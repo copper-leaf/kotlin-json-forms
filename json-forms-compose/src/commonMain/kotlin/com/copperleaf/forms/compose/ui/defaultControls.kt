@@ -2,10 +2,14 @@ package com.copperleaf.forms.compose.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -15,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -24,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.util.ControlRenderer
 import com.copperleaf.forms.compose.util.Registered
 import com.copperleaf.forms.compose.util.RichTextToolbar
@@ -43,9 +49,13 @@ import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
 import com.copperleaf.json.pointer.JsonPointerAction
 import com.copperleaf.json.pointer.asPointer
+import com.copperleaf.json.pointer.defaultValueForType
+import com.copperleaf.json.pointer.plus
+import com.copperleaf.json.pointer.toJsonValue
 import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
 import com.darkrockstudios.richtexteditor.ui.defaultRichTextFieldStyle
+import net.pwall.json.JSONArray
 import net.pwall.json.JSONBoolean
 import net.pwall.json.JSONDecimal
 import net.pwall.json.JSONInteger
@@ -80,7 +90,7 @@ public fun ControlType.uiControl(
     )
 }
 
-expect public fun UiElement.Control.Companion.defaults(): List<Registered<UiElement.Control, ControlRenderer>>
+public expect fun UiElement.Control.Companion.defaults(): List<Registered<UiElement.Control, ControlRenderer>>
 
 public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
     val vm = LocalViewModel.current
@@ -255,7 +265,7 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
                 JSONObject(
                     mapOf(
                         "type" to JSONString("Control"),
-                        "scope" to JSONString("#${control.schemaScope}/properties/$key")
+                        "scope" to JSONString("${control.schemaScope}/properties/$key")
                     )
                 ).resolveAsControl(vmState.schemaJson!!)
             }
@@ -268,22 +278,79 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
 }
 
 public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
-//    val currentScope = LocalJsonPointer.current
-//
-//    currentValue?.forEachIndexed { index, jsonElement ->
-//        CompositionLocalProvider(LocalJsonPointer provides (currentScope + JsonPointer.ArrayIndex(index))) {
-//            RenderUiControl(
-//                Form.UiSchema.Element(
-//                    type = "Control",
-//                    scope = ref.trimEnd('/') + "/properties/$key",
-//                )
-//            )
-//        }
-//    }
+    val properties = control.schemaConfig.getObject("properties") ?: emptyMap()
+    val vm = LocalViewModel.current
+    val vmState by vm.observeStates().collectAsState()
+    val currentDataPointer by dataPointer(control)
+
+    val currentDataValue: JSONArray by currentValueAtPointer(vmState, currentDataPointer, JSONArray()) {
+        it as JSONArray
+    }
+
+    val items: JSONObject = control.schemaConfig.requireObject("items")
+    val itemsType: String = items.requireString("type")
+
+    Row {
+        Button(onClick = {
+            vm.trySend(
+                FormContract.Inputs.UpdateFormState(
+                    pointer = currentDataPointer + "/${currentDataValue.size}",
+                    action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
+                )
+            )
+        }) {
+            Text("Add New Item")
+        }
+    }
+
+    currentDataValue.forEachIndexed { index, jsonValue ->
+        WithArrayIndex(index) {
+            Card(Modifier.fillMaxWidth()) {
+                Box(Modifier.padding(8.dp)) {
+                    Column {
+                        Button(onClick = {
+                            vm.trySend(
+                                FormContract.Inputs.UpdateFormState(
+                                    pointer = currentDataPointer + "/$index",
+                                    JsonPointerAction.RemoveValue
+                                )
+                            )
+                        }) {
+                            Text("Remove")
+                        }
+
+                        val arrayFieldControl by remember {
+                            derivedStateOf {
+                                JSONObject(
+                                    mapOf(
+                                        "type" to JSONString("Control"),
+                                        "scope" to JSONString("${control.schemaScope}/items")
+                                    )
+                                ).resolveAsControl(vmState.schemaJson!!)
+                            }
+                        }
+                        RenderUiControl(
+                            arrayFieldControl
+                        )
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Control utils
 // ---------------------------------------------------------------------------------------------------------------------
+
+@Composable
+public fun WithArrayIndex(
+    index: Int,
+    content: @Composable () -> Unit
+) {
+    CompositionLocalProvider(LocalArrayIndices provides (LocalArrayIndices.current + index)) {
+        content()
+    }
+}
 
 @Composable
 public fun <T> currentValueAtPointer(
@@ -333,8 +400,9 @@ public fun updateFormState(
 public fun dataPointer(
     control: UiElement.Control,
 ): State<JSONPointer> {
-    return remember(control.dataScope) {
-        derivedStateOf { control.dataScope.asPointer() }
+    val localArrayIndices = LocalArrayIndices.current
+    return remember(control.dataScope, localArrayIndices) {
+        derivedStateOf { control.dataScope.asPointer(localArrayIndices) }
     }
 }
 
@@ -342,8 +410,9 @@ public fun dataPointer(
 public fun schemaPointer(
     control: UiElement.Control,
 ): State<JSONPointer> {
-    return remember(control.schemaScope) {
-        derivedStateOf { control.schemaScope.asPointer() }
+    val localArrayIndices = LocalArrayIndices.current
+    return remember(control.schemaScope, localArrayIndices) {
+        derivedStateOf { control.schemaScope.asPointer(localArrayIndices) }
     }
 }
 
@@ -363,4 +432,5 @@ public fun DebugControlContents(control: UiElement.Control) {
     Text("type: ${control.controlType}")
     Text("Required: ${control.required}")
     Text("Has Rule?: ${control.rule != null}")
+    Text("Local array indices: ${LocalArrayIndices.current}")
 }

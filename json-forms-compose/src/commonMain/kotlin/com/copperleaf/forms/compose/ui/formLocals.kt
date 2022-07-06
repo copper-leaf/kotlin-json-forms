@@ -13,5 +13,7 @@ public val LocalViewModel: ProvidableCompositionLocal<FormViewModel> = staticCom
     error("LocalViewModel not defined")
 }
 
+public val LocalArrayIndices: ProvidableCompositionLocal<List<Int>> = compositionLocalOf { emptyList() }
+
 public val LocallyEnabled: ProvidableCompositionLocal<Boolean> = compositionLocalOf { true }
 public val LocallyVisible: ProvidableCompositionLocal<Boolean> = compositionLocalOf { true }

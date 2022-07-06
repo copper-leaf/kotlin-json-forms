@@ -51,7 +51,7 @@ public fun JSONObject.resolveAsControl(
     schema: JSONValue
 ): UiElement.Control {
     val scope = checkNotNull(this.getString("scope")) { "Control is missing 'scope'" }
-    val scopeJsonPointer = scope.asPointer()
+    val scopeJsonPointer = scope.asPointer(emptyList())
 
     val controlInSchema = scopeJsonPointer.find(schema)
     check(controlInSchema is JSONObject) { "Referenced value at scope '$scope' in schema must be an object" }
@@ -110,9 +110,39 @@ internal fun staticallyDetermineDataScope(
         currentSchemaScope.append('/')
         currentSchemaScope.append(token)
 
-        if (token != "properties") {
+        if (token == "properties") {
+            // just skip it
+        } else if(token == "items") {
             // get the value at the current schema scope
-            val testedPointer = currentSchemaScope.toString().asPointer()
+            val testedPointer = currentSchemaScope.toString().asPointer(emptyList())
+            val referencedProperty = testedPointer.parent().find(schema)
+            check(referencedProperty is JSONObject) {
+                "Referenced value at $currentSchemaScope must be an object"
+            }
+            val referencedPropertyType = checkNotNull(referencedProperty.getString("type")) {
+                "Referenced value at $currentSchemaScope has no type"
+            }
+
+            when (referencedPropertyType) {
+                "object" -> {
+                    // it's an object, append the token to the data scope
+                    currentDataScope.append('/')
+                    currentDataScope.append(token)
+                }
+                "array" -> {
+                    // it's an array, append the '[]' placeholder to the data scope
+                    currentDataScope.append("/[]")
+                }
+                else -> {
+                    // assume it's a primitive, append the token to the data scope
+                    currentDataScope.append('/')
+                    currentDataScope.append(token)
+                }
+            }
+        }
+        else {
+            // get the value at the current schema scope
+            val testedPointer = currentSchemaScope.toString().asPointer(emptyList())
             val referencedProperty = testedPointer.parent().parent().find(schema)
             check(referencedProperty is JSONObject) {
                 "Referenced value at $currentSchemaScope must be an object"
@@ -166,7 +196,7 @@ internal fun JSONObject.resolveRule(
     val condition = checkNotNull(rule.getObject("condition")) { "Rule must have a condition" }
 
     val scope = checkNotNull(condition.getString("scope")) { "Control is missing 'scope'" }
-    val scopeJsonPointer = scope.asPointer()
+    val scopeJsonPointer = scope.asPointer(emptyList())
     val dataScope = staticallyDetermineDataScope(schema, scopeJsonPointer)
 
     val schemaJson = scopeJsonPointer.find(schema)

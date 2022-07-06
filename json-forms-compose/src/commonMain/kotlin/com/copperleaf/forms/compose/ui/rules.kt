@@ -63,13 +63,13 @@ public fun LocallyApplyEffect(
     }
 }
 
-
 @Composable
 public fun rulePointer(
     rule: Rule,
 ): State<JSONPointer> {
-    return remember(rule.dataScope) {
-        derivedStateOf { rule.dataScope.asPointer() }
+    val localArrayIndices = LocalArrayIndices.current
+    return remember(rule.dataScope, localArrayIndices) {
+        derivedStateOf { rule.dataScope.asPointer(localArrayIndices) }
     }
 }
 

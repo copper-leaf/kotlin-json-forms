@@ -41,6 +41,7 @@ val allForms = listOf(
     "/layout/3",
     "/layout/4",
     "/array",
+    "/nestedArray",
     "/rule",
     "/listWithDetail",
 )

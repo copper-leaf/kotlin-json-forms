@@ -186,14 +186,47 @@ public fun Any?.toJsonValue(): JSONValue? {
     }
 }
 
+public fun String?.defaultValueForType(): Any? {
+    return when (this) {
+        "string" -> ""
+        "integer" -> 0
+        "number" -> 0.0
+        "boolean" -> false
+        "array" -> emptyList<Any>()
+        "object" -> emptyMap<String, Any>()
+        else -> null
+    }
+}
+
 public fun String?.parseJson(): JSONValue? {
     return JSON.parse(this ?: "null")
 }
 
-public fun String.asPointer(): JSONPointer {
-    return JSONPointer.fromURIFragment(this)
+public fun String.asPointer(arrayIndices: List<Int>): JSONPointer {
+    val fullyFormattedPointer = buildString {
+        append('#')
+
+        var nextArrayIndex = 0
+        this@asPointer.drop(2).split("/").forEach {
+            append('/')
+            if (it == "[]") {
+                // we have a placeholder array index, replace it with the actual local array index value
+                append(arrayIndices[nextArrayIndex])
+                nextArrayIndex++
+            } else {
+                // we have a regular index, just append it
+                append(it)
+            }
+        }
+    }
+
+    return JSONPointer.fromURIFragment(fullyFormattedPointer)
 }
 
 public fun JSONPointer.asPointerString(): String {
     return "#/" + this.tokens.joinToString(separator = "/")
+}
+
+public operator fun JSONPointer.plus(suffix: String): JSONPointer {
+    return (this.asPointerString() + suffix).asPointer(emptyList())
 }
