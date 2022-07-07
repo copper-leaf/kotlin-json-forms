@@ -2,11 +2,12 @@ package com.copperleaf.forms.compose.util
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
+import com.copperleaf.forms.compose.ui.ControlScope
 import com.copperleaf.forms.compose.ui.defaults
 import com.copperleaf.forms.core.ui.UiElement
 
 public typealias UiElementRenderer = @Composable ColumnScope.(UiElement.ElementWithChildren) -> Unit
-public typealias ControlRenderer = @Composable ColumnScope.(UiElement.Control) -> Unit
+public typealias ControlRenderer = @Composable ControlScope.() -> Unit
 
 public data class Registered<T, U>(
     val rank: Int,

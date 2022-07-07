@@ -80,10 +80,7 @@ public fun RenderUiControl(
     val controlRenderer = LocalFormConfig.current.getControl(control)
 
     if (controlRenderer != null) {
-        Column {
-            controlRenderer(control)
-            DebugControl(control)
-        }
+        ControlLayout(control, controlRenderer)
     } else {
         Text("No UI control with type '${control.controlType}' could be found.")
     }

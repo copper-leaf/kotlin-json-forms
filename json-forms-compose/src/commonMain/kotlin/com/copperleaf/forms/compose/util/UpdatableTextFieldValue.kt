@@ -73,6 +73,23 @@ public fun rememberUpdatableText(
 
 @Composable
 public fun <T : Any> rememberUpdatableText(
+    initialValue: T,
+    mapStateToText: (T) -> String,
+    onTextChange: (String) -> Unit,
+): UpdatableTextFieldValue {
+    val textPosition: MutableState<TextFieldValue> = remember { mutableStateOf(TextFieldValue()) }
+    val textString: MutableState<String> = remember(initialValue) { mutableStateOf(mapStateToText(initialValue)) }
+
+    return UpdatableTextFieldValue(
+        textPosition,
+        textString,
+        onTextChange
+    )
+}
+
+
+@Composable
+public fun <T : Any> rememberUpdatableText(
     inputState: State<T>,
     mapStateToText: (T) -> String,
     onTextChange: (String) -> Unit,

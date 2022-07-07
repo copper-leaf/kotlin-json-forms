@@ -1,5 +1,6 @@
 package com.copperleaf.forms.core.vm
 
+import com.copperleaf.forms.core.internal.getValidationErrorMessages
 import com.copperleaf.forms.core.ui.UiSchema
 import com.copperleaf.json.pointer.JsonPointerAction
 import net.pwall.json.JSONValue
@@ -26,9 +27,14 @@ public object FormContract {
         val updatedData: JSONValue? = null,
     ) {
         val isReady: Boolean = schema != null && uiSchema != null
-        val validationDetails: DetailedOutput? = schema?.validateDetailed(updatedData)
-        val isValid: Boolean = validationDetails?.valid == true
+//        val basicValidationOutput: BasicOutput? = schema?.validateBasic(updatedData)
+        val detailedValidationOutput: DetailedOutput? = schema?.validateDetailed(updatedData)
+        val isValid: Boolean = detailedValidationOutput?.valid == true
         val isChanged: Boolean = originalData != updatedData
+
+        public fun errors(pointer: String): List<String> {
+            return detailedValidationOutput?.getValidationErrorMessages(pointer) ?: emptyList()
+        }
     }
 
     public sealed class Inputs {

@@ -4,6 +4,7 @@ import com.copperleaf.json.utils.takeHead
 import net.pwall.json.JSON
 import net.pwall.json.JSONArray
 import net.pwall.json.JSONBoolean
+import net.pwall.json.JSONDecimal
 import net.pwall.json.JSONDouble
 import net.pwall.json.JSONFloat
 import net.pwall.json.JSONInteger
@@ -12,6 +13,7 @@ import net.pwall.json.JSONObject
 import net.pwall.json.JSONString
 import net.pwall.json.JSONValue
 import net.pwall.json.pointer.JSONPointer
+import java.math.BigDecimal
 
 public sealed interface JsonPointerAction {
     public data class SetValue(val value: JSONValue?) : JsonPointerAction
@@ -179,6 +181,7 @@ public fun Any?.toJsonValue(): JSONValue? {
         is Long -> JSONLong(this)
         is Float -> JSONFloat(this)
         is Double -> JSONDouble(this)
+        is BigDecimal -> JSONDecimal(this)
         is Boolean -> JSONBoolean(this)
         is List<*> -> JSONArray(this.map { it.toJsonValue() })
         is Map<*, *> -> JSONObject(this.mapKeys { it.key.toString() }.mapValues { it.value.toJsonValue() })

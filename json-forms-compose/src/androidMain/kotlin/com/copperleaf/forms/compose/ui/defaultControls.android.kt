@@ -12,8 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,19 +47,15 @@ public actual fun UiElement.Control.Companion.defaults(): List<Registered<UiElem
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
     rank = 10,
     tester = { hasSchemaProperty("enum") }
-) { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: State<String> = currentValueAtPointer(vmState, currentPointer, "") {
+) {
+    val currentValue = getTypedValue("") {
         it.toSimpleValue().toString()
     }
 
     val (text, updateText) = rememberUpdatableText(
-        inputState = currentValue,
+        initialValue = currentValue,
         onTextChange = { value ->
-            updateFormState(vm, control, currentPointer, JSONString(value))
+            updateFormState(value)
         }
     )
 

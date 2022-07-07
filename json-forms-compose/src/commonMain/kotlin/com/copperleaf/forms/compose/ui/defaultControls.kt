@@ -20,8 +20,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,10 +43,7 @@ import com.copperleaf.forms.core.ObjectControl
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.internal.resolveAsControl
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
-import com.copperleaf.forms.core.vm.FormViewModel
 import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.asPointer
 import com.copperleaf.json.pointer.defaultValueForType
 import com.copperleaf.json.pointer.plus
 import com.copperleaf.json.pointer.toJsonValue
@@ -56,13 +51,8 @@ import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
 import com.darkrockstudios.richtexteditor.ui.defaultRichTextFieldStyle
 import net.pwall.json.JSONArray
-import net.pwall.json.JSONBoolean
-import net.pwall.json.JSONDecimal
-import net.pwall.json.JSONInteger
 import net.pwall.json.JSONObject
 import net.pwall.json.JSONString
-import net.pwall.json.JSONValue
-import net.pwall.json.pointer.JSONPointer
 
 public fun UiElement.Control.matchesControlType(type: ControlType): Boolean {
     return (this.controlType == type.type)
@@ -92,19 +82,14 @@ public fun ControlType.uiControl(
 
 public expect fun UiElement.Control.Companion.defaults(): List<Registered<UiElement.Control, ControlRenderer>>
 
-public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: State<String> = currentValueAtPointer(vmState, currentPointer, "") {
+public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
+    val currentValue = getTypedValue("") {
         it.toSimpleValue().toString()
     }
-
     val (text, updateText) = rememberUpdatableText(
-        inputState = currentValue,
+        initialValue = currentValue,
         onTextChange = { value ->
-            updateFormState(vm, control, currentPointer, JSONString(value))
+            updateFormState(value)
         }
     )
 
@@ -114,29 +99,18 @@ public fun StringControl.control(): Registered<UiElement.Control, ControlRendere
         onValueChange = updateText,
         label = { Text(control.label) },
         enabled = LocallyEnabled.current,
+        isError = validationErrors.isNotEmpty(),
     )
 }
 
 public fun StringControl.richText(): Registered<UiElement.Control, ControlRenderer> = uiControl(
     rank = 10,
     tester = { optionIsEnabled("richText") }
-) { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: State<String> = currentValueAtPointer(vmState, currentPointer, "") {
+) {
+    val currentValue = getTypedValue("") {
         it.toSimpleValue().toString()
     }
-
     var value by remember { mutableStateOf(RichTextValue.get()) }
-
-//    val (text, updateText) = rememberUpdatableRichText(
-//        inputState = currentValue,
-//        onTextChange = { value ->
-//            updateFormState(vm, control, currentPointer, JSONString(value))
-//        }
-//    )
 
     RichTextToolbar(
         modifier = Modifier,
@@ -154,27 +128,23 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
     )
 }
 
-public fun IntegerControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: State<Int> = currentValueAtPointer(vmState, currentPointer, 0) {
-        it.toSimpleValue().toString().toIntOrNull() ?: 0
+public fun IntegerControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
+    val currentValue = getTypedValue(0) {
+        it.toSimpleValue().toString().toIntOrNull()
     }
 
     val updatableText = rememberUpdatableText(
-        inputState = currentValue,
+        initialValue = currentValue,
         mapStateToText = { it.toString() },
         onTextChange = { value ->
             value.toIntOrNull()?.let { intValue ->
-                updateFormState(vm, control, currentPointer, JSONInteger(intValue))
+                updateFormState(intValue)
             }
         }
     )
     val (text, updateText) = updatableText
     val nudge = { amount: Int ->
-        updatableText.updateText((currentValue.value + amount).toString())
+        updatableText.updateText((currentValue + amount).toString())
     }
 
     OutlinedTextField(
@@ -192,27 +162,23 @@ public fun IntegerControl.control(): Registered<UiElement.Control, ControlRender
     )
 }
 
-public fun NumberControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: State<Double> = currentValueAtPointer(vmState, currentPointer, 0.0) {
-        it.toSimpleValue().toString().toDoubleOrNull() ?: 0.0
+public fun NumberControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
+    val currentValue = getTypedValue(0.0) {
+        it.toSimpleValue().toString().toDoubleOrNull()
     }
 
     val updatableText = rememberUpdatableText(
-        inputState = currentValue,
+        initialValue = currentValue,
         mapStateToText = { it.toString() },
         onTextChange = { value ->
             value.toDoubleOrNull()?.let { doubleValue ->
-                updateFormState(vm, control, currentPointer, JSONDecimal(doubleValue.toBigDecimal()))
+                updateFormState(doubleValue.toBigDecimal())
             }
         }
     )
     val (text, updateText) = updatableText
     val nudge = { amount: Double ->
-        updatableText.updateText((currentValue.value + amount).toString())
+        updatableText.updateText((currentValue + amount).toString())
     }
 
     OutlinedTextField(
@@ -230,23 +196,16 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
     )
 }
 
-public fun BooleanControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentPointer by dataPointer(control)
-
-    val currentValue: Boolean by currentValueAtPointer(vmState, currentPointer, false) {
+public fun BooleanControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
+    val currentValue = getTypedValue(false) {
         it.toSimpleValue().toString().toBooleanStrictOrNull() ?: false
-    }
-    val postUpdate = { value: Boolean ->
-        updateFormState(vm, control, currentPointer, JSONBoolean(value))
     }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Checkbox(
             checked = currentValue,
             onCheckedChange = {
-                postUpdate(it)
+                updateFormState(it)
             },
             enabled = LocallyEnabled.current,
         )
@@ -254,10 +213,8 @@ public fun BooleanControl.control(): Registered<UiElement.Control, ControlRender
     }
 }
 
-public fun ObjectControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
+public fun ObjectControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val properties = control.schemaConfig.getObject("properties") ?: emptyMap()
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
 
     properties.forEach { (key, schemaValue) ->
         val objectFieldControl by remember {
@@ -277,13 +234,10 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
     }
 }
 
-public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl { control ->
+public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val properties = control.schemaConfig.getObject("properties") ?: emptyMap()
-    val vm = LocalViewModel.current
-    val vmState by vm.observeStates().collectAsState()
-    val currentDataPointer by dataPointer(control)
 
-    val currentDataValue: JSONArray by currentValueAtPointer(vmState, currentDataPointer, JSONArray()) {
+    val currentDataValue: JSONArray = getTypedValue(JSONArray()) {
         it as JSONArray
     }
 
@@ -292,11 +246,9 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
 
     Row {
         Button(onClick = {
-            vm.trySend(
-                FormContract.Inputs.UpdateFormState(
-                    pointer = currentDataPointer + "/${currentDataValue.size}",
-                    action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
-                )
+            sendFormAction(
+                pointer = dataPointer + "/${currentDataValue.size}",
+                action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
             )
         }) {
             Text("Add New Item")
@@ -309,11 +261,9 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
                 Box(Modifier.padding(8.dp)) {
                     Column {
                         Button(onClick = {
-                            vm.trySend(
-                                FormContract.Inputs.UpdateFormState(
-                                    pointer = currentDataPointer + "/$index",
-                                    JsonPointerAction.RemoveValue
-                                )
+                            sendFormAction(
+                                pointer = dataPointer + "/$index",
+                                action = JsonPointerAction.RemoveValue
                             )
                         }) {
                             Text("Remove")
@@ -352,85 +302,3 @@ public fun WithArrayIndex(
     }
 }
 
-@Composable
-public fun <T> currentValueAtPointer(
-    vmState: FormContract.State,
-    currentPointer: JSONPointer,
-    defaultValue: T,
-    mapper: (JSONValue) -> T,
-): State<T> {
-    return remember(vmState.updatedData) {
-        derivedStateOf {
-            runCatching {
-                mapper(currentPointer.find(vmState.updatedData))
-            }.getOrDefault(defaultValue)
-        }
-    }
-}
-
-@Composable
-public fun currentJsonValueAtPointer(
-    vmState: FormContract.State,
-    currentPointer: JSONPointer,
-): State<JSONValue?> {
-    return remember(vmState.updatedData) {
-        derivedStateOf {
-            runCatching {
-                currentPointer.find(vmState.updatedData)
-            }.getOrNull()
-        }
-    }
-}
-
-public fun updateFormState(
-    vm: FormViewModel,
-    control: UiElement.Control,
-    currentPointer: JSONPointer,
-    value: JSONValue?,
-) {
-    vm.trySend(
-        FormContract.Inputs.UpdateFormState(
-            pointer = currentPointer,
-            action = JsonPointerAction.SetValue(value),
-        )
-    )
-}
-
-@Composable
-public fun dataPointer(
-    control: UiElement.Control,
-): State<JSONPointer> {
-    val localArrayIndices = LocalArrayIndices.current
-    return remember(control.dataScope, localArrayIndices) {
-        derivedStateOf { control.dataScope.asPointer(localArrayIndices) }
-    }
-}
-
-@Composable
-public fun schemaPointer(
-    control: UiElement.Control,
-): State<JSONPointer> {
-    val localArrayIndices = LocalArrayIndices.current
-    return remember(control.schemaScope, localArrayIndices) {
-        derivedStateOf { control.schemaScope.asPointer(localArrayIndices) }
-    }
-}
-
-@Composable
-public fun DebugControl(control: UiElement.Control) {
-    val vmState by LocalViewModel.current.observeStates().collectAsState()
-
-    if (vmState.debug) {
-        DebugControlContents(control)
-    }
-}
-
-@Composable
-public fun DebugControlContents(control: UiElement.Control) {
-    Text("schema scope: ${schemaPointer(control).value.toURIFragment()}")
-    Text("data scope: ${dataPointer(control).value.toURIFragment()}")
-    Text("type: ${control.controlType}")
-    Text("Required: ${control.required}")
-    Text("Has Rule?: ${control.rule != null}")
-    Text("Local array indices: ${LocalArrayIndices.current}")
-}

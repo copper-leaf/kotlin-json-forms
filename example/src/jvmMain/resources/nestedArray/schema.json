@@ -7,7 +7,8 @@
                 "type": "object",
                 "properties": {
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "maxLength": 5
                     },
                     "todos": {
                         "type": "array",
@@ -15,7 +16,8 @@
                             "type": "object",
                             "properties": {
                                 "text": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "maxLength": 5
                                 },
                                 "done": {
                                     "type": "boolean"
