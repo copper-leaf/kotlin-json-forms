@@ -22,7 +22,7 @@ format itself, that library's documentation will be a valid reference for this l
 
 See the video below for an example form in action:
 
-https://user-images.githubusercontent.com/6157866/177850032-d2eca07a-7a72-4861-9b3c-9ef6f28409e9.mov
+https://user-images.githubusercontent.com/6157866/177853499-86d7cbd7-03a8-4105-83bc-b2e3f1c72b53.mov
 
 # Supported Platforms/Features
 

@@ -200,7 +200,7 @@ class TestJsonPointerUpdate : FreeSpec({
 
             val jsonValue = value.toJsonValue()
 
-            val pointer = jsonPointer.asPointer()
+            val pointer = jsonPointer.asPointer(emptyList())
             val action = JsonPointerAction.SetValue(jsonValue)
 
             val updatedValue = json.updateWithPointer(pointer, action)
