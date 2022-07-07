@@ -22,7 +22,7 @@ format itself, that library's documentation will be a valid reference for this l
 
 See the video below for an example form in action:
 
-https://copper-leaf.github.io/kotlin-json-forms/assets/media/example-form.mov
+https://user-images.githubusercontent.com/6157866/177850032-d2eca07a-7a72-4861-9b3c-9ef6f28409e9.mov
 
 # Supported Platforms/Features
 
