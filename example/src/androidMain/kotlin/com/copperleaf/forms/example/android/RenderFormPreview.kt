@@ -19,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
+import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.compose.ui.LocallyEnabled
-import com.copperleaf.forms.compose.ui.RenderForm
 import com.copperleaf.forms.core.vm.FormContract
 
 @Composable
@@ -59,7 +59,7 @@ fun RenderFormPreview(
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
         ) {
-            RenderForm(vm)
+            Form(vm)
         }
         Column(
             Modifier

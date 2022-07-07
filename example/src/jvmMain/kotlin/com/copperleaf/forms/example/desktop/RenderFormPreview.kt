@@ -23,8 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.compose.ui.LocallyEnabled
-import com.copperleaf.forms.compose.ui.RenderForm
 import com.copperleaf.forms.core.vm.FormContract
 import net.pwall.json.JSONFormat
 import org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi
@@ -61,7 +61,7 @@ fun RenderFormPreview(
                         }
                     }
                     Column(Modifier.fillMaxWidth()) {
-                        RenderForm(vm)
+                        Form(vm)
                     }
                 }
             }

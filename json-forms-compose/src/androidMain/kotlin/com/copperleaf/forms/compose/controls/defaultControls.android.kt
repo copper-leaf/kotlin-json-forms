@@ -1,4 +1,4 @@
-package com.copperleaf.forms.compose.ui
+package com.copperleaf.forms.compose.controls
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,30 +19,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.TextFieldValue
-import com.copperleaf.forms.compose.util.ControlRenderer
-import com.copperleaf.forms.compose.util.Registered
+import com.copperleaf.forms.compose.form.ControlRenderer
+import com.copperleaf.forms.compose.form.Registered
+import com.copperleaf.forms.compose.form.uiControl
 import com.copperleaf.forms.compose.util.rememberUpdatableText
-import com.copperleaf.forms.core.ArrayControl
-import com.copperleaf.forms.core.BooleanControl
-import com.copperleaf.forms.core.IntegerControl
-import com.copperleaf.forms.core.NumberControl
-import com.copperleaf.forms.core.ObjectControl
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.ui.UiElement
 import net.pwall.json.JSONString
-
-public actual fun UiElement.Control.Companion.defaults(): List<Registered<UiElement.Control, ControlRenderer>> =
-    listOf(
-        StringControl.control(),
-        StringControl.richText(),
-        StringControl.dropdownEnum(),
-
-        IntegerControl.control(),
-        NumberControl.control(),
-        BooleanControl.control(),
-        ObjectControl.control(),
-        ArrayControl.control(),
-    )
 
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
     rank = 10,
@@ -75,9 +58,9 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
             value = text,
             onValueChange = updateText,
             label = { Text(control.label) },
-            enabled = LocallyEnabled.current,
+            enabled = isEnabled,
             trailingIcon = {
-                IconButton(onClick = { dropdownIsVisible = true }, enabled = LocallyEnabled.current) {
+                IconButton(onClick = { dropdownIsVisible = true }, enabled = isEnabled) {
                     if (dropdownIsVisible) {
                         Icon(Icons.Default.ArrowDropUp, "Close")
                     } else {
@@ -88,7 +71,7 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
         )
 
         DropdownMenu(
-            expanded = dropdownIsVisible && LocallyEnabled.current,
+            expanded = dropdownIsVisible && isEnabled,
             onDismissRequest = { dropdownIsVisible = false },
         ) {
             if (filteredDropdownOptions.isNotEmpty()) {

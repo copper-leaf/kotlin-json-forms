@@ -1,4 +1,4 @@
-package com.copperleaf.forms.compose.ui
+package com.copperleaf.forms.compose.elements
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -17,8 +17,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.util.Registered
-import com.copperleaf.forms.compose.util.UiElementRenderer
+import com.copperleaf.forms.compose.controls.ControlLayout
+import com.copperleaf.forms.compose.form.Registered
+import com.copperleaf.forms.compose.form.UiElement
+import com.copperleaf.forms.compose.form.UiElementRenderer
+import com.copperleaf.forms.compose.form.uiElement
+import com.copperleaf.forms.compose.ui.optionalString
+import com.copperleaf.forms.compose.ui.requireString
+import com.copperleaf.forms.compose.rules.RuleLayout
 import com.copperleaf.forms.core.Categorization
 import com.copperleaf.forms.core.Category
 import com.copperleaf.forms.core.Control
@@ -26,53 +32,36 @@ import com.copperleaf.forms.core.Group
 import com.copperleaf.forms.core.HorizontalLayout
 import com.copperleaf.forms.core.Label
 import com.copperleaf.forms.core.ListWithDetail
-import com.copperleaf.forms.core.UiElementType
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
 
-public fun UiElementType.uiElement(
-    rank: Int = 0,
-    tester: (UiElement.ElementWithChildren) -> Boolean = { it.elementType == this@uiElement.type },
-    renderer: UiElementRenderer,
-): Registered<UiElement.ElementWithChildren, UiElementRenderer> {
-    return Registered(
-        rank = rank,
-        tester = tester,
-        renderer = renderer,
-    )
+public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
+    Column(Modifier.fillMaxWidth()) {
+        element.elements.forEach {
+            Box {
+                UiElement(it)
+            }
+        }
+    }
 }
 
-expect public fun UiElement.Companion.defaults(): List<Registered<UiElement.ElementWithChildren, UiElementRenderer>>
-
-public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> =
-    uiElement { element ->
-        Column(Modifier.fillMaxWidth()) {
-            element.elements.forEach {
-                Box {
-                    RenderGenericUiElement(it)
-                }
+public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
+    Row(Modifier.fillMaxWidth().wrapContentHeight()) {
+        element.elements.forEach {
+            Box(Modifier.weight(1f)) {
+                UiElement(it)
             }
         }
     }
+}
 
-public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> =
-    uiElement { element ->
-        Row(Modifier.fillMaxWidth().wrapContentHeight()) {
-            element.elements.forEach {
-                Box(Modifier.weight(1f)) {
-                    RenderGenericUiElement(it)
-                }
-            }
-        }
-    }
-
-public fun Control.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement { element ->
+public fun Control.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     Column(Modifier.fillMaxWidth().padding(16.dp)) {
-        RenderUiControl(element as UiElement.Control)
+        ControlLayout(element as UiElement.Control)
     }
 }
 
-public fun Label.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement { element ->
+public fun Label.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     val text = element.uiSchemaConfig.requireString("text")
 
     Column(Modifier.fillMaxWidth().padding(16.dp)) {
@@ -80,7 +69,7 @@ public fun Label.element(): Registered<UiElement.ElementWithChildren, UiElementR
     }
 }
 
-public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement { element ->
+public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     val label = element.uiSchemaConfig.optionalString("label")
 
     Column(Modifier.padding(16.dp)) {
@@ -89,7 +78,7 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
         }
         element.elements.forEach {
             Box {
-                RenderGenericUiElement(it)
+                UiElement(it)
             }
         }
     }
@@ -97,7 +86,7 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
 
 @OptIn(ExperimentalAnimationApi::class)
 public fun Categorization.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> =
-    uiElement { element ->
+    uiElement {
         Column(Modifier.fillMaxWidth()) {
             var selectedTab by remember { mutableStateOf(0) }
             ScrollableTabRow(
@@ -115,12 +104,12 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
                 }
             }
             AnimatedContent(selectedTab) { selectedIndex ->
-                RenderGenericUiElement(element.elements[selectedIndex])
+                UiElement(element.elements[selectedIndex])
             }
         }
     }
 
-public fun Category.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement { element ->
+public fun Category.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     val label = element.uiSchemaConfig.requireString("label")
 
     Column(Modifier.fillMaxWidth()) {
@@ -128,13 +117,12 @@ public fun Category.element(): Registered<UiElement.ElementWithChildren, UiEleme
             Text(label)
             element.elements.forEach { childElement ->
                 Box {
-                    RenderGenericUiElement(childElement)
+                    UiElement(childElement)
                 }
             }
         }
     }
 }
 
-public fun ListWithDetail.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> =
-    uiElement { element ->
-    }
+public fun ListWithDetail.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
+}

@@ -1,4 +1,4 @@
-package com.copperleaf.forms.compose.ui
+package com.copperleaf.forms.compose.controls
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +18,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,15 +26,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.util.ControlRenderer
-import com.copperleaf.forms.compose.util.Registered
+import com.copperleaf.forms.compose.form.ControlRenderer
+import com.copperleaf.forms.compose.form.Registered
+import com.copperleaf.forms.compose.form.UiElement
+import com.copperleaf.forms.compose.form.WithArrayIndex
+import com.copperleaf.forms.compose.form.uiControl
+import com.copperleaf.forms.compose.ui.requireObject
+import com.copperleaf.forms.compose.ui.requireString
 import com.copperleaf.forms.compose.util.RichTextToolbar
 import com.copperleaf.forms.compose.util.rememberUpdatableText
 import com.copperleaf.forms.compose.util.richTextToolbarShortcuts
 import com.copperleaf.forms.compose.util.updateText
 import com.copperleaf.forms.core.ArrayControl
 import com.copperleaf.forms.core.BooleanControl
-import com.copperleaf.forms.core.ControlType
 import com.copperleaf.forms.core.IntegerControl
 import com.copperleaf.forms.core.NumberControl
 import com.copperleaf.forms.core.ObjectControl
@@ -54,34 +56,6 @@ import net.pwall.json.JSONArray
 import net.pwall.json.JSONObject
 import net.pwall.json.JSONString
 
-public fun UiElement.Control.matchesControlType(type: ControlType): Boolean {
-    return (this.controlType == type.type)
-}
-
-public fun UiElement.Control.optionIsEnabled(name: String): Boolean {
-    return uiSchemaConfig
-        .getObject("options")
-        ?.getBoolean(name) == true
-}
-
-public fun UiElement.Control.hasSchemaProperty(name: String): Boolean {
-    return schemaConfig.containsKey(name)
-}
-
-public fun ControlType.uiControl(
-    rank: Int = 0,
-    tester: UiElement.Control.() -> Boolean = { true },
-    renderer: ControlRenderer,
-): Registered<UiElement.Control, ControlRenderer> {
-    return Registered(
-        rank = rank,
-        tester = { it.matchesControlType(this) && tester(it) },
-        renderer = renderer,
-    )
-}
-
-public expect fun UiElement.Control.Companion.defaults(): List<Registered<UiElement.Control, ControlRenderer>>
-
 public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue("") {
         it.toSimpleValue().toString()
@@ -98,7 +72,7 @@ public fun StringControl.control(): Registered<UiElement.Control, ControlRendere
         value = text,
         onValueChange = updateText,
         label = { Text(control.label) },
-        enabled = LocallyEnabled.current,
+        enabled = isEnabled,
         isError = validationErrors.isNotEmpty(),
     )
 }
@@ -158,7 +132,7 @@ public fun IntegerControl.control(): Registered<UiElement.Control, ControlRender
                 Icon(Icons.Default.KeyboardArrowDown, "Down", modifier = Modifier.clickable { nudge(-1) })
             }
         },
-        enabled = LocallyEnabled.current,
+        enabled = isEnabled,
     )
 }
 
@@ -192,7 +166,7 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
                 Icon(Icons.Default.KeyboardArrowDown, "Down", modifier = Modifier.clickable { nudge(-1.0) })
             }
         },
-        enabled = LocallyEnabled.current,
+        enabled = isEnabled,
     )
 }
 
@@ -207,7 +181,7 @@ public fun BooleanControl.control(): Registered<UiElement.Control, ControlRender
             onCheckedChange = {
                 updateFormState(it)
             },
-            enabled = LocallyEnabled.current,
+            enabled = isEnabled,
         )
         Text(control.label)
     }
@@ -228,15 +202,13 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
             }
         }
 
-        RenderUiControl(
+        UiElement(
             objectFieldControl
         )
     }
 }
 
 public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
-    val properties = control.schemaConfig.getObject("properties") ?: emptyMap()
-
     val currentDataValue: JSONArray = getTypedValue(JSONArray()) {
         it as JSONArray
     }
@@ -245,12 +217,15 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
     val itemsType: String = items.requireString("type")
 
     Row {
-        Button(onClick = {
-            sendFormAction(
-                pointer = dataPointer + "/${currentDataValue.size}",
-                action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
-            )
-        }) {
+        Button(
+            onClick = {
+                sendFormAction(
+                    pointer = dataPointer + "/${currentDataValue.size}",
+                    action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
+                )
+            },
+            enabled = isEnabled,
+        ) {
             Text("Add New Item")
         }
     }
@@ -260,12 +235,15 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
             Card(Modifier.fillMaxWidth()) {
                 Box(Modifier.padding(8.dp)) {
                     Column {
-                        Button(onClick = {
-                            sendFormAction(
-                                pointer = dataPointer + "/$index",
-                                action = JsonPointerAction.RemoveValue
-                            )
-                        }) {
+                        Button(
+                            onClick = {
+                                sendFormAction(
+                                    pointer = dataPointer + "/$index",
+                                    action = JsonPointerAction.RemoveValue
+                                )
+                            },
+                            enabled = isEnabled,
+                        ) {
                             Text("Remove")
                         }
 
@@ -279,7 +257,7 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
                                 ).resolveAsControl(vmState.schemaJson!!)
                             }
                         }
-                        RenderUiControl(
+                        UiElement(
                             arrayFieldControl
                         )
                     }
@@ -288,17 +266,3 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
         }
     }
 }
-
-// Control utils
-// ---------------------------------------------------------------------------------------------------------------------
-
-@Composable
-public fun WithArrayIndex(
-    index: Int,
-    content: @Composable () -> Unit
-) {
-    CompositionLocalProvider(LocalArrayIndices provides (LocalArrayIndices.current + index)) {
-        content()
-    }
-}
-
