@@ -1,16 +1,16 @@
 site:
   theme: Copper
-  baseUrl: 'https://copper-leaf.github.io/ballast/'
+  baseUrl: 'https://copper-leaf.github.io/kotlin-json-forms/'
   about:
-    siteName: Ballast
-    siteDescription: Opinionated Application State Management framework for Kotlin Multiplatform
+    siteName: Kotlin JSON Forms
+    siteDescription: Customizable JSON Schema-based forms for Kotlin and Compose
 
 theme:
   social:
     other:
-      - { link: 'https://github.com/copper-leaf',         label: 'Copper Leaf Home', icon: 'fas fa-home' }
-      - { link: 'https://github.com/copper-leaf/ballast', label: 'Github',           icon: 'fab fa-github'}
-      - { link: 'https://twitter.com/OrchidSSG',          label: 'Twitter',          icon: 'fab fa-twitter'}
+      - { link: 'https://github.com/copper-leaf',                   label: 'Copper Leaf Home', icon: 'fas fa-home' }
+      - { link: 'https://github.com/copper-leaf/kotlin-json-forms', label: 'Github',           icon: 'fab fa-github'}
+      - { link: 'https://twitter.com/OrchidSSG',                    label: 'Twitter',          icon: 'fab fa-twitter'}
   menu:
     # Main site menu in toolbar
     - { type: 'github', githubProject: 'orchidhq/Orchid'  }
@@ -35,10 +35,6 @@ theme:
     linkVisited: 'BLUE'
 
 allPages:
-  extraJs:
-    - "https://plugins.jetbrains.com/assets/scripts/mp-widget.js"
-    - asset: 'assets/js/jb-plugin.js'
-      inlined: true
   menu:
     # Menu in left sidebar
     - type: 'page'
@@ -82,26 +78,26 @@ snippets:
         type: 'file'
         baseDirs: [ 'snippets' ]
         recursive: false
-    - tags: ['embedded_snippets']
-      adapter:
-        type: 'embedded'
-        recursive: true
-        baseDirs:
-          - './../../../../ballast-core/'
+#    - tags: ['embedded_snippets']
+#      adapter:
+#        type: 'embedded'
+#        recursive: true
+#        baseDirs:
+#          - './../../../../ballast-core/'
 
 assets:
   sourceDirs:
-    - 'assets/example/distributions/bgg/hot'
+    - 'assets/media'
 
 services:
   publications:
     stages:
       - type: githubReleases
-        repo: 'copper-leaf/ballast'
+        repo: 'copper-leaf/kotlin-json-forms'
         username: 'cjbrooks12'
         commitish: 'main'
       - type: githubPages
-        repo: 'copper-leaf/ballast'
+        repo: 'copper-leaf/kotlin-json-forms'
         username: 'cjbrooks12'
   generators:
     disabled:
@@ -120,3 +116,4 @@ services:
       - 'woff'
       - 'woff2'
       - 'mp4'
+      - 'mov'

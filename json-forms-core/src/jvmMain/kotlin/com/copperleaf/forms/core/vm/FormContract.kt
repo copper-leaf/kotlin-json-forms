@@ -5,6 +5,7 @@ import com.copperleaf.json.pointer.JsonPointerAction
 import net.pwall.json.JSONValue
 import net.pwall.json.pointer.JSONPointer
 import net.pwall.json.schema.JSONSchema
+import net.pwall.json.schema.output.DetailedOutput
 
 public object FormContract {
 
@@ -25,7 +26,8 @@ public object FormContract {
         val updatedData: JSONValue? = null,
     ) {
         val isReady: Boolean = schema != null && uiSchema != null
-        val isValid: Boolean = schema?.validate(updatedData) ?: true
+        val validationDetails: DetailedOutput? = schema?.validateDetailed(updatedData)
+        val isValid: Boolean = validationDetails?.valid == true
         val isChanged: Boolean = originalData != updatedData
     }
 

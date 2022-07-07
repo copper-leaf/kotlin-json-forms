@@ -1,3 +1,5 @@
 ---
+components:
+    - type: readme
 ---
 

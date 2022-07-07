@@ -72,9 +72,11 @@ kotlin {
             }
         }
 
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val jvmMain by getting {
             dependencies {
                 api(compose.desktop.currentOs)
+                api(compose.desktop.components.splitPane)
             }
         }
         val jvmTest by getting {

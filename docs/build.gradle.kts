@@ -39,14 +39,6 @@ val orchidDeploy by tasks
 orchidBuild.mustRunAfter(check)
 build.dependsOn(orchidBuild)
 
-val copyExampleComposeWebSources by tasks.registering(Copy::class) {
-    from(project.rootDir.resolve("examples/mpp/build/distributions"))
-    into(project.projectDir.resolve("src/orchid/resources/assets/example/distributions"))
-}
-orchidServe.dependsOn(copyExampleComposeWebSources)
-orchidBuild.dependsOn(copyExampleComposeWebSources)
-orchidDeploy.dependsOn(copyExampleComposeWebSources)
-
 val publish by tasks.registering {
     dependsOn(orchidDeploy)
 }
