@@ -1,6 +1,5 @@
 package com.copperleaf.forms.compose.util
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -38,7 +37,6 @@ public val editorButtons: List<EditorToolbarAction> = listOf(
     EditorToolbarAction("Strikethrough", Icons.Default.FormatStrikethrough, Style.Strikethrough, Key.S),
 )
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 public fun RichTextToolbar(
     value: RichTextValue,

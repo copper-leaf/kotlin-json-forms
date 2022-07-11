@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Checkbox
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.compose.ui.LocallyEnabled
 import com.copperleaf.forms.core.vm.FormContract
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 
 @Composable
 fun RenderFormPreview(
@@ -66,11 +72,32 @@ fun RenderFormPreview(
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
         ) {
-            Text("Original Value", style = MaterialTheme.typography.subtitle1)
-            Text(vmState.originalData?.toJSON() ?: "", fontFamily = FontFamily.Monospace)
+            val json = Json { prettyPrint = true }
 
-            Text("UpdatedValue", style = MaterialTheme.typography.subtitle1)
-            Text(vmState.updatedData?.toJSON() ?: "", fontFamily = FontFamily.Monospace)
+            Text(
+                "Original Value",
+                style = MaterialTheme.typography.subtitle1,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            SelectionContainer {
+                Text(
+                    json.encodeToString(JsonElement.serializer(), vmState.originalData),
+                    fontFamily = FontFamily.Monospace
+                )
+            }
+            Divider(Modifier.padding(bottom = 16.dp))
+
+            Text(
+                "Updated Value",
+                style = MaterialTheme.typography.subtitle1,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            SelectionContainer {
+                Text(
+                    json.encodeToString(JsonElement.serializer(), vmState.updatedData),
+                    fontFamily = FontFamily.Monospace
+                )
+            }
         }
     }
 }

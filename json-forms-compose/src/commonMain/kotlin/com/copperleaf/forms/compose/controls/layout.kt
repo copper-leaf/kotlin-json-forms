@@ -13,8 +13,10 @@ import com.copperleaf.forms.compose.ui.LocalFormConfig
 import com.copperleaf.forms.compose.ui.LocalViewModel
 import com.copperleaf.forms.compose.ui.LocallyEnabled
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.json.pointer.asPointer
-import com.copperleaf.json.pointer.asPointerString
+import com.copperleaf.json.pointer.find
+import com.copperleaf.json.pointer.reifyPointer
+import com.copperleaf.json.pointer.toUriFragment
+import kotlinx.serialization.json.JsonNull
 
 @Composable
 public fun ControlLayout(controlElement: UiElement.Control) {
@@ -30,12 +32,12 @@ public fun ControlLayout(controlElement: UiElement.Control) {
 
             val controlScope by remember(controlElement, vmState, localArrayIndices, locallyEnabled) {
                 derivedStateOf {
-                    val currentDataPointer = controlElement.dataScope.asPointer(localArrayIndices)
-                    val currentSchemaPointer = controlElement.schemaScope.asPointer(localArrayIndices)
-                    val validationErrors = vmState.errors(currentDataPointer.asPointerString())
+                    val currentDataPointer = controlElement.dataScope.reifyPointer(localArrayIndices)
+                    val currentSchemaPointer = controlElement.schemaScope
+                    val validationErrors = vmState.errors(currentDataPointer)
                     val currentValue = runCatching {
-                        currentDataPointer.find(vmState.updatedData)
-                    }.getOrNull()
+                        vmState.updatedData.find(currentDataPointer)
+                    }.getOrDefault(JsonNull)
 
                     ControlScope(
                         vm = vm,
@@ -60,8 +62,8 @@ public fun ControlLayout(controlElement: UiElement.Control) {
             }
             if (vmState.debug) {
                 with(controlScope) {
-                    Text("schema scope: ${schemaPointer.asPointerString()}")
-                    Text("data scope: ${dataPointer.asPointerString()}")
+                    Text("schema scope: ${schemaPointer.toUriFragment()}")
+                    Text("data scope: ${dataPointer.toUriFragment()}")
                     Text("type: ${control.controlType}")
                     Text("Required: ${control.required}")
                     Text("Has Rule?: ${control.rule != null}")

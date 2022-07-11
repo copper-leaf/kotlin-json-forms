@@ -1,0 +1,100 @@
+public abstract interface class com/copperleaf/json/pointer/JsonPointerAction {
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$RemoveValue : com/copperleaf/json/pointer/JsonPointerAction {
+	public static final field INSTANCE Lcom/copperleaf/json/pointer/JsonPointerAction$RemoveValue;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$SetValue : com/copperleaf/json/pointer/JsonPointerAction {
+	public fun <init> (Lnet/pwall/json/JSONValue;)V
+	public final fun component1 ()Lnet/pwall/json/JSONValue;
+	public final fun copy (Lnet/pwall/json/JSONValue;)Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;Lnet/pwall/json/JSONValue;ILjava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lnet/pwall/json/JSONValue;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices : com/copperleaf/json/pointer/JsonPointerAction {
+	public fun <init> (I)V
+	public final fun component1 ()I
+	public final fun copy (I)Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;IILjava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTo ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/pointer/PointerKt {
+	public static final fun asPointer (Ljava/lang/String;Ljava/util/List;)Lnet/pwall/json/pointer/JSONPointer;
+	public static final fun asPointerString (Lnet/pwall/json/pointer/JSONPointer;)Ljava/lang/String;
+	public static final fun defaultValueForType (Ljava/lang/String;)Ljava/lang/Object;
+	public static final fun parseJson (Ljava/lang/String;)Lnet/pwall/json/JSONValue;
+	public static final fun plus (Lnet/pwall/json/pointer/JSONPointer;Ljava/lang/String;)Lnet/pwall/json/pointer/JSONPointer;
+	public static final fun toJsonValue (Ljava/lang/Object;)Lnet/pwall/json/JSONValue;
+	public static final fun updateWithPointer (Lnet/pwall/json/JSONValue;Lnet/pwall/json/pointer/JSONPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lnet/pwall/json/JSONValue;
+}
+
+public final class com/copperleaf/json/utils/ListUtilsKt {
+	public static final fun takeHead (Ljava/util/List;)Lkotlin/Pair;
+	public static final fun takeHead (Ljava/util/List;I)Lkotlin/Pair;
+	public static final fun takeHead (Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lkotlin/Pair;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Locale;)V
+	public synthetic fun <init> (Ljava/util/Locale;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun convertTo (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
+	public final fun executeSplit (Ljava/lang/String;)Ljava/util/List;
+	public final fun getLocale ()Ljava/util/Locale;
+	public final fun splitEach (Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/json/utils/SplitTransformer;
+	public final fun transformEach (Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Combiner {
+	public abstract fun combine (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$CombinerScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Splitter {
+	public abstract fun split (Ljava/lang/String;)Ljava/util/List;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$SplitterScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Transformer {
+	public abstract fun transform (ILjava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$TransformerScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformerKt {
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getDashCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getDashCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getLowercase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getPascalCase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getSnakeCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getSnakeCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getTrimmed (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getUppercase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getUrlEncoded (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getWords (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getWords (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+}
+

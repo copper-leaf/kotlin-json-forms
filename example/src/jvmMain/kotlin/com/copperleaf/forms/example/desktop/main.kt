@@ -46,7 +46,6 @@ val allForms = listOf(
     "/listWithDetail",
 )
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
 fun main() = singleWindowApplication {
     Row(Modifier.fillMaxSize()) {
         val (selectedForm, setSelectedForm) = remember { mutableStateOf("/fields/boolean") }

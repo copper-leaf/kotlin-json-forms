@@ -1,0 +1,238 @@
+public final class com/copperleaf/json/pointer/AbstractJsonPointer {
+	public static final field Companion Lcom/copperleaf/json/pointer/AbstractJsonPointer$Companion;
+	public final fun getTokens ()Ljava/util/List;
+}
+
+public final class com/copperleaf/json/pointer/AbstractJsonPointer$Companion {
+	public final fun parse (Ljava/lang/String;)Lcom/copperleaf/json/pointer/AbstractJsonPointer;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointer {
+	public static final field Companion Lcom/copperleaf/json/pointer/JsonPointer$Companion;
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lcom/copperleaf/json/pointer/JsonPointer;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/JsonPointer;Ljava/util/List;ILjava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointer;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTokens ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointer$Companion {
+	public final fun parse (Ljava/lang/String;)Lcom/copperleaf/json/pointer/JsonPointer;
+}
+
+public abstract interface class com/copperleaf/json/pointer/JsonPointerAction {
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$RemoveValue : com/copperleaf/json/pointer/JsonPointerAction {
+	public static final field INSTANCE Lcom/copperleaf/json/pointer/JsonPointerAction$RemoveValue;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$SetValue : com/copperleaf/json/pointer/JsonPointerAction {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;Ljava/lang/Object;ILjava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointerAction$SetValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices : com/copperleaf/json/pointer/JsonPointerAction {
+	public fun <init> (I)V
+	public final fun component1 ()I
+	public final fun copy (I)Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;IILjava/lang/Object;)Lcom/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndices;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTo ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/pointer/KotlinxJsonKt {
+	public static final fun find (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun mutate (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun toKotlinxJsonValue (Ljava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+}
+
+public final class com/copperleaf/json/pointer/UtilsKt {
+	public static final fun getCurrent (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/lang/String;
+	public static final fun parent (Lcom/copperleaf/json/pointer/JsonPointer;)Lcom/copperleaf/json/pointer/JsonPointer;
+	public static final fun reifyPointer (Lcom/copperleaf/json/pointer/AbstractJsonPointer;Ljava/util/List;)Lcom/copperleaf/json/pointer/JsonPointer;
+	public static final fun toAbstractUriFragment (Lcom/copperleaf/json/pointer/AbstractJsonPointer;)Ljava/lang/String;
+	public static final fun toUriFragment (Lcom/copperleaf/json/pointer/AbstractJsonPointer;Ljava/util/List;)Ljava/lang/String;
+	public static final fun toUriFragment (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/schema/JsonSchema {
+	public static final field Companion Lcom/copperleaf/json/schema/JsonSchema$Companion;
+	public fun <init> ()V
+	public final fun validate (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/json/schema/SchemaValidationResult;
+}
+
+public final class com/copperleaf/json/schema/JsonSchema$Companion {
+	public final fun parse (Ljava/lang/String;)Lcom/copperleaf/json/schema/JsonSchema;
+}
+
+public final class com/copperleaf/json/schema/JsonSchemaKt {
+	public static final fun issues (Lcom/copperleaf/json/schema/SchemaValidationResult;Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
+}
+
+public abstract class com/copperleaf/json/schema/SchemaValidationResult {
+	public synthetic fun <init> (ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun isValid ()Z
+}
+
+public final class com/copperleaf/json/schema/SchemaValidationResult$Invalid : com/copperleaf/json/schema/SchemaValidationResult {
+	public fun <init> (Ljava/util/Map;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun copy (Ljava/util/Map;)Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;Ljava/util/Map;ILjava/lang/Object;)Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIssues ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/schema/SchemaValidationResult$Valid : com/copperleaf/json/schema/SchemaValidationResult {
+	public static final field INSTANCE Lcom/copperleaf/json/schema/SchemaValidationResult$Valid;
+}
+
+public final class com/copperleaf/json/utils/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public abstract class com/copperleaf/json/utils/Either {
+}
+
+public final class com/copperleaf/json/utils/Either$Left : com/copperleaf/json/utils/Either {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/copperleaf/json/utils/Either$Left;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/utils/Either$Left;Ljava/lang/Object;ILjava/lang/Object;)Lcom/copperleaf/json/utils/Either$Left;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/Either$Right : com/copperleaf/json/utils/Either {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/copperleaf/json/utils/Either$Right;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/utils/Either$Right;Ljava/lang/Object;ILjava/lang/Object;)Lcom/copperleaf/json/utils/Either$Right;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/EitherKt {
+	public static final fun asLeft (Ljava/lang/Object;)Lcom/copperleaf/json/utils/Either;
+	public static final fun asRight (Ljava/lang/Object;)Lcom/copperleaf/json/utils/Either;
+	public static final fun getLeftValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
+	public static final fun getRightValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
+	public static final fun requireLeftValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
+	public static final fun requireRightValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/json/utils/ListUtilsKt {
+	public static final fun takeHead (Ljava/util/List;)Lkotlin/Pair;
+	public static final fun takeHead (Ljava/util/List;I)Lkotlin/Pair;
+	public static final fun takeHead (Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lkotlin/Pair;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer {
+	public fun <init> ()V
+	public final fun convertTo (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
+	public final fun executeSplit (Ljava/lang/String;)Ljava/util/List;
+	public final fun splitEach (Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/json/utils/SplitTransformer;
+	public final fun transformEach (Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Combiner {
+	public abstract fun combine (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$CombinerScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Splitter {
+	public abstract fun split (Ljava/lang/String;)Ljava/util/List;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$SplitterScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public abstract interface class com/copperleaf/json/utils/SplitTransformer$Transformer {
+	public abstract fun transform (ILjava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer$TransformerScope {
+	public fun <init> (Lcom/copperleaf/json/utils/SplitTransformer;)V
+	public final fun getTransformer ()Lcom/copperleaf/json/utils/SplitTransformer;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformerKt {
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getDashCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getDashCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getLowercase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getPascalCase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getSnakeCase (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+	public static final fun getSnakeCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getTrimmed (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getUppercase (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getWords (Lcom/copperleaf/json/utils/SplitTransformer$CombinerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Combiner;
+}
+
+public final class com/copperleaf/json/utils/SplitTransformer_androidKt {
+	public static final fun getCamelCase (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+	public static final fun getUrlEncoded (Lcom/copperleaf/json/utils/SplitTransformer$TransformerScope;)Lcom/copperleaf/json/utils/SplitTransformer$Transformer;
+	public static final fun getWords (Lcom/copperleaf/json/utils/SplitTransformer$SplitterScope;)Lcom/copperleaf/json/utils/SplitTransformer$Splitter;
+}
+
+public final class com/copperleaf/json/utils/StringutilsKt {
+	public static final fun indent (Ljava/lang/String;I)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/values/GetJsonValuesKt {
+	public static final fun arrayAt (Lkotlinx/serialization/json/JsonElement;I)Lkotlinx/serialization/json/JsonArray;
+	public static final fun arrayAt (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonArray;
+	public static final fun arrayAt (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Lkotlinx/serialization/json/JsonArray;
+	public static final fun boolean (Lkotlinx/serialization/json/JsonElement;I)Z
+	public static final fun boolean (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Z
+	public static final fun boolean (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Z
+	public static final fun double (Lkotlinx/serialization/json/JsonElement;I)D
+	public static final fun double (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)D
+	public static final fun double (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)D
+	public static final fun float (Lkotlinx/serialization/json/JsonElement;I)F
+	public static final fun float (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)F
+	public static final fun float (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)F
+	public static final fun int (Lkotlinx/serialization/json/JsonElement;I)I
+	public static final fun int (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)I
+	public static final fun int (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)I
+	public static final fun long (Lkotlinx/serialization/json/JsonElement;I)J
+	public static final fun long (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)J
+	public static final fun long (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)J
+	public static final fun objectAt (Lkotlinx/serialization/json/JsonElement;I)Lkotlinx/serialization/json/JsonObject;
+	public static final fun objectAt (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonObject;
+	public static final fun objectAt (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Lkotlinx/serialization/json/JsonObject;
+	public static final fun optional (Lkotlinx/serialization/json/JsonElement;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun optional (Lkotlinx/serialization/json/JsonElement;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun optionalWithError (Lkotlinx/serialization/json/JsonElement;Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/json/utils/Either;
+	public static final fun string (Lkotlinx/serialization/json/JsonElement;I)Ljava/lang/String;
+	public static final fun string (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/lang/String;
+	public static final fun string (Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Ljava/lang/String;
+}
+

@@ -15,7 +15,6 @@ import com.copperleaf.forms.core.vm.FormSavedStateAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 class FormViewModelImpl(
     coroutineScope: CoroutineScope,
     path: String,

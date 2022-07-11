@@ -26,13 +26,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.form.ControlRenderer
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
 import com.copperleaf.forms.compose.form.uiControl
-import com.copperleaf.forms.compose.ui.requireObject
-import com.copperleaf.forms.compose.ui.requireString
 import com.copperleaf.forms.compose.util.RichTextToolbar
 import com.copperleaf.forms.compose.util.rememberUpdatableText
 import com.copperleaf.forms.compose.util.richTextToolbarShortcuts
@@ -46,19 +43,25 @@ import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.internal.resolveAsControl
 import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.defaultValueForType
 import com.copperleaf.json.pointer.plus
-import com.copperleaf.json.pointer.toJsonValue
+import com.copperleaf.json.pointer.toUriFragment
+import com.copperleaf.json.values.objectAt
 import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
 import com.darkrockstudios.richtexteditor.ui.defaultRichTextFieldStyle
-import net.pwall.json.JSONArray
-import net.pwall.json.JSONObject
-import net.pwall.json.JSONString
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.doubleOrNull
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonPrimitive
 
 public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue("") {
-        it.toSimpleValue().toString()
+        it.jsonPrimitive.content
     }
     val (text, updateText) = rememberUpdatableText(
         initialValue = currentValue,
@@ -81,9 +84,6 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
     rank = 10,
     tester = { optionIsEnabled("richText") }
 ) {
-    val currentValue = getTypedValue("") {
-        it.toSimpleValue().toString()
-    }
     var value by remember { mutableStateOf(RichTextValue.get()) }
 
     RichTextToolbar(
@@ -104,7 +104,7 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
 
 public fun IntegerControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue(0) {
-        it.toSimpleValue().toString().toIntOrNull()
+        it.jsonPrimitive.intOrNull
     }
 
     val updatableText = rememberUpdatableText(
@@ -138,7 +138,7 @@ public fun IntegerControl.control(): Registered<UiElement.Control, ControlRender
 
 public fun NumberControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue(0.0) {
-        it.toSimpleValue().toString().toDoubleOrNull()
+        it.jsonPrimitive.doubleOrNull
     }
 
     val updatableText = rememberUpdatableText(
@@ -172,7 +172,7 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
 
 public fun BooleanControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue(false) {
-        it.toSimpleValue().toString().toBooleanStrictOrNull() ?: false
+        it.jsonPrimitive.booleanOrNull
     }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -188,17 +188,17 @@ public fun BooleanControl.control(): Registered<UiElement.Control, ControlRender
 }
 
 public fun ObjectControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
-    val properties = control.schemaConfig.getObject("properties") ?: emptyMap()
+    val properties = control.schemaConfig.objectAt("properties")
 
-    properties.forEach { (key, schemaValue) ->
+    properties.forEach { (key, _) ->
         val objectFieldControl by remember {
             derivedStateOf {
-                JSONObject(
+                JsonObject(
                     mapOf(
-                        "type" to JSONString("Control"),
-                        "scope" to JSONString("${control.schemaScope}/properties/$key")
+                        "type" to JsonPrimitive("Control"),
+                        "scope" to JsonPrimitive((control.schemaScope + "/properties/$key").toUriFragment())
                     )
-                ).resolveAsControl(vmState.schemaJson!!)
+                ).resolveAsControl(vmState.schemaJson)
             }
         }
 
@@ -209,19 +209,19 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
 }
 
 public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
-    val currentDataValue: JSONArray = getTypedValue(JSONArray()) {
-        it as JSONArray
+    val currentDataValue: JsonArray = getTypedValue(JsonArray(emptyList())) {
+        it.jsonArray
     }
 
-    val items: JSONObject = control.schemaConfig.requireObject("items")
-    val itemsType: String = items.requireString("type")
+    val items: JsonObject = control.schemaConfig.objectAt("items")
+//    val itemsType: String = items.string("type")
 
     Row {
         Button(
             onClick = {
                 sendFormAction(
                     pointer = dataPointer + "/${currentDataValue.size}",
-                    action = JsonPointerAction.SetValue(itemsType.defaultValueForType().toJsonValue()),
+                    action = JsonPointerAction.SetValue(JsonNull),
                 )
             },
             enabled = isEnabled,
@@ -230,7 +230,7 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
         }
     }
 
-    currentDataValue.forEachIndexed { index, jsonValue ->
+    currentDataValue.forEachIndexed { index, _ ->
         WithArrayIndex(index) {
             Card(Modifier.fillMaxWidth()) {
                 Box(Modifier.padding(8.dp)) {
@@ -249,12 +249,12 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
 
                         val arrayFieldControl by remember {
                             derivedStateOf {
-                                JSONObject(
+                                JsonObject(
                                     mapOf(
-                                        "type" to JSONString("Control"),
-                                        "scope" to JSONString("${control.schemaScope}/items")
+                                        "type" to JsonPrimitive("Control"),
+                                        "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
                                     )
-                                ).resolveAsControl(vmState.schemaJson!!)
+                                ).resolveAsControl(vmState.schemaJson)
                             }
                         }
                         UiElement(

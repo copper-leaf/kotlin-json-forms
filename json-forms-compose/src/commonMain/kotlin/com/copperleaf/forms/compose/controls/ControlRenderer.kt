@@ -1,6 +1,5 @@
-package com.copperleaf.forms.compose.form
+package com.copperleaf.forms.compose.controls
 
 import androidx.compose.runtime.Composable
-import com.copperleaf.forms.compose.controls.ControlScope
 
 public typealias ControlRenderer = @Composable ControlScope.() -> Unit

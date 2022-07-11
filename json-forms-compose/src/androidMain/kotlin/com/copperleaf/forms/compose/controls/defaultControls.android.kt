@@ -19,20 +19,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.TextFieldValue
-import com.copperleaf.forms.compose.form.ControlRenderer
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.uiControl
 import com.copperleaf.forms.compose.util.rememberUpdatableText
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.ui.UiElement
-import net.pwall.json.JSONString
+import com.copperleaf.json.values.arrayAt
+import kotlinx.serialization.json.jsonPrimitive
 
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
     rank = 10,
     tester = { hasSchemaProperty("enum") }
 ) {
     val currentValue = getTypedValue("") {
-        it.toSimpleValue().toString()
+        it.jsonPrimitive.content
     }
 
     val (text, updateText) = rememberUpdatableText(
@@ -44,7 +44,7 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
 
     var dropdownIsVisible by remember { mutableStateOf(false) }
     val allDropdownOptions: List<String> = remember {
-        control.schemaConfig.getArray("enum").map { (it as JSONString).value }
+        control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
     }
     val filteredDropdownOptions: List<String> = remember(text) {
         allDropdownOptions.filter { it.contains(text.text) }

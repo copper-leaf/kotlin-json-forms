@@ -57,7 +57,7 @@ kotlin {
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-                api(project(":json-forms-compose"))
+                implementation(project(":json-forms-compose"))
             }
         }
         val commonTest by getting {
@@ -75,8 +75,8 @@ kotlin {
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val jvmMain by getting {
             dependencies {
-                api(compose.desktop.currentOs)
-                api(compose.desktop.components.splitPane)
+                implementation(compose.desktop.currentOs)
+                implementation(compose.desktop.components.splitPane)
             }
         }
         val jvmTest by getting {
@@ -87,7 +87,7 @@ kotlin {
         // Android JVM Sourcesets
         val androidMain by getting {
             dependencies {
-                api(libs.androidx.compose.activity)
+                implementation(libs.androidx.compose.activity)
             }
         }
         val androidAndroidTestRelease by getting { }
@@ -112,6 +112,16 @@ tasks.withType<Test> {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = Config.javaVersion
+        freeCompilerArgs += listOf(
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-Xopt-in=kotlin.ExperimentalStdlibApi",
+            "-Xopt-in=kotlin.time.ExperimentalTime",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-Xopt-in=org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi",
+        )
     }
 }
 

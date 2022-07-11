@@ -8,11 +8,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.copperleaf.forms.compose.ui.LocalFormConfig
-import com.copperleaf.forms.compose.ui.LocalViewModel
 import com.copperleaf.forms.compose.controls.ControlLayout
 import com.copperleaf.forms.compose.elements.UiElementLayout
 import com.copperleaf.forms.compose.rules.RuleLayout
+import com.copperleaf.forms.compose.ui.LocalFormConfig
+import com.copperleaf.forms.compose.ui.LocalViewModel
 import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
@@ -21,7 +21,10 @@ import com.copperleaf.forms.core.vm.FormViewModel
 public fun Form(
     viewModel: FormViewModel,
     modifier: Modifier = Modifier,
-    config: ComposeFormConfig = ComposeFormConfig(),
+    config: ComposeFormConfig = ComposeFormConfig(
+        elements = UiElement.defaults(),
+        controls = UiElement.Control.defaults(),
+    ),
 ) {
     Column(modifier) {
         val vmState by viewModel.observeStates().collectAsState()

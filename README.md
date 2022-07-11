@@ -78,4 +78,4 @@ This project depends on the following libraries:
 - [json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema) for providing JSON parsing and validation on JVM, 
   which itself depends on many other Java or Kotlin JSON libraries by the same author
 - [Ballast](https://github.com/copper-leaf/ballast) for state management
-
+- [richtext-compose-multiplatform](https://github.com/Wavesonics/richtext-compose-multiplatform) for rich text editor capabilities

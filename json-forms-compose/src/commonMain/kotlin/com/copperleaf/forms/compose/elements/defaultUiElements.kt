@@ -17,23 +17,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.controls.ControlLayout
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
-import com.copperleaf.forms.compose.form.UiElementRenderer
 import com.copperleaf.forms.compose.form.uiElement
-import com.copperleaf.forms.compose.ui.optionalString
-import com.copperleaf.forms.compose.ui.requireString
 import com.copperleaf.forms.compose.rules.RuleLayout
 import com.copperleaf.forms.core.Categorization
 import com.copperleaf.forms.core.Category
-import com.copperleaf.forms.core.Control
 import com.copperleaf.forms.core.Group
 import com.copperleaf.forms.core.HorizontalLayout
 import com.copperleaf.forms.core.Label
 import com.copperleaf.forms.core.ListWithDetail
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.json.values.optional
+import com.copperleaf.json.values.string
 
 public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     Column(Modifier.fillMaxWidth()) {
@@ -55,14 +52,8 @@ public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren,
     }
 }
 
-public fun Control.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    Column(Modifier.fillMaxWidth().padding(16.dp)) {
-        ControlLayout(element as UiElement.Control)
-    }
-}
-
 public fun Label.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    val text = element.uiSchemaConfig.requireString("text")
+    val text = element.uiSchemaConfig.string("text")
 
     Column(Modifier.fillMaxWidth().padding(16.dp)) {
         Text(text)
@@ -70,7 +61,7 @@ public fun Label.element(): Registered<UiElement.ElementWithChildren, UiElementR
 }
 
 public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    val label = element.uiSchemaConfig.optionalString("label")
+    val label = element.uiSchemaConfig.optional { string("label") }
 
     Column(Modifier.padding(16.dp)) {
         if (label != null) {
@@ -94,7 +85,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
             ) {
                 element.elements.forEachIndexed { index, category ->
                     RuleLayout(uiElement = category, animated = false) {
-                        val label = category.uiSchemaConfig.requireString("label")
+                        val label = category.uiSchemaConfig.string("label")
                         Tab(
                             selected = index == selectedTab,
                             onClick = { selectedTab = index },
@@ -110,7 +101,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
     }
 
 public fun Category.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    val label = element.uiSchemaConfig.requireString("label")
+    val label = element.uiSchemaConfig.string("label")
 
     Column(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {

@@ -3,19 +3,19 @@ package com.copperleaf.forms.compose.rules
 import com.copperleaf.forms.core.ui.Rule
 import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
-import net.pwall.json.JSONValue
-import net.pwall.json.pointer.JSONPointer
+import com.copperleaf.json.pointer.JsonPointer
+import kotlinx.serialization.json.JsonElement
 
 public data class RuleScope(
     private val vm: FormViewModel,
     val vmState: FormContract.State,
     val rule: Rule,
-    val dataPointer: JSONPointer,
-    val schemaPointer: JSONPointer,
+    val dataPointer: JsonPointer,
+    val schemaPointer: JsonPointer,
     val isValid: Boolean,
 
     val isEnabled: Boolean,
     val isVisible: Boolean,
 
-    val currentValue: JSONValue?,
+    val currentValue: JsonElement,
 )

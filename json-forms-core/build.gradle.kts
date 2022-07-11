@@ -1,5 +1,5 @@
 plugins {
-//    id("com.android.library")
+    id("com.android.library")
     kotlin("multiplatform")
     `copper-leaf-base`
     `copper-leaf-version`
@@ -9,45 +9,45 @@ plugins {
 
 description = "Opinionated Application State Management framework for Kotlin Multiplatform"
 
-//android {
-//    compileSdk = 31
-//    defaultConfig {
-//        minSdk = 21
-//        targetSdk = 31
-//        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-//    }
-//    buildTypes {
-//        val release by getting {
-//            isMinifyEnabled = false
-//        }
-//    }
-//    sourceSets {
-//        getByName("main") {
-//            setRoot("src/androidMain")
-//        }
-//        getByName("androidTest") {
-//            setRoot("src/androidTest")
-//        }
-//    }
-//    testOptions {
-//        unitTests {
-//            isIncludeAndroidResources = true
-//            isReturnDefaultValues = true
-//        }
-//    }
-//    lint {
-//        disable("GradleDependency")
-//    }
-//}
+android {
+    compileSdk = 31
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 31
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        val release by getting {
+            isMinifyEnabled = false
+        }
+    }
+    sourceSets {
+        getByName("main") {
+            setRoot("src/androidMain")
+        }
+        getByName("androidTest") {
+            setRoot("src/androidTest")
+        }
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+    lint {
+        disable("GradleDependency")
+    }
+}
 
 kotlin {
     explicitApi()
 
     // targets
     jvm { }
-//    android {
-//        publishAllLibraryVariants()
-//    }
+    android {
+        publishAllLibraryVariants()
+    }
 
     // sourcesets
     sourceSets {
@@ -59,7 +59,9 @@ kotlin {
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-
+                api(project(":json-utils"))
+                api("io.github.copper-leaf:ballast-core:1.2.1")
+                api("io.github.copper-leaf:ballast-saved-state:1.2.1")
             }
         }
         val commonTest by getting {
@@ -76,10 +78,6 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api(project(":json-utils"))
-                api("net.pwall.json:json-kotlin-schema:0.35")
-                api("io.github.copper-leaf:ballast-core:1.2.1")
-                api("io.github.copper-leaf:ballast-saved-state:1.2.1")
             }
         }
         val jvmTest by getting {
@@ -88,18 +86,16 @@ kotlin {
         }
 
         // Android JVM Sourcesets
-//        val androidMain by getting {
-//            dependsOn(jvmMain)
-//            dependencies {
-//            }
-//        }
-//        val androidAndroidTestRelease by getting { }
-//        val androidTest by getting {
-//            dependsOn(androidAndroidTestRelease)
-//            dependsOn(jvmTest)
-//            dependencies {
-//            }
-//        }
+        val androidMain by getting {
+            dependencies {
+            }
+        }
+        val androidAndroidTestRelease by getting { }
+        val androidTest by getting {
+            dependsOn(androidAndroidTestRelease)
+            dependencies {
+            }
+        }
     }
 }
 
@@ -116,5 +112,11 @@ tasks.withType<Test> {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = Config.javaVersion
+        freeCompilerArgs += listOf(
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-Xopt-in=kotlin.ExperimentalStdlibApi",
+            "-Xopt-in=kotlin.time.ExperimentalTime",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        )
     }
 }

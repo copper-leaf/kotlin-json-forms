@@ -61,7 +61,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":json-forms-core"))
-                api("io.github.copper-leaf:ballast-core:1.2.1")
                 api("com.darkrockstudios:richtexteditor:1.3.0")
                 api(compose.material)
                 api(compose.materialIconsExtended)
@@ -115,5 +114,13 @@ tasks.withType<Test> {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = Config.javaVersion
+        freeCompilerArgs += listOf(
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-Xopt-in=kotlin.ExperimentalStdlibApi",
+            "-Xopt-in=kotlin.time.ExperimentalTime",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+            "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+        )
     }
 }

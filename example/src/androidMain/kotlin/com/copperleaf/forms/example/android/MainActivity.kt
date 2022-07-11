@@ -52,7 +52,6 @@ val allForms = listOf(
 )
 
 class MainActivity : AppCompatActivity() {
-    @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

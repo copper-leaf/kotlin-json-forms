@@ -12,7 +12,9 @@ import com.copperleaf.forms.compose.ui.LocalViewModel
 import com.copperleaf.forms.compose.ui.LocallyEnabled
 import com.copperleaf.forms.compose.ui.LocallyVisible
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.json.pointer.asPointer
+import com.copperleaf.json.pointer.find
+import com.copperleaf.json.pointer.reifyPointer
+import kotlinx.serialization.json.JsonNull
 
 @Composable
 public fun RuleLayout(
@@ -33,15 +35,15 @@ public fun RuleLayout(
 
         val ruleScope by remember(rule, vmState, localArrayIndices, locallyEnabled) {
             derivedStateOf {
-                val currentDataPointer = rule.dataScope.asPointer(localArrayIndices)
-                val currentSchemaPointer = rule.schemaScope.asPointer(localArrayIndices)
+                val currentDataPointer = rule.dataScope.reifyPointer(localArrayIndices)
+                val currentSchemaPointer = rule.schemaScope
                 val currentValue = runCatching {
-                    currentDataPointer.find(vmState.updatedData)
-                }.getOrNull()
+                    vmState.updatedData.find(currentDataPointer)
+                }.getOrDefault(JsonNull)
 
-                val isValid = rule.conditionSchema.validate(currentValue)
+                val result = rule.conditionSchema.validate(currentValue)
 
-                val effect = if (isValid) rule.effect else rule.effect.inverse()
+                val effect = if (result.isValid) rule.effect else rule.effect.inverse()
 
                 RuleScope(
                     vm = vm,
@@ -51,7 +53,7 @@ public fun RuleLayout(
                     dataPointer = currentDataPointer,
                     schemaPointer = currentSchemaPointer,
 
-                    isValid = isValid,
+                    isValid = result.isValid,
 
                     isEnabled = effect.isEnabled,
                     isVisible = effect.isVisible,

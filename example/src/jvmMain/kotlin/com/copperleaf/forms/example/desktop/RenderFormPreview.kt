@@ -26,12 +26,11 @@ import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.compose.ui.LocallyEnabled
 import com.copperleaf.forms.core.vm.FormContract
-import net.pwall.json.JSONFormat
-import org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import org.jetbrains.compose.splitpane.VerticalSplitPane
 import org.jetbrains.compose.splitpane.rememberSplitPaneState
 
-@OptIn(ExperimentalSplitPaneApi::class)
 @Composable
 fun RenderFormPreview(
     path: String,
@@ -73,7 +72,7 @@ fun RenderFormPreview(
                         .padding(16.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    val jsonFormatter = JSONFormat(0, 4, true)
+                    val json = Json { prettyPrint = true }
 
                     Text(
                         "Original Value",
@@ -81,7 +80,10 @@ fun RenderFormPreview(
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     SelectionContainer {
-                        Text(jsonFormatter.format(vmState.originalData), fontFamily = FontFamily.Monospace)
+                        Text(
+                            json.encodeToString(JsonElement.serializer(), vmState.originalData),
+                            fontFamily = FontFamily.Monospace
+                        )
                     }
                     Divider(Modifier.padding(bottom = 16.dp))
 
@@ -91,7 +93,10 @@ fun RenderFormPreview(
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     SelectionContainer {
-                        Text(jsonFormatter.format(vmState.updatedData), fontFamily = FontFamily.Monospace)
+                        Text(
+                            json.encodeToString(JsonElement.serializer(), vmState.updatedData),
+                            fontFamily = FontFamily.Monospace
+                        )
                     }
                 }
             }

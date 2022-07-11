@@ -1,0 +1,40 @@
+public final class com/copperleaf/forms/compose/android/BuildConfig {
+	public static final field APPLICATION_ID Ljava/lang/String;
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/forms/example/android/ComposableSingletons$MainActivityKt {
+	public static final field INSTANCE Lcom/copperleaf/forms/example/android/ComposableSingletons$MainActivityKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function2;
+	public static field lambda-2 Lkotlin/jvm/functions/Function2;
+	public fun <init> ()V
+	public final fun getLambda-1$example_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$example_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/copperleaf/forms/example/android/FormViewModelImpl : com/copperleaf/ballast/core/BasicViewModel {
+	public static final field $stable I
+	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Landroid/content/Context;Ljava/lang/String;)V
+}
+
+public final class com/copperleaf/forms/example/android/MainActivity : androidx/appcompat/app/AppCompatActivity {
+	public static final field $stable I
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/forms/example/android/MainActivityKt {
+	public static final fun getAllForms ()Ljava/util/List;
+}
+
+public final class com/copperleaf/forms/example/android/PreviewFormDataStore {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/copperleaf/forms/example/android/PreviewFormDataStore;
+	public final fun getStoreAt (Landroid/content/Context;Ljava/lang/String;)Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter$Store;
+}
+
+public final class com/copperleaf/forms/example/android/RenderFormPreviewKt {
+	public static final fun RenderFormPreview (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+}
+

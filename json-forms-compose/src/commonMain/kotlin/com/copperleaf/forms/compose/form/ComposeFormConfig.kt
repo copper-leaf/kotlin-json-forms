@@ -1,10 +1,15 @@
 package com.copperleaf.forms.compose.form
 
+import com.copperleaf.forms.compose.controls.ControlRenderer
+import com.copperleaf.forms.compose.elements.UiElementRenderer
 import com.copperleaf.forms.core.ui.UiElement
 
 public class ComposeFormConfig(
-    private val elements: List<Registered<UiElement.ElementWithChildren, UiElementRenderer>> = UiElement.defaults(),
-    private val controls: List<Registered<UiElement.Control, ControlRenderer>> = UiElement.Control.defaults(),
+//    private val elements: List<Registered<UiElement.ElementWithChildren, UiElementRenderer>> = UiElement.defaults(),
+//    private val controls: List<Registered<UiElement.Control, ControlRenderer>> = UiElement.Control.defaults(),
+
+    private val elements: List<Registered<UiElement.ElementWithChildren, UiElementRenderer>>,
+    private val controls: List<Registered<UiElement.Control, ControlRenderer>>,
 ) {
     public fun getElement(element: UiElement.ElementWithChildren): UiElementRenderer? {
         return elements
