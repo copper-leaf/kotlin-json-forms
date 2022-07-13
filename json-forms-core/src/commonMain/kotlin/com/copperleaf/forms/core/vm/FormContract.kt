@@ -26,6 +26,8 @@ public object FormContract {
 
         val originalData: JsonElement = JsonNull,
         val updatedData: JsonElement = JsonNull,
+
+        val touchedProperties: Set<JsonPointer> = emptySet(),
     ) {
         val isReady: Boolean = schema != null && uiSchema != null
 

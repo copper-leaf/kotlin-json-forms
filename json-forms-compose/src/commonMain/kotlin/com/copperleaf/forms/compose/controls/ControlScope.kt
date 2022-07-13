@@ -13,8 +13,12 @@ public data class ControlScope(
     val control: UiElement.Control,
     val dataPointer: JsonPointer,
     val schemaPointer: JsonPointer,
+
     val isValid: Boolean,
     val validationErrors: List<String>,
+
+    val isTouched: Boolean,
+    val isChanged: Boolean,
 
     val isEnabled: Boolean,
 

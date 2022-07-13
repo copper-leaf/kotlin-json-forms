@@ -287,9 +287,6 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
         it.jsonArray
     }
 
-    val items: JsonObject = control.schemaConfig.objectAt("items")
-//    val itemsType: String = items.string("type")
-
     Row {
         Button(
             onClick = {

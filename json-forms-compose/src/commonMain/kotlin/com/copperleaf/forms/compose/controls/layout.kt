@@ -35,9 +35,14 @@ public fun ControlLayout(controlElement: UiElement.Control) {
                     val currentDataPointer = controlElement.dataScope.reifyPointer(localArrayIndices)
                     val currentSchemaPointer = controlElement.schemaScope
                     val validationErrors = vmState.errors(currentDataPointer)
+                    val originalValue = runCatching {
+                        vmState.originalData.find(currentDataPointer)
+                    }.getOrDefault(JsonNull)
                     val currentValue = runCatching {
                         vmState.updatedData.find(currentDataPointer)
                     }.getOrDefault(JsonNull)
+                    val isTouched = currentDataPointer in vmState.touchedProperties
+                    val isChanged = originalValue != currentValue
 
                     ControlScope(
                         vm = vm,
@@ -49,6 +54,9 @@ public fun ControlLayout(controlElement: UiElement.Control) {
 
                         isValid = validationErrors.isEmpty(),
                         validationErrors = validationErrors,
+
+                        isTouched = isTouched,
+                        isChanged = isChanged,
 
                         isEnabled = locallyEnabled,
                         currentValue = currentValue,
@@ -67,6 +75,8 @@ public fun ControlLayout(controlElement: UiElement.Control) {
                     Text("type: ${control.controlType}")
                     Text("Required: ${control.required}")
                     Text("Has Rule?: ${control.rule != null}")
+                    Text("touched?: $isTouched")
+                    Text("changed?: $isChanged")
                 }
             }
         } else {

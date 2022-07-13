@@ -25,18 +25,21 @@ public class FormInputHandler : InputHandler<
 
             val updatedTemporaryState = currentState.copy(
                 updatedData = currentState.updatedData.mutate(input.pointer, input.action),
+                touchedProperties = currentState.touchedProperties + input.pointer,
             )
 
             val updatedState = when (currentState.saveType) {
                 FormContract.SaveType.OnAnyChange -> {
                     updatedTemporaryState.copy(
-                        originalData = updatedTemporaryState.updatedData
+                        originalData = updatedTemporaryState.updatedData,
+                        touchedProperties = emptySet()
                     )
                 }
                 FormContract.SaveType.OnValidChange -> {
                     if (updatedTemporaryState.isValid) {
                         updatedTemporaryState.copy(
-                            originalData = updatedTemporaryState.updatedData
+                            originalData = updatedTemporaryState.updatedData,
+                            touchedProperties = emptySet()
                         )
                     } else {
                         updatedTemporaryState
@@ -54,6 +57,7 @@ public class FormInputHandler : InputHandler<
                 if (it.isValid) {
                     it.copy(
                         originalData = it.updatedData,
+                        touchedProperties = emptySet(),
                     )
                 } else {
                     it
