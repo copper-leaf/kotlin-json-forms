@@ -76,7 +76,7 @@ public final class com/copperleaf/json/pointer/UtilsKt {
 
 public final class com/copperleaf/json/schema/JsonSchema {
 	public static final field Companion Lcom/copperleaf/json/schema/JsonSchema$Companion;
-	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
 	public final fun validate (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/json/schema/SchemaValidationResult;
 }
 
@@ -84,28 +84,19 @@ public final class com/copperleaf/json/schema/JsonSchema$Companion {
 	public final fun parse (Ljava/lang/String;)Lcom/copperleaf/json/schema/JsonSchema;
 }
 
-public final class com/copperleaf/json/schema/JsonSchemaKt {
-	public static final fun issues (Lcom/copperleaf/json/schema/SchemaValidationResult;Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
-}
-
 public abstract class com/copperleaf/json/schema/SchemaValidationResult {
 	public synthetic fun <init> (ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun isValid ()Z
+	public abstract fun issues (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
 }
 
-public final class com/copperleaf/json/schema/SchemaValidationResult$Invalid : com/copperleaf/json/schema/SchemaValidationResult {
-	public fun <init> (Ljava/util/Map;)V
-	public final fun component1 ()Ljava/util/Map;
-	public final fun copy (Ljava/util/Map;)Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;
-	public static synthetic fun copy$default (Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;Ljava/util/Map;ILjava/lang/Object;)Lcom/copperleaf/json/schema/SchemaValidationResult$Invalid;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getIssues ()Ljava/util/Map;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract class com/copperleaf/json/schema/SchemaValidationResult$Invalid : com/copperleaf/json/schema/SchemaValidationResult {
+	public fun <init> ()V
 }
 
 public final class com/copperleaf/json/schema/SchemaValidationResult$Valid : com/copperleaf/json/schema/SchemaValidationResult {
 	public static final field INSTANCE Lcom/copperleaf/json/schema/SchemaValidationResult$Valid;
+	public fun issues (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
 }
 
 public abstract class com/copperleaf/json/utils/Either {

@@ -2,6 +2,7 @@ package com.copperleaf.forms.compose.elements
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,7 +34,7 @@ import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
 
 public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    Column(Modifier.fillMaxWidth()) {
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         element.elements.forEach {
             Box {
                 UiElement(it)
@@ -43,7 +44,7 @@ public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, U
 }
 
 public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
-    Row(Modifier.fillMaxWidth().wrapContentHeight()) {
+    Row(Modifier.fillMaxWidth().wrapContentHeight(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         element.elements.forEach {
             Box(Modifier.weight(1f)) {
                 UiElement(it)

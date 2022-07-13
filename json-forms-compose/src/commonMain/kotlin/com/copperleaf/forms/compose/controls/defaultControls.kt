@@ -284,7 +284,11 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
 
 public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentDataValue: JsonArray = getTypedValue(JsonArray(emptyList())) {
-        it.jsonArray
+        if(it == JsonNull) {
+            JsonArray(emptyList())
+        } else {
+            it.jsonArray
+        }
     }
 
     Row {
@@ -301,36 +305,38 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
         }
     }
 
-    currentDataValue.forEachIndexed { index, _ ->
-        WithArrayIndex(index) {
-            Card(Modifier.fillMaxWidth()) {
-                Box(Modifier.padding(8.dp)) {
-                    Column {
-                        Button(
-                            onClick = {
-                                sendFormAction(
-                                    pointer = dataPointer + "/$index",
-                                    action = JsonPointerAction.RemoveValue
-                                )
-                            },
-                            enabled = isEnabled,
-                        ) {
-                            Text("Remove")
-                        }
-
-                        val arrayFieldControl by remember {
-                            derivedStateOf {
-                                JsonObject(
-                                    mapOf(
-                                        "type" to JsonPrimitive("Control"),
-                                        "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        currentDataValue.forEachIndexed { index, _ ->
+            WithArrayIndex(index) {
+                Card(Modifier.fillMaxWidth(), elevation = 4.dp) {
+                    Box(Modifier.padding(8.dp)) {
+                        Column {
+                            Button(
+                                onClick = {
+                                    sendFormAction(
+                                        pointer = dataPointer + "/$index",
+                                        action = JsonPointerAction.RemoveValue
                                     )
-                                ).resolveAsControl(vmState.schemaJson)
+                                },
+                                enabled = isEnabled,
+                            ) {
+                                Text("Remove")
                             }
+
+                            val arrayFieldControl by remember {
+                                derivedStateOf {
+                                    JsonObject(
+                                        mapOf(
+                                            "type" to JsonPrimitive("Control"),
+                                            "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
+                                        )
+                                    ).resolveAsControl(vmState.schemaJson)
+                                }
+                            }
+                            UiElement(
+                                arrayFieldControl
+                            )
                         }
-                        UiElement(
-                            arrayFieldControl
-                        )
                     }
                 }
             }

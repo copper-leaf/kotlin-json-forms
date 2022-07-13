@@ -27,7 +27,9 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 
 public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public static final field $stable I
-	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZLkotlinx/serialization/json/JsonElement;)V
+	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;)V
+	public final fun component10 ()Z
+	public final fun component11 ()Lkotlinx/serialization/json/JsonElement;
 	public final fun component2 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
 	public final fun component3 ()Lcom/copperleaf/forms/core/ui/UiElement$Control;
 	public final fun component4 ()Lcom/copperleaf/json/pointer/JsonPointer;
@@ -35,9 +37,9 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public final fun component6 ()Z
 	public final fun component7 ()Ljava/util/List;
 	public final fun component8 ()Z
-	public final fun component9 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZLkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/compose/controls/ControlScope;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZLkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/controls/ControlScope;
+	public final fun component9 ()Z
+	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/compose/controls/ControlScope;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/controls/ControlScope;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getControl ()Lcom/copperleaf/forms/core/ui/UiElement$Control;
 	public final fun getCurrentValue ()Lkotlinx/serialization/json/JsonElement;
@@ -47,7 +49,9 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public final fun getValidationErrors ()Ljava/util/List;
 	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
 	public fun hashCode ()I
+	public final fun isChanged ()Z
 	public final fun isEnabled ()Z
+	public final fun isTouched ()Z
 	public final fun isValid ()Z
 	public final fun sendFormAction (Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;)V
 	public static synthetic fun sendFormAction$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)V

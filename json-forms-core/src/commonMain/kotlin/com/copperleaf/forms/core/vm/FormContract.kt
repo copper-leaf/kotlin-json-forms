@@ -5,7 +5,6 @@ import com.copperleaf.json.pointer.JsonPointer
 import com.copperleaf.json.pointer.JsonPointerAction
 import com.copperleaf.json.schema.JsonSchema
 import com.copperleaf.json.schema.SchemaValidationResult
-import com.copperleaf.json.schema.issues
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 

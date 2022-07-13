@@ -77,7 +77,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation("org.apache.commons:commons-lang3:3.12.0")
-                implementation("com.worldturner.medeia:medeia-validator-jackson:1.1.0")
+                implementation("net.pwall.json:json-kotlin-schema:0.35")
             }
         }
         val jvmTest by getting {
@@ -89,7 +89,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("org.apache.commons:commons-lang3:3.12.0")
-                implementation("com.worldturner.medeia:medeia-validator-jackson:1.1.0")
+                implementation("net.pwall.json:json-kotlin-schema:0.35")
             }
         }
         val androidAndroidTestRelease by getting { }
