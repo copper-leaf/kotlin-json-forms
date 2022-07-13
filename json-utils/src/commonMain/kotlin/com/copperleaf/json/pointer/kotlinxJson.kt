@@ -204,6 +204,7 @@ internal fun JsonPrimitive.mutateNextInJsonPrimitive(
 
 public fun Any?.toKotlinxJsonValue(): JsonElement {
     return when (this) {
+        is JsonElement -> this
         is String -> JsonPrimitive(this)
         is Int -> JsonPrimitive(this)
         is Long -> JsonPrimitive(this)

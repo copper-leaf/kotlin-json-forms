@@ -10,6 +10,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.key.Key
 import com.darkrockstudios.richtexteditor.model.Style
 
+public data class RichTextToolbar(val groups: List<RichTextToolbarGroup>)
+public data class RichTextToolbarGroup(val actions: List<RichTextEditorAction>)
 public data class RichTextEditorAction(
     val name: String,
     val icon: ImageVector,
@@ -17,10 +19,24 @@ public data class RichTextEditorAction(
     val shortcutKey: Key,
 )
 
-@OptIn(ExperimentalComposeUiApi::class)
-public val defaultRichTextEditorActions: List<RichTextEditorAction> = listOf(
-    RichTextEditorAction("Bold", Icons.Default.FormatBold, Style.Bold, Key.B),
-    RichTextEditorAction("Italic", Icons.Default.FormatItalic, Style.Italic, Key.I),
-    RichTextEditorAction("Underlined", Icons.Default.FormatUnderlined, Style.Underline, Key.U),
-    RichTextEditorAction("Strikethrough", Icons.Default.FormatStrikethrough, Style.Strikethrough, Key.S),
-)
+public object RichTextEditorDefaults {
+    @OptIn(ExperimentalComposeUiApi::class)
+    public val defaultToolbar: RichTextToolbar = RichTextToolbar(
+        listOf(
+            RichTextToolbarGroup(
+                listOf(
+                    RichTextEditorAction("Bold", Icons.Default.FormatBold, Style.Bold, Key.B),
+                    RichTextEditorAction("Italic", Icons.Default.FormatItalic, Style.Italic, Key.I),
+                    RichTextEditorAction("Underlined", Icons.Default.FormatUnderlined, Style.Underline, Key.U),
+                    RichTextEditorAction(
+                        "Strikethrough",
+                        Icons.Default.FormatStrikethrough,
+                        Style.Strikethrough,
+                        Key.S
+                    ),
+                )
+            )
+        )
+    )
+}
+

@@ -14,11 +14,12 @@ import com.darkrockstudios.richtexteditor.model.RichTextValue
 public fun Modifier.richTextToolbarShortcuts(
     value: RichTextValue,
     onValueChange: (RichTextValue) -> Unit,
-    keys: List<RichTextEditorAction> = defaultRichTextEditorActions,
+    toolbar: RichTextToolbar = RichTextEditorDefaults.defaultToolbar,
 ): Modifier = composed {
     onPreviewKeyEvent { pressedKey ->
         if (pressedKey.isMetaPressed && pressedKey.type == KeyEventType.KeyUp) {
-            keys
+            toolbar
+                .groups.flatMap { it.actions }
                 .firstOrNull { it.shortcutKey == pressedKey.key }
                 ?.run {
                     onValueChange(value.insertStyle(style))

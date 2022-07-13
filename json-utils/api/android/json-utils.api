@@ -1,6 +1,13 @@
 public final class com/copperleaf/json/pointer/AbstractJsonPointer {
 	public static final field Companion Lcom/copperleaf/json/pointer/AbstractJsonPointer$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lcom/copperleaf/json/pointer/AbstractJsonPointer;
+	public static synthetic fun copy$default (Lcom/copperleaf/json/pointer/AbstractJsonPointer;Ljava/util/List;ILjava/lang/Object;)Lcom/copperleaf/json/pointer/AbstractJsonPointer;
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getTokens ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/copperleaf/json/pointer/AbstractJsonPointer$Companion {
@@ -60,6 +67,7 @@ public final class com/copperleaf/json/pointer/KotlinxJsonKt {
 public final class com/copperleaf/json/pointer/UtilsKt {
 	public static final fun getCurrent (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/lang/String;
 	public static final fun parent (Lcom/copperleaf/json/pointer/JsonPointer;)Lcom/copperleaf/json/pointer/JsonPointer;
+	public static final fun plus (Lcom/copperleaf/json/pointer/JsonPointer;Ljava/lang/String;)Lcom/copperleaf/json/pointer/JsonPointer;
 	public static final fun reifyPointer (Lcom/copperleaf/json/pointer/AbstractJsonPointer;Ljava/util/List;)Lcom/copperleaf/json/pointer/JsonPointer;
 	public static final fun toAbstractUriFragment (Lcom/copperleaf/json/pointer/AbstractJsonPointer;)Ljava/lang/String;
 	public static final fun toUriFragment (Lcom/copperleaf/json/pointer/AbstractJsonPointer;Ljava/util/List;)Ljava/lang/String;
@@ -139,6 +147,38 @@ public final class com/copperleaf/json/utils/EitherKt {
 	public static final fun getRightValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
 	public static final fun requireLeftValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
 	public static final fun requireRightValue (Lcom/copperleaf/json/utils/Either;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/json/utils/Encode_androidKt {
+	public static final fun base64Decode (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun base64Encode (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun urlDecode (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun urlEncode (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface annotation class com/copperleaf/json/utils/JsonBuilderDsl : java/lang/annotation/Annotation {
+}
+
+public final class com/copperleaf/json/utils/JsonObjectBuilder {
+	public fun <init> ()V
+	public final fun build ()Lkotlinx/serialization/json/JsonObject;
+	public final fun get (Ljava/lang/String;[Ljava/lang/Object;)V
+	public final fun to (Ljava/lang/String;Ljava/lang/Number;)V
+	public final fun to (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun to (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun to (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)V
+	public final fun to (Ljava/lang/String;Z)V
+}
+
+public final class com/copperleaf/json/utils/JsonUtilsKt {
+	public static final fun get (Lkotlinx/serialization/json/JsonArray$Companion;[Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
+	public static final fun json (Lkotlin/jvm/functions/Function1;)Lkotlinx/serialization/json/JsonObject;
+	public static final fun parseJson (Ljava/lang/String;Lkotlinx/serialization/json/Json;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun parseJson (Ljava/lang/String;Z)Lkotlinx/serialization/json/JsonElement;
+	public static synthetic fun parseJson$default (Ljava/lang/String;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;)Ljava/lang/String;
+	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Z)Ljava/lang/String;
+	public static synthetic fun toJsonString$default (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Ljava/lang/String;
 }
 
 public final class com/copperleaf/json/utils/ListUtilsKt {

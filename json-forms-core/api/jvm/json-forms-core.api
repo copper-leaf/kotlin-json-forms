@@ -69,13 +69,13 @@ public final class com/copperleaf/forms/core/internal/ResolveUiSchemaKt {
 }
 
 public final class com/copperleaf/forms/core/ui/Rule {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/copperleaf/forms/core/ui/Rule$Effect;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/schema/JsonSchema;)V
+	public fun <init> (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/AbstractJsonPointer;Lcom/copperleaf/forms/core/ui/Rule$Effect;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/schema/JsonSchema;)V
 	public final fun getConditionSchema ()Lcom/copperleaf/json/schema/JsonSchema;
 	public final fun getConditionSchemaJson ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getDataScope ()Ljava/lang/String;
+	public final fun getDataScope ()Lcom/copperleaf/json/pointer/AbstractJsonPointer;
 	public final fun getEffect ()Lcom/copperleaf/forms/core/ui/Rule$Effect;
 	public final fun getSchemaJson ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getSchemaScope ()Ljava/lang/String;
+	public final fun getSchemaScope ()Lcom/copperleaf/json/pointer/JsonPointer;
 }
 
 public final class com/copperleaf/forms/core/ui/Rule$Effect : java/lang/Enum {
@@ -101,26 +101,25 @@ public final class com/copperleaf/forms/core/ui/UiElement$Companion {
 
 public final class com/copperleaf/forms/core/ui/UiElement$Control : com/copperleaf/forms/core/ui/UiElement {
 	public static final field Companion Lcom/copperleaf/forms/core/ui/UiElement$Control$Companion;
-	public fun <init> (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ZLjava/lang/String;)V
-	public synthetic fun <init> (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun component2 ()Lcom/copperleaf/forms/core/ui/Rule;
-	public final fun component3 ()Ljava/lang/String;
-	public final fun component4 ()Ljava/lang/String;
-	public final fun component5 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun component6 ()Ljava/lang/String;
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/json/pointer/JsonPointer;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/AbstractJsonPointer;Lcom/copperleaf/forms/core/ui/Rule;ZLjava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun component3 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component4 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component5 ()Lcom/copperleaf/json/pointer/AbstractJsonPointer;
+	public final fun component6 ()Lcom/copperleaf/forms/core/ui/Rule;
 	public final fun component7 ()Z
 	public final fun component8 ()Ljava/lang/String;
-	public final fun copy (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ZLjava/lang/String;)Lcom/copperleaf/forms/core/ui/UiElement$Control;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ZLjava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/forms/core/ui/UiElement$Control;
+	public final fun copy (Ljava/lang/String;Lcom/copperleaf/json/pointer/JsonPointer;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/AbstractJsonPointer;Lcom/copperleaf/forms/core/ui/Rule;ZLjava/lang/String;)Lcom/copperleaf/forms/core/ui/UiElement$Control;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Lcom/copperleaf/json/pointer/JsonPointer;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/AbstractJsonPointer;Lcom/copperleaf/forms/core/ui/Rule;ZLjava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/forms/core/ui/UiElement$Control;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getControlType ()Ljava/lang/String;
-	public final fun getDataScope ()Ljava/lang/String;
+	public final fun getDataScope ()Lcom/copperleaf/json/pointer/AbstractJsonPointer;
 	public final fun getLabel ()Ljava/lang/String;
 	public final fun getRequired ()Z
 	public fun getRule ()Lcom/copperleaf/forms/core/ui/Rule;
 	public final fun getSchemaConfig ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getSchemaScope ()Ljava/lang/String;
+	public final fun getSchemaScope ()Lcom/copperleaf/json/pointer/JsonPointer;
 	public fun getUiSchemaConfig ()Lkotlinx/serialization/json/JsonElement;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -131,7 +130,6 @@ public final class com/copperleaf/forms/core/ui/UiElement$Control$Companion {
 
 public final class com/copperleaf/forms/core/ui/UiElement$ElementWithChildren : com/copperleaf/forms/core/ui/UiElement {
 	public fun <init> (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/util/List;)V
-	public synthetic fun <init> (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/forms/core/ui/Rule;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
 	public final fun component2 ()Lcom/copperleaf/forms/core/ui/Rule;
 	public final fun component3 ()Ljava/lang/String;

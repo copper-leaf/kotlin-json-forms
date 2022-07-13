@@ -220,7 +220,7 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
         mapStateToText = { it.toString() },
         onTextChange = { value ->
             value.toDoubleOrNull()?.let { doubleValue ->
-                updateFormState(doubleValue.toBigDecimal())
+                updateFormState(doubleValue)
             }
         }
     )

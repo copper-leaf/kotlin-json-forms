@@ -1,6 +1,6 @@
 package com.copperleaf.json.pointer
 
-public class AbstractJsonPointer(
+public data class AbstractJsonPointer(
     public val tokens: List<String>
 ) {
     public companion object {
