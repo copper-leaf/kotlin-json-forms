@@ -6,16 +6,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.derivedStateOf
@@ -25,15 +29,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
 import com.copperleaf.forms.compose.form.uiControl
-import com.copperleaf.forms.compose.util.RichTextToolbar
 import com.copperleaf.forms.compose.util.rememberUpdatableText
-import com.copperleaf.forms.compose.util.richTextToolbarShortcuts
 import com.copperleaf.forms.compose.util.updateText
+import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenu
+import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenuItem
+import com.copperleaf.forms.compose.widgets.richtext.RichTextToolbar
+import com.copperleaf.forms.compose.widgets.richtext.richTextToolbarShortcuts
 import com.copperleaf.forms.core.ArrayControl
 import com.copperleaf.forms.core.BooleanControl
 import com.copperleaf.forms.core.IntegerControl
@@ -45,6 +53,7 @@ import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.json.pointer.JsonPointerAction
 import com.copperleaf.json.pointer.plus
 import com.copperleaf.json.pointer.toUriFragment
+import com.copperleaf.json.values.arrayAt
 import com.copperleaf.json.values.objectAt
 import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
@@ -100,6 +109,71 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
             textColor = MaterialTheme.colors.onSurface,
         ),
     )
+}
+
+public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 10,
+    tester = { hasSchemaProperty("enum") }
+) {
+    val currentValue = getTypedValue("") {
+        it.jsonPrimitive.content
+    }
+
+    val (text, updateText) = rememberUpdatableText(
+        initialValue = currentValue,
+        onTextChange = { value ->
+            updateFormState(value)
+        }
+    )
+
+    var dropdownIsVisible by remember { mutableStateOf(false) }
+    val allDropdownOptions: List<String> = remember {
+        control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
+    }
+    val filteredDropdownOptions: List<String> = remember(text) {
+        allDropdownOptions.filter { it.contains(text.text) }
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .onFocusChanged { dropdownIsVisible = it.isFocused },
+            value = text,
+            onValueChange = updateText,
+            label = { Text(control.label) },
+            enabled = isEnabled,
+            trailingIcon = {
+                IconButton(onClick = { dropdownIsVisible = true }, enabled = isEnabled) {
+                    if (dropdownIsVisible) {
+                        Icon(Icons.Default.ArrowDropUp, "Close")
+                    } else {
+                        Icon(Icons.Default.ArrowDropDown, "Open")
+                    }
+                }
+            }
+        )
+
+        DropdownMenu(
+            expanded = dropdownIsVisible && isEnabled,
+            onDismissRequest = { dropdownIsVisible = false },
+        ) {
+            if (filteredDropdownOptions.isNotEmpty()) {
+                filteredDropdownOptions.forEach { option ->
+                    DropdownMenuItem(onClick = {
+                        updateText(TextFieldValue(option))
+                        dropdownIsVisible = false
+                    }) {
+                        Text(option)
+                    }
+                }
+            } else {
+                DropdownMenuItem(onClick = { }, enabled = false) {
+                    Text("No Options")
+                }
+            }
+        }
+    }
 }
 
 public fun IntegerControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {

@@ -1,4 +1,4 @@
-package com.copperleaf.forms.compose.util
+package com.copperleaf.forms.compose.widgets.richtext
 
 //class UpdatableRichTextFieldValue(
 //    private val richTextValue: MutableState<RichTextValue>,
