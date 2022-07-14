@@ -25,7 +25,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.compose.ui.LocallyEnabled
+import com.copperleaf.forms.core.vm.BasicFormViewModel
 import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormSavedStateAdapter
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 
@@ -35,7 +37,15 @@ fun RenderFormPreview(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current.applicationContext
-    val vm = remember(coroutineScope, context, path) { FormViewModelImpl(coroutineScope, context, path) }
+    val vm = remember(coroutineScope, context, path) {
+        BasicFormViewModel(
+            coroutineScope,
+            FormSavedStateAdapter(
+                PreviewFormDataStore.getStoreAt(context, path),
+                saveType = FormContract.SaveType.OnCommit,
+            )
+        )
+    }
     val vmState by vm.observeStates().collectAsState()
 
     Column(Modifier.fillMaxSize()) {

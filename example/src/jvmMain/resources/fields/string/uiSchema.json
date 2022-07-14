@@ -4,6 +4,12 @@
         {
             "type": "Control",
             "scope": "#/properties/value"
+        },
+        {
+            "type": "Button",
+            "options": {
+                "action": "submit"
+            }
         }
     ]
 }

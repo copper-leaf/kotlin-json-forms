@@ -185,9 +185,9 @@ public fun IntegerControl.control(): Registered<UiElement.Control, ControlRender
         initialValue = currentValue,
         mapStateToText = { it.toString() },
         onTextChange = { value ->
-            value.toIntOrNull()?.let { intValue ->
-                updateFormState(intValue)
-            }
+            // send the value as a well-formed Int, if possible. Otherwise, still send the data to the ViewModel, but as
+            // a string
+            updateFormState(value.toIntOrNull() ?: value)
         }
     )
     val (text, updateText) = updatableText
@@ -219,9 +219,9 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
         initialValue = currentValue,
         mapStateToText = { it.toString() },
         onTextChange = { value ->
-            value.toDoubleOrNull()?.let { doubleValue ->
-                updateFormState(doubleValue)
-            }
+            // send the value as a well-formed Double, if possible. Otherwise, still send the data to the ViewModel, but
+            // as a string
+            updateFormState(value.toDoubleOrNull() ?: value)
         }
     )
     val (text, updateText) = updatableText

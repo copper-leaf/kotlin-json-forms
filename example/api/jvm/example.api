@@ -7,11 +7,6 @@ public final class com/copperleaf/forms/example/desktop/ComposableSingletons$Mai
 	public final fun getLambda-2$example ()Lkotlin/jvm/functions/Function3;
 }
 
-public final class com/copperleaf/forms/example/desktop/FormViewModelImpl : com/copperleaf/ballast/core/BasicViewModel {
-	public static final field $stable I
-	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Ljava/lang/String;)V
-}
-
 public final class com/copperleaf/forms/example/desktop/MainKt {
 	public static final fun getAllForms ()Ljava/util/List;
 	public static final fun main ()V

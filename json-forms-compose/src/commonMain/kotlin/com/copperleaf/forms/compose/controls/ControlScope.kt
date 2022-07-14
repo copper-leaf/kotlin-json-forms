@@ -8,7 +8,7 @@ import com.copperleaf.json.pointer.JsonPointerAction
 import kotlinx.serialization.json.JsonElement
 
 public data class ControlScope(
-    private val vm: FormViewModel,
+    val vm: FormViewModel,
     val vmState: FormContract.State,
     val control: UiElement.Control,
     val dataPointer: JsonPointer,

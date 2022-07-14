@@ -5,4 +5,4 @@ include(":json-forms-core")
 include(":json-forms-compose")
 include(":example")
 
-//include(":docs")
+include(":docs")

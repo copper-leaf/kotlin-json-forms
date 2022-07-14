@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.Button
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.Text
@@ -22,16 +23,30 @@ import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.uiElement
 import com.copperleaf.forms.compose.rules.RuleLayout
+import com.copperleaf.forms.core.Button
 import com.copperleaf.forms.core.Categorization
 import com.copperleaf.forms.core.Category
 import com.copperleaf.forms.core.Group
 import com.copperleaf.forms.core.HorizontalLayout
 import com.copperleaf.forms.core.Label
-import com.copperleaf.forms.core.ListWithDetail
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
+
+public fun Button.submit(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement(
+    tester = { optionFieldIs("action", "submit") }
+) {
+    if (vmState.saveType == FormContract.SaveType.OnCommit) {
+        Button(
+            onClick = { vm.trySend(FormContract.Inputs.CommitChanges) },
+            enabled = vmState.isValid,
+        ) {
+            Text("Submit")
+        }
+    }
+}
 
 public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -114,7 +129,4 @@ public fun Category.element(): Registered<UiElement.ElementWithChildren, UiEleme
             }
         }
     }
-}
-
-public fun ListWithDetail.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
 }

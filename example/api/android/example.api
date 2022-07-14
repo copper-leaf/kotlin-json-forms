@@ -14,11 +14,6 @@ public final class com/copperleaf/forms/example/android/ComposableSingletons$Mai
 	public final fun getLambda-2$example_release ()Lkotlin/jvm/functions/Function2;
 }
 
-public final class com/copperleaf/forms/example/android/FormViewModelImpl : com/copperleaf/ballast/core/BasicViewModel {
-	public static final field $stable I
-	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Landroid/content/Context;Ljava/lang/String;)V
-}
-
 public final class com/copperleaf/forms/example/android/MainActivity : androidx/appcompat/app/AppCompatActivity {
 	public static final field $stable I
 	public fun <init> ()V

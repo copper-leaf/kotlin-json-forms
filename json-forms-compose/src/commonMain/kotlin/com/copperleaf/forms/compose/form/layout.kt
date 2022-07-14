@@ -1,8 +1,6 @@
 package com.copperleaf.forms.compose.form
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -14,7 +12,6 @@ import com.copperleaf.forms.compose.rules.RuleLayout
 import com.copperleaf.forms.compose.ui.LocalFormConfig
 import com.copperleaf.forms.compose.ui.LocalViewModel
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
 
 @Composable
@@ -35,15 +32,6 @@ public fun Form(
                 LocalViewModel providesDefault viewModel,
             ) {
                 UiElement(vmState.uiSchema!!.rootUiElement)
-            }
-
-            if (vmState.saveType == FormContract.SaveType.OnCommit) {
-                Button(
-                    onClick = { viewModel.trySend(FormContract.Inputs.CommitChanges) },
-                    enabled = vmState.isValid,
-                ) {
-                    Text("Submit")
-                }
             }
         }
     }

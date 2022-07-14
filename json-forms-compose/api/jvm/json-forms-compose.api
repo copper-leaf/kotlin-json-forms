@@ -28,6 +28,7 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public static final field $stable I
 	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;)V
+	public final fun component1 ()Lcom/copperleaf/ballast/BallastViewModel;
 	public final fun component10 ()Z
 	public final fun component11 ()Lkotlinx/serialization/json/JsonElement;
 	public final fun component2 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
@@ -47,6 +48,7 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public final fun getSchemaPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
 	public final fun getTypedValue (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
 	public final fun getValidationErrors ()Ljava/util/List;
+	public final fun getVm ()Lcom/copperleaf/ballast/BallastViewModel;
 	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
 	public fun hashCode ()I
 	public final fun isChanged ()Z
@@ -89,6 +91,7 @@ public final class com/copperleaf/forms/compose/elements/ComposableSingletons$De
 	public static field lambda-5 Lkotlin/jvm/functions/Function3;
 	public static field lambda-6 Lkotlin/jvm/functions/Function3;
 	public static field lambda-7 Lkotlin/jvm/functions/Function3;
+	public static field lambda-8 Lkotlin/jvm/functions/Function3;
 	public fun <init> ()V
 	public final fun getLambda-1$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose ()Lkotlin/jvm/functions/Function3;
@@ -97,6 +100,7 @@ public final class com/copperleaf/forms/compose/elements/ComposableSingletons$De
 	public final fun getLambda-5$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-6$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-7$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-8$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class com/copperleaf/forms/compose/elements/DefaultUiElementsKt {
@@ -105,31 +109,34 @@ public final class com/copperleaf/forms/compose/elements/DefaultUiElementsKt {
 	public static final fun element (Lcom/copperleaf/forms/core/Group;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun element (Lcom/copperleaf/forms/core/HorizontalLayout;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun element (Lcom/copperleaf/forms/core/Label;)Lcom/copperleaf/forms/compose/form/Registered;
-	public static final fun element (Lcom/copperleaf/forms/core/ListWithDetail;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun element (Lcom/copperleaf/forms/core/VerticalLayout;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun submit (Lcom/copperleaf/forms/core/Button;)Lcom/copperleaf/forms/compose/form/Registered;
 }
 
 public final class com/copperleaf/forms/compose/elements/LayoutKt {
 	public static final fun UiElementLayout (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Landroidx/compose/runtime/Composer;I)V
 }
 
-public final class com/copperleaf/forms/compose/elements/UiElementScope {
-	public static final field $stable I
-	public fun <init> (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)V
-	public final fun component1 ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
-	public final fun copy (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/elements/UiElementScope;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getElement ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class com/copperleaf/forms/compose/elements/TestersKt {
+	public static final fun matchesElementType (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Lcom/copperleaf/forms/core/UiElementType;)Z
+	public static final fun optionFieldIs (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun optionIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Ljava/lang/String;)Z
 }
 
-public final class com/copperleaf/forms/compose/form/ComposableSingletons$LayoutKt {
-	public static final field INSTANCE Lcom/copperleaf/forms/compose/form/ComposableSingletons$LayoutKt;
-	public static field lambda-1 Lkotlin/jvm/functions/Function3;
-	public fun <init> ()V
-	public final fun getLambda-1$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+public final class com/copperleaf/forms/compose/elements/UiElementScope {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)V
+	public final fun component1 ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun component2 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public final fun component3 ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
+	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/elements/UiElementScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getElement ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
+	public final fun getVm ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/copperleaf/forms/compose/form/ComposeFormConfig {
