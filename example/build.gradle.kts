@@ -4,12 +4,12 @@ plugins {
     `copper-leaf-base`
     `copper-leaf-version`
     `copper-leaf-lint`
-    `copper-leaf-publish`
     id("org.jetbrains.compose")
 }
 
 description = "Opinionated Application State Management framework for Kotlin Multiplatform"
 
+@Suppress("UnstableApiUsage")
 android {
     compileSdk = 31
     defaultConfig {

@@ -10,6 +10,7 @@ plugins {
 
 description = "Opinionated Application State Management framework for Kotlin Multiplatform"
 
+@Suppress("UnstableApiUsage")
 android {
     compileSdk = 31
     defaultConfig {
