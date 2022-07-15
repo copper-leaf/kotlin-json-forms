@@ -117,25 +117,26 @@ There are several controls available in the original JavaScript library that are
 but a goal is to have all controls from that library fully working here soon. The table below shows the different 
 controls that are currently implemented or will be soon.
 
-| UI Control                                                | Field Type in Schema | Other Schema config                                         | Other UI Schema config             | Supported                             |
-|-----------------------------------------------------------|----------------------|-------------------------------------------------------------|------------------------------------|---------------------------------------|
-| Normal text field                                         | `string`             |                                                             |                                    | Yes                                   |
-| Rich text field editor                                    | `string`             |                                                             | `"options": { "richText": true }`  | Partial, doesn't actually update data |
-| Text field with dropdown menu                             | `string`             | `"enum": [...]`                                             |                                    | Partial, dropdown is clunky           |
-| Text field with Radio Buttons                             | `string`             | `"enum": [...]`                                             | `"options": { "format": "radio" }` | Yes                                   |
-| Text field with dropdown menu                             | `string`             | `"oneOf": [{}, {}]`                                         |                                    | Partial, dropdown is clunky           |
-| Text field with Radio Buttons                             | `string`             | `"oneOf": [{}, {}]`                                         | `"options": { "format": "radio" }` | Yes                                   |
-| Text field with Date Picker                               | `string`             | `"format": "date"`                                          |                                    | No                                    |
-| Text field with Time Picker                               | `string`             | `"format": "time"`                                          |                                    | No                                    |
-| Text field with DateTime Picker                           | `string`             | `"format": "datetime"`                                      |                                    | No                                    |
-| Text field with up/down buttons                           | `integer`            |                                                             |                                    | Yes                                   |
-| Text field with up/down buttons                           | `number`             |                                                             |                                    | Yes                                   |
-| Checkbox                                                  | `boolean`            |                                                             |                                    | Yes                                   |
-| Switch                                                    | `boolean`            |                                                             | `"options": { "toggle": true }`    | Yes                                   |
-| Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"type": "string", "enum": [] }` |                                    | Yes                                   |
-| Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"oneOf": [{}, {}] }`            |                                    | Yes                                   |
-| Render all properties of the object as fields             | `object`             |                                                             |                                    | Yes                                   |
-| Add/remove items from the array (including nested arrays) | `array`              |                                                             |                                    | Partial, UI is ugly                   |
+| UI Control                                                | Field Type in Schema | Other Schema config                                         | Other UI Schema config              | Supported                             |
+|-----------------------------------------------------------|----------------------|-------------------------------------------------------------|-------------------------------------|---------------------------------------|
+| Normal text field                                         | `string`             |                                                             |                                     | Yes                                   |
+| Rich text field editor                                    | `string`             |                                                             | `"options": { "richText": true }`   | Partial, doesn't actually update data |
+| Code text field editor                                    | `string`             |                                                             | `"options": { "codeEditor": true }` | Yes                                   |
+| Text field with dropdown menu                             | `string`             | `"enum": [...]`                                             |                                     | Partial, dropdown is clunky           |
+| Text field with Radio Buttons                             | `string`             | `"enum": [...]`                                             | `"options": { "format": "radio" }`  | Yes                                   |
+| Text field with dropdown menu                             | `string`             | `"oneOf": [{}, {}]`                                         |                                     | Partial, dropdown is clunky           |
+| Text field with Radio Buttons                             | `string`             | `"oneOf": [{}, {}]`                                         | `"options": { "format": "radio" }`  | Yes                                   |
+| Text field with Date Picker                               | `string`             | `"format": "date"`                                          |                                     | No                                    |
+| Text field with Time Picker                               | `string`             | `"format": "time"`                                          |                                     | No                                    |
+| Text field with DateTime Picker                           | `string`             | `"format": "datetime"`                                      |                                     | No                                    |
+| Text field with up/down buttons                           | `integer`            |                                                             |                                     | Yes                                   |
+| Text field with up/down buttons                           | `number`             |                                                             |                                     | Yes                                   |
+| Checkbox                                                  | `boolean`            |                                                             |                                     | Yes                                   |
+| Switch                                                    | `boolean`            |                                                             | `"options": { "toggle": true }`     | Yes                                   |
+| Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"type": "string", "enum": [] }` |                                     | Yes                                   |
+| Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"oneOf": [{}, {}] }`            |                                     | Yes                                   |
+| Render all properties of the object as fields             | `object`             |                                                             |                                     | Yes                                   |
+| Add/remove items from the array (including nested arrays) | `array`              |                                                             |                                     | Partial, UI is ugly                   |
 
 ## Validation
 

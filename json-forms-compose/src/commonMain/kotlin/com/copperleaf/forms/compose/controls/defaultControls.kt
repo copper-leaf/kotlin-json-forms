@@ -1,5 +1,6 @@
 package com.copperleaf.forms.compose.controls
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
@@ -35,14 +38,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
 import com.copperleaf.forms.compose.form.uiControl
+import com.copperleaf.forms.compose.util.rememberUpdatableAnnotatedText
 import com.copperleaf.forms.compose.util.rememberUpdatableText
 import com.copperleaf.forms.compose.util.updateText
+import com.copperleaf.forms.compose.widgets.codeeditor.model.CodeLang
+import com.copperleaf.forms.compose.widgets.codeeditor.prettify.PrettifyParser
+import com.copperleaf.forms.compose.widgets.codeeditor.theme.CodeThemeType
+import com.copperleaf.forms.compose.widgets.codeeditor.utils.parseCodeAsAnnotatedString
 import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenu
 import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenuItem
 import com.copperleaf.forms.compose.widgets.richtext.RichTextToolbar
@@ -105,6 +115,7 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
 ) {
     var value by remember { mutableStateOf(RichTextValue.get()) }
 
+    Text(control.label, style = MaterialTheme.typography.subtitle1)
     RichTextToolbar(
         modifier = Modifier,
         value = value,
@@ -123,6 +134,62 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
             cursorColor = MaterialTheme.colors.primary
         ),
     )
+}
+
+public fun StringControl.codeEditor(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 20,
+    tester = { optionIsEnabled("codeEditor") }
+) {
+    val language = CodeLang.Kotlin
+    val parser = remember { PrettifyParser() } // try getting from LocalPrettifyParser.current
+    val theme = remember { CodeThemeType.Monokai.getTheme() }
+    val currentValue = getTypedValue(AnnotatedString("")) {
+        parseCodeAsAnnotatedString(
+            parser = parser,
+            theme = theme,
+            lang = language,
+            code = it.jsonPrimitive.content
+        )
+    }
+    val (text: TextFieldValue, updateText: (TextFieldValue) -> Unit) = rememberUpdatableAnnotatedText(
+        initialValue = currentValue,
+        onTextChange = { value ->
+            updateFormState(value.text)
+        }
+    )
+
+    var lineTops by remember { mutableStateOf(emptyArray<Float>()) }
+    val density = LocalDensity.current
+
+    Text(control.label, style = MaterialTheme.typography.subtitle1)
+    Row(
+        modifier = Modifier
+            .background(MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
+            .border(width = 1.dp, color = MaterialTheme.colors.onSurface.copy(alpha = 0.25f))
+    ) {
+        if (lineTops.isNotEmpty()) {
+            Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                lineTops.forEachIndexed { index, top ->
+                    Text(
+                        modifier = Modifier.offset(y = with(density) { top.toDp() }),
+                        text = index.toString(),
+                        color = MaterialTheme.colors.onBackground.copy(.3f)
+                    )
+                }
+            }
+        }
+        BasicTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = 120.dp),
+            value = text,
+            onValueChange = updateText,
+            enabled = isEnabled,
+            onTextLayout = { result ->
+                lineTops = Array(result.lineCount) { result.getLineTop(it) }
+            }
+        )
+    }
 }
 
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(

@@ -2,6 +2,7 @@ package com.copperleaf.forms.compose.form
 
 import com.copperleaf.forms.compose.controls.ControlRenderer
 import com.copperleaf.forms.compose.controls.checkbox
+import com.copperleaf.forms.compose.controls.codeEditor
 import com.copperleaf.forms.compose.controls.control
 import com.copperleaf.forms.compose.controls.dropdownEnum
 import com.copperleaf.forms.compose.controls.dropdownOneOf
@@ -32,6 +33,8 @@ public actual fun UiElement.Control.Companion.defaults(): List<Registered<UiElem
     listOf(
         StringControl.control(),
         StringControl.richText(),
+        StringControl.codeEditor(),
+
         StringControl.dropdownEnum(),
         StringControl.dropdownOneOf(),
         StringControl.radioButtonEnum(),

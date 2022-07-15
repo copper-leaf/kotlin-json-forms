@@ -45,7 +45,7 @@ fun RenderFormPreview(
     Box(Modifier.fillMaxSize()) {
         VerticalSplitPane(splitPaneState = rememberSplitPaneState(0.85f)) {
             first(minSize = 64.dp) {
-                Column(Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
+                Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
                     Form(vm)
                 }
             }

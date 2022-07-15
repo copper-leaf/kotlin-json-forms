@@ -79,3 +79,4 @@ This project depends on the following libraries:
   which itself depends on many other Java or Kotlin JSON libraries by the same author
 - [Ballast](https://github.com/copper-leaf/ballast) for state management
 - [richtext-compose-multiplatform](https://github.com/Wavesonics/richtext-compose-multiplatform) for rich text editor capabilities
+- [compose-code-editor](https://github.com/Qawaz/compose-code-editor) for code editor capabilities
