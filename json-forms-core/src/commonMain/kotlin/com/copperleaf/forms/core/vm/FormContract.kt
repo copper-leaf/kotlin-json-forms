@@ -13,10 +13,15 @@ public object FormContract {
     public enum class SaveType {
         OnValidChange, OnAnyChange, OnCommit
     }
+    public enum class ValidationMode {
+        ValidateAndShow, ValidateAndHide, NoValidation
+    }
 
     public data class State(
-        val saveType: SaveType = SaveType.OnValidChange,
+        val saveType: SaveType = SaveType.OnCommit,
+        val validationMode: ValidationMode = ValidationMode.ValidateAndShow,
         val debug: Boolean = false,
+        val readonly: Boolean = false,
 
         val schemaJson: JsonElement = JsonNull,
         val schema: JsonSchema? = null,
@@ -46,6 +51,9 @@ public object FormContract {
         public data class UpdateFormState(
             val pointer: JsonPointer,
             val action: JsonPointerAction,
+        ) : Inputs()
+        public data class MarkAsTouched(
+            val pointer: JsonPointer,
         ) : Inputs()
 
         public object CommitChanges : Inputs()

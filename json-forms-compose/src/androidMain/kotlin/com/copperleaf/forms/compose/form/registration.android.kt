@@ -1,12 +1,18 @@
 package com.copperleaf.forms.compose.form
 
 import com.copperleaf.forms.compose.controls.ControlRenderer
+import com.copperleaf.forms.compose.controls.checkbox
 import com.copperleaf.forms.compose.controls.control
 import com.copperleaf.forms.compose.controls.dropdownEnum
+import com.copperleaf.forms.compose.controls.dropdownOneOf
+import com.copperleaf.forms.compose.controls.radioButtonEnum
+import com.copperleaf.forms.compose.controls.radioButtonOneOf
 import com.copperleaf.forms.compose.controls.richText
+import com.copperleaf.forms.compose.controls.switch
 import com.copperleaf.forms.compose.elements.UiElementRenderer
 import com.copperleaf.forms.compose.elements.element
 import com.copperleaf.forms.compose.elements.submit
+import com.copperleaf.forms.compose.elements.toggleDebug
 import com.copperleaf.forms.core.ArrayControl
 import com.copperleaf.forms.core.BooleanControl
 import com.copperleaf.forms.core.Button
@@ -27,21 +33,31 @@ public actual fun UiElement.Control.Companion.defaults(): List<Registered<UiElem
         StringControl.control(),
         StringControl.richText(),
         StringControl.dropdownEnum(),
+        StringControl.dropdownOneOf(),
+        StringControl.radioButtonEnum(),
+        StringControl.radioButtonOneOf(),
 
         IntegerControl.control(),
         NumberControl.control(),
-        BooleanControl.control(),
+
+        BooleanControl.checkbox(),
+        BooleanControl.switch(),
+
         ObjectControl.control(),
         ArrayControl.control(),
     )
 
 public actual fun UiElement.Companion.defaults(): List<Registered<UiElement.ElementWithChildren, UiElementRenderer>> =
     listOf(
-        Button.submit(),
         VerticalLayout.element(),
         HorizontalLayout.element(),
+
         Label.element(),
+
         Group.element(),
         Categorization.element(),
         Category.element(),
+
+        Button.submit(),
+        Button.toggleDebug(),
     )

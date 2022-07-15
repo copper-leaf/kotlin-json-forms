@@ -9,19 +9,17 @@ object PreviewFormDataStore {
 
     fun getStoreAt(context: Context, path: String): FormSavedStateAdapter.Store {
         return object : FormSavedStateAdapter.Store {
-            override val schema: String
-                get() {
-                    return context.assets.open("$path/schema.json".trimStart('/'))
-                        .bufferedReader()
-                        .readText()
-                }
+            override suspend fun loadSchema(): String {
+                return context.assets.open("$path/schema.json".trimStart('/'))
+                    .bufferedReader()
+                    .readText()
+            }
 
-            override val uiSchema: String
-                get() {
-                    return context.assets.open("$path/uiSchema.json".trimStart('/'))
-                        .bufferedReader()
-                        .readText()
-                }
+            override suspend fun loadUiSchema(): String {
+                return context.assets.open("$path/uiSchema.json".trimStart('/'))
+                    .bufferedReader()
+                    .readText()
+            }
 
             override suspend fun loadInitialData(): String {
                 return allData.getOrPut(path) {

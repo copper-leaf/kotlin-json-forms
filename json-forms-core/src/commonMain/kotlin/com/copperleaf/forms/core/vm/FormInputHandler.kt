@@ -52,6 +52,11 @@ public class FormInputHandler : InputHandler<
 
             updateState { updatedState }
         }
+        is FormContract.Inputs.MarkAsTouched -> {
+            updateState {
+                it.copy(touchedProperties = it.touchedProperties + input.pointer,)
+            }
+        }
         is FormContract.Inputs.CommitChanges -> {
             updateState {
                 if (it.isValid) {

@@ -5,6 +5,7 @@ import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.json.values.boolean
 import com.copperleaf.json.values.objectAt
 import com.copperleaf.json.values.optional
+import com.copperleaf.json.values.string
 import kotlinx.serialization.json.jsonObject
 
 public fun UiElement.Control.matchesControlType(type: ControlType): Boolean {
@@ -15,6 +16,12 @@ public fun UiElement.Control.optionIsEnabled(name: String): Boolean {
     return uiSchemaConfig
         .optional { objectAt("options") }
         ?.optional { boolean(name) } == true
+}
+
+public fun UiElement.Control.optionFieldIs(name: String, value: String): Boolean {
+    return uiSchemaConfig
+        .optional { objectAt("options") }
+        ?.optional { string(name) } == value
 }
 
 public fun UiElement.Control.hasSchemaProperty(name: String): Boolean {

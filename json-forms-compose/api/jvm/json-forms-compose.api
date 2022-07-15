@@ -3,6 +3,11 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public static field lambda-1 Lkotlin/jvm/functions/Function3;
 	public static field lambda-10 Lkotlin/jvm/functions/Function3;
 	public static field lambda-11 Lkotlin/jvm/functions/Function3;
+	public static field lambda-12 Lkotlin/jvm/functions/Function3;
+	public static field lambda-13 Lkotlin/jvm/functions/Function3;
+	public static field lambda-14 Lkotlin/jvm/functions/Function3;
+	public static field lambda-15 Lkotlin/jvm/functions/Function3;
+	public static field lambda-16 Lkotlin/jvm/functions/Function3;
 	public static field lambda-2 Lkotlin/jvm/functions/Function3;
 	public static field lambda-3 Lkotlin/jvm/functions/Function3;
 	public static field lambda-4 Lkotlin/jvm/functions/Function3;
@@ -15,6 +20,11 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public final fun getLambda-1$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-10$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-11$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-12$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-13$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-14$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-15$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-16$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-3$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-4$json_forms_compose ()Lkotlin/jvm/functions/Function3;
@@ -55,6 +65,8 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 	public final fun isEnabled ()Z
 	public final fun isTouched ()Z
 	public final fun isValid ()Z
+	public final fun markAsTouched (Lcom/copperleaf/json/pointer/JsonPointer;)V
+	public static synthetic fun markAsTouched$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)V
 	public final fun sendFormAction (Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;)V
 	public static synthetic fun sendFormAction$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)V
 	public fun toString ()Ljava/lang/String;
@@ -62,14 +74,18 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 }
 
 public final class com/copperleaf/forms/compose/controls/DefaultControlsKt {
+	public static final fun checkbox (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
-	public static final fun control (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/IntegerControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/NumberControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/ObjectControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun dropdownEnum (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun dropdownOneOf (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun radioButtonEnum (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun radioButtonOneOf (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun richText (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun switch (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 }
 
 public final class com/copperleaf/forms/compose/controls/LayoutKt {
@@ -79,6 +95,7 @@ public final class com/copperleaf/forms/compose/controls/LayoutKt {
 public final class com/copperleaf/forms/compose/controls/TestersKt {
 	public static final fun hasSchemaProperty (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
 	public static final fun matchesControlType (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/forms/core/ControlType;)Z
+	public static final fun optionFieldIs (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Ljava/lang/String;)Z
 	public static final fun optionIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
 }
 
@@ -92,6 +109,7 @@ public final class com/copperleaf/forms/compose/elements/ComposableSingletons$De
 	public static field lambda-6 Lkotlin/jvm/functions/Function3;
 	public static field lambda-7 Lkotlin/jvm/functions/Function3;
 	public static field lambda-8 Lkotlin/jvm/functions/Function3;
+	public static field lambda-9 Lkotlin/jvm/functions/Function3;
 	public fun <init> ()V
 	public final fun getLambda-1$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose ()Lkotlin/jvm/functions/Function3;
@@ -101,6 +119,7 @@ public final class com/copperleaf/forms/compose/elements/ComposableSingletons$De
 	public final fun getLambda-6$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-7$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-8$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-9$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class com/copperleaf/forms/compose/elements/DefaultUiElementsKt {
@@ -111,6 +130,7 @@ public final class com/copperleaf/forms/compose/elements/DefaultUiElementsKt {
 	public static final fun element (Lcom/copperleaf/forms/core/Label;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun element (Lcom/copperleaf/forms/core/VerticalLayout;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun submit (Lcom/copperleaf/forms/core/Button;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun toggleDebug (Lcom/copperleaf/forms/core/Button;)Lcom/copperleaf/forms/compose/form/Registered;
 }
 
 public final class com/copperleaf/forms/compose/elements/LayoutKt {

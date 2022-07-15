@@ -8,12 +8,12 @@ class TestFormSavedStateAdapter(
 
     var latestSavedValue: String? = null
 
-    override val schema: String by lazy {
-        getJsonFromResources("$resourcesPath/schema.json")
+    override suspend fun loadSchema(): String {
+        return getJsonFromResources("$resourcesPath/schema.json")
     }
 
-    override val uiSchema: String by lazy {
-        getJsonFromResources("$resourcesPath/uiSchema.json")
+    override suspend fun loadUiSchema(): String {
+        return getJsonFromResources("$resourcesPath/uiSchema.json")
     }
 
     override suspend fun loadInitialData(): String {

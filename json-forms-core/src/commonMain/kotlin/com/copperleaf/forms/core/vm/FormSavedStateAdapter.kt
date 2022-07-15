@@ -7,13 +7,15 @@ import com.copperleaf.forms.core.internal.createDefaultUiSchema
 import com.copperleaf.forms.core.internal.resolveUiSchema
 import com.copperleaf.forms.core.ui.UiSchema
 import com.copperleaf.json.schema.JsonSchema
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 
 public class FormSavedStateAdapter(
-    private val prefs: Store,
-    private val saveType: FormContract.SaveType = FormContract.SaveType.OnValidChange,
+    private val store: Store,
+    private val initialState: () -> FormContract.State = { FormContract.State() },
     private val json: Json = Json,
 ) : SavedStateAdapter<
     FormContract.Inputs,
@@ -21,8 +23,8 @@ public class FormSavedStateAdapter(
     FormContract.State> {
 
     public interface Store {
-        public val schema: String
-        public val uiSchema: String?
+        public suspend fun loadSchema(): String
+        public suspend fun loadUiSchema(): String?
 
         public suspend fun loadInitialData(): String?
         public suspend fun saveUpdatedData(data: String)
@@ -33,17 +35,21 @@ public class FormSavedStateAdapter(
         FormContract.Events,
         FormContract.State>.save() {
         saveDiff({ originalData }) { updatedData ->
-            prefs.saveUpdatedData(json.encodeToString(JsonElement.serializer(), updatedData))
+            store.saveUpdatedData(json.encodeToString(JsonElement.serializer(), updatedData))
         }
     }
 
     override suspend fun RestoreStateScope<
         FormContract.Inputs,
         FormContract.Events,
-        FormContract.State>.restore(): FormContract.State {
-        val schemaJsonString = prefs.schema
-        val uiSchemaJsonString = prefs.uiSchema
-        val initialDataString = prefs.loadInitialData()
+        FormContract.State>.restore(): FormContract.State = coroutineScope {
+        val schemaJsonStringAsync = async { store.loadSchema() }
+        val uiSchemaJsonStringAsync = async { store.loadUiSchema() }
+        val initialDataStringAsync = async { store.loadInitialData() }
+
+        val schemaJsonString = schemaJsonStringAsync.await()
+        val uiSchemaJsonString = uiSchemaJsonStringAsync.await()
+        val initialDataString = initialDataStringAsync.await()
 
         val schemaJsonElement = json.decodeFromString(JsonElement.serializer(), schemaJsonString)
         val uiSchemaJsonElement = uiSchemaJsonString
@@ -54,9 +60,7 @@ public class FormSavedStateAdapter(
         val schema = JsonSchema.parse(schemaJsonString)
         val uiSchema: UiSchema = uiSchemaJsonElement.resolveUiSchema(schemaJsonElement)
 
-        return FormContract.State(
-            saveType = saveType,
-
+        initialState().copy(
             schemaJson = schemaJsonElement,
             schema = schema,
             uiSchemaJson = uiSchemaJsonElement,

@@ -90,7 +90,9 @@ public actual class JsonSchema actual constructor(input: String) {
     private fun JsonElement.toJsonSchemaValue(): JSONValue? {
         return when (this) {
             is JsonPrimitive -> {
-                if (this.booleanOrNull != null) {
+                if (this.isString) {
+                    JSONString(content)
+                } else if (this.booleanOrNull != null) {
                     JSONBoolean(boolean)
                 } else if (this.intOrNull != null) {
                     JSONInteger(int)

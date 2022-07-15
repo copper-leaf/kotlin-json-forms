@@ -95,16 +95,17 @@ be one of the following values:
 UI Elements are defined in the UI schema, and control how the form is physically laid out and rendered on the page. The 
 table below shows the different controls that are currently implemented or will be soon.
 
-| UI Element                                                                                      | Element Type in UI Schema    | Other UI Schema config              | Supported |
-|-------------------------------------------------------------------------------------------------|------------------------------|-------------------------------------|-----------|
-| Render child elements in a Compose `Column`                                                     | `"type": "VerticalLayout"`   |                                     | Yes       |
-| Render child elements in a Compose `Row`                                                        | `"type": "HorizontalLayout"` |                                     | Yes       |
-| Render a Control according to the referenced field type (see next section)                      | `"type": "Control"`          |                                     | Yes       |
-| A Submit button to commit form changes. Only visible when using `SaveType.OnCommit`             | `"type": "Button"`           | `"options": { "action": "submit" }` | Yes       |
-| A simple Label                                                                                  | `"type": "Label"`            |                                     | Yes       |
-| Group related elements in a card                                                                | `"type": "Group"`            |                                     | Yes       |
-| Set up a tabbed view. Each tab will be shown/hidden according to the Rule of the element itself | `"type": "Categorization"`   |                                     | Yes       |
-| One tab as a child of `Categorization`                                                          | `"type": "Category"`         |                                     | Yes       |
+| UI Element                                                                                      | Element Type in UI Schema    | Other UI Schema config                   | Supported |
+|-------------------------------------------------------------------------------------------------|------------------------------|------------------------------------------|-----------|
+| Render child elements in a Compose `Column`                                                     | `"type": "VerticalLayout"`   |                                          | Yes       |
+| Render child elements in a Compose `Row`                                                        | `"type": "HorizontalLayout"` |                                          | Yes       |
+| Render a Control according to the referenced field type (see next section)                      | `"type": "Control"`          |                                          | Yes       |
+| A simple Label                                                                                  | `"type": "Label"`            |                                          | Yes       |
+| Group related elements in a card                                                                | `"type": "Group"`            |                                          | Yes       |
+| Set up a tabbed view. Each tab will be shown/hidden according to the Rule of the element itself | `"type": "Categorization"`   |                                          | Yes       |
+| One tab as a child of `Categorization`                                                          | `"type": "Category"`         |                                          | Yes       |
+| A Submit button to commit form changes. Only visible when using `SaveType.OnCommit`             | `"type": "Button"`           | `"options": { "action": "submit" }`      | Yes       |
+| A checkbox to show/hide debug info                                                              | `"type": "Button"`           | `"options": { "action": "toggleDebug" }` | Yes       |
 
 ## Controls
 
@@ -121,15 +122,16 @@ controls that are currently implemented or will be soon.
 | Normal text field                                         | `string`             |                                                             |                                    | Yes                                   |
 | Rich text field editor                                    | `string`             |                                                             | `"options": { "richText": true }`  | Partial, doesn't actually update data |
 | Text field with dropdown menu                             | `string`             | `"enum": [...]`                                             |                                    | Partial, dropdown is clunky           |
-| Text field with Radio Buttons                             | `string`             | `"enum": [...]`                                             | `"options": { "format": "radio" }` | No                                    |
-| Text field with dropdown menu                             | `string`             | `"oneOf": [{}, {}]`                                         |                                    | No                                    |
-| Text field with Radio Buttons                             | `string`             | `"oneOf": [{}, {}]`                                         | `"options": { "format": "radio" }` | No                                    |
+| Text field with Radio Buttons                             | `string`             | `"enum": [...]`                                             | `"options": { "format": "radio" }` | Yes                                   |
+| Text field with dropdown menu                             | `string`             | `"oneOf": [{}, {}]`                                         |                                    | Partial, dropdown is clunky           |
+| Text field with Radio Buttons                             | `string`             | `"oneOf": [{}, {}]`                                         | `"options": { "format": "radio" }` | Yes                                   |
 | Text field with Date Picker                               | `string`             | `"format": "date"`                                          |                                    | No                                    |
 | Text field with Time Picker                               | `string`             | `"format": "time"`                                          |                                    | No                                    |
 | Text field with DateTime Picker                           | `string`             | `"format": "datetime"`                                      |                                    | No                                    |
 | Text field with up/down buttons                           | `integer`            |                                                             |                                    | Yes                                   |
 | Text field with up/down buttons                           | `number`             |                                                             |                                    | Yes                                   |
 | Checkbox                                                  | `boolean`            |                                                             |                                    | Yes                                   |
+| Switch                                                    | `boolean`            |                                                             | `"options": { "toggle": true }`    | Yes                                   |
 | Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"type": "string", "enum": [] }` |                                    | Yes                                   |
 | Multi-select Checkboxes                                   | `array`              | `uniqueItems: true, items: {"oneOf": [{}, {}] }`            |                                    | Yes                                   |
 | Render all properties of the object as fields             | `object`             |                                                             |                                    | Yes                                   |
@@ -141,3 +143,32 @@ Each control rendered in the UI will check for validation error messages and dis
 validation is very complex, and the messaged displayed in the UI come directly from the platform's validation library, 
 which may not be the most user-friendly. At this time, it is not a goal to provide more user-friendly or localized 
 error messages.
+
+# Roadmap
+
+This is a list of features planned for this library. None of them are guaranteed, all of them are open for contribution.
+
+- Improve rich-text editor
+  - Contribute improvements to the upstream library for [richtext-compose-multiplatform](https://github.com/Wavesonics/richtext-compose-multiplatform)
+  - Improve toolbar and keyboard shortcuts
+  - Support saving/restoring rich text field state to/from HTML and Markdown
+  - Allow the user to switch between the rich-text editor, and editing the markup directly
+  - When editing markup directly, allow user to choose whether to show a rendered preview of the rich text
+- Add code editor widget
+  - Potentially based on [this library](https://github.com/Qawaz/compose-code-editor), if it would move its dependencies to MavenCentral
+- Improve UX of dropdown-based widgets
+- Support date/time pickers
+  - Ideally, these would use the native picker dialogs on Android, and custom-built ones for Desktop
+- Add UI elements to display refs to properties, or computed expressions
+  - Use [trellis](https://github.com/copper-leaf/trellis) for building the expression DSL here
+- Improve UX of array widgets
+  - would be nice to have list, master/detail, and table views for array-of-object controls
+- Improve error messages
+  - See if there's a way to map the error messages of the validator libs to common strings (especially ones that could be localized)
+  - Add a way to provide custom additional error messages (such as coming from an API after submitting the form)
+- Support `readonly` flag
+  - Globally on the entire form (set via FormContract.State)
+  - On any individual Control
+  - On a property within the JSON Schema
+- Support `definitions` so that object/array controls can use `oneOf`, `anyOf`, or `allOf` with `$ref` to the definitions
+- Automatically move focus between controls with tab on desktop

@@ -47,6 +47,16 @@ public data class ControlScope(
         )
     }
 
+    public fun markAsTouched(
+        pointer: JsonPointer = dataPointer,
+    ) {
+        vm.trySend(
+            FormContract.Inputs.MarkAsTouched(
+                pointer = pointer,
+            )
+        )
+    }
+
     public fun <T> getTypedValue(
         defaultValue: T,
         mapper: (JsonElement) -> T?,

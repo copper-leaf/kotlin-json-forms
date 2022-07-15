@@ -1,14 +1,17 @@
 package com.copperleaf.forms.compose.controls
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
@@ -16,6 +19,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.RadioButton
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -55,6 +60,7 @@ import com.copperleaf.json.pointer.plus
 import com.copperleaf.json.pointer.toUriFragment
 import com.copperleaf.json.values.arrayAt
 import com.copperleaf.json.values.objectAt
+import com.copperleaf.json.values.string
 import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
 import com.darkrockstudios.richtexteditor.ui.defaultRichTextFieldStyle
@@ -66,7 +72,11 @@ import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+
+// StringControls
+// ---------------------------------------------------------------------------------------------------------------------
 
 public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue("") {
@@ -102,17 +112,21 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
     )
 
     RichTextEditor(
-        modifier = Modifier.richTextToolbarShortcuts(value, { value = it }),
+        modifier = Modifier
+            .richTextToolbarShortcuts(value, { value = it })
+            .defaultMinSize(minHeight = 120.dp)
+            .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(4.dp)),
         value = value,
         onValueChange = { value = it },
         textFieldStyle = defaultRichTextFieldStyle().copy(
             textColor = MaterialTheme.colors.onSurface,
+            cursorColor = MaterialTheme.colors.primary
         ),
     )
 }
 
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
-    rank = 10,
+    rank = 20,
     tester = { hasSchemaProperty("enum") }
 ) {
     val currentValue = getTypedValue("") {
@@ -129,9 +143,6 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
     var dropdownIsVisible by remember { mutableStateOf(false) }
     val allDropdownOptions: List<String> = remember {
         control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
-    }
-    val filteredDropdownOptions: List<String> = remember(text) {
-        allDropdownOptions.filter { it.contains(text.text) }
     }
 
     Box(Modifier.fillMaxSize()) {
@@ -158,14 +169,15 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
             expanded = dropdownIsVisible && isEnabled,
             onDismissRequest = { dropdownIsVisible = false },
         ) {
-            if (filteredDropdownOptions.isNotEmpty()) {
-                filteredDropdownOptions.forEach { option ->
-                    DropdownMenuItem(onClick = {
-                        updateText(TextFieldValue(option))
-                        dropdownIsVisible = false
-                    }) {
-                        Text(option)
-                    }
+            if (allDropdownOptions.isNotEmpty()) {
+                allDropdownOptions.forEach { option ->
+                    DropdownMenuItem(
+                        onClick = {
+                            updateText(TextFieldValue(option))
+                            dropdownIsVisible = false
+                        },
+                        content = { Text(option) },
+                    )
                 }
             } else {
                 DropdownMenuItem(onClick = { }, enabled = false) {
@@ -175,6 +187,129 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
         }
     }
 }
+
+public fun StringControl.dropdownOneOf(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 21,
+    tester = { hasSchemaProperty("oneOf") }
+) {
+    val currentValue = getTypedValue("") {
+        it.jsonPrimitive.content
+    }
+
+    val (text, updateText) = rememberUpdatableText(
+        initialValue = currentValue,
+        onTextChange = { value ->
+            updateFormState(value)
+        }
+    )
+
+    var dropdownIsVisible by remember { mutableStateOf(false) }
+    val allDropdownOptions: List<Pair<String, String>> = remember {
+        control.schemaConfig.arrayAt("oneOf").map {
+            it.jsonObject.string("const") to it.jsonObject.string("title")
+        }
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .onFocusChanged { dropdownIsVisible = it.isFocused },
+            value = text,
+            onValueChange = updateText,
+            label = { Text(control.label) },
+            enabled = isEnabled,
+
+            trailingIcon = {
+                IconButton(onClick = { dropdownIsVisible = true }, enabled = isEnabled) {
+                    if (dropdownIsVisible) {
+                        Icon(Icons.Default.ArrowDropUp, "Close")
+                    } else {
+                        Icon(Icons.Default.ArrowDropDown, "Open")
+                    }
+                }
+            }
+        )
+
+        DropdownMenu(
+            expanded = dropdownIsVisible && isEnabled,
+            onDismissRequest = { dropdownIsVisible = false },
+        ) {
+            if (allDropdownOptions.isNotEmpty()) {
+                allDropdownOptions.forEach { (const, title) ->
+                    DropdownMenuItem(
+                        onClick = {
+                            updateText(TextFieldValue(const))
+                            dropdownIsVisible = false
+                        },
+                        content = { Text(title) },
+                    )
+                }
+            } else {
+                DropdownMenuItem(onClick = { }, enabled = false) {
+                    Text("No Options")
+                }
+            }
+        }
+    }
+}
+
+public fun StringControl.radioButtonEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 30,
+    tester = { hasSchemaProperty("enum") && optionFieldIs("format", "radio") }
+) {
+    val currentValue = getTypedValue("") {
+        it.jsonPrimitive.content
+    }
+
+    val allDropdownOptions: List<String> = remember {
+        control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
+    }
+
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        allDropdownOptions.forEach {
+            Row(Modifier.clickable { updateFormState(it) }) {
+                RadioButton(
+                    selected = currentValue == it,
+                    onClick = null,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(it)
+            }
+        }
+    }
+}
+
+public fun StringControl.radioButtonOneOf(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 31,
+    tester = { hasSchemaProperty("oneOf") && optionFieldIs("format", "radio") }
+) {
+    val currentValue = getTypedValue("") {
+        it.jsonPrimitive.content
+    }
+
+    val allDropdownOptions: List<Pair<String, String>> = remember {
+        control.schemaConfig.arrayAt("oneOf").map {
+            it.jsonObject.string("const") to it.jsonObject.string("title")
+        }
+    }
+
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        allDropdownOptions.forEach { (const, title) ->
+            Row(Modifier.clickable { updateFormState(const) }) {
+                RadioButton(
+                    selected = currentValue == const,
+                    onClick = null,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(title)
+            }
+        }
+    }
+}
+
+// Number Controls
+// ---------------------------------------------------------------------------------------------------------------------
 
 public fun IntegerControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue(0) {
@@ -244,7 +379,10 @@ public fun NumberControl.control(): Registered<UiElement.Control, ControlRendere
     )
 }
 
-public fun BooleanControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
+// Boolean Controls
+// ---------------------------------------------------------------------------------------------------------------------
+
+public fun BooleanControl.checkbox(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentValue = getTypedValue(false) {
         it.jsonPrimitive.booleanOrNull
     }
@@ -260,6 +398,31 @@ public fun BooleanControl.control(): Registered<UiElement.Control, ControlRender
         Text(control.label)
     }
 }
+
+public fun BooleanControl.switch(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 10,
+    tester = {
+        optionIsEnabled("toggle")
+    }
+) {
+    val currentValue = getTypedValue(false) {
+        it.jsonPrimitive.booleanOrNull
+    }
+
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Switch(
+            checked = currentValue,
+            onCheckedChange = {
+                updateFormState(it)
+            },
+            enabled = isEnabled,
+        )
+        Text(control.label)
+    }
+}
+
+// Composite Controls
+// ---------------------------------------------------------------------------------------------------------------------
 
 public fun ObjectControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val properties = control.schemaConfig.objectAt("properties")
@@ -284,7 +447,7 @@ public fun ObjectControl.control(): Registered<UiElement.Control, ControlRendere
 
 public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
     val currentDataValue: JsonArray = getTypedValue(JsonArray(emptyList())) {
-        if(it == JsonNull) {
+        if (it == JsonNull) {
             JsonArray(emptyList())
         } else {
             it.jsonArray
@@ -298,6 +461,7 @@ public fun ArrayControl.control(): Registered<UiElement.Control, ControlRenderer
                     pointer = dataPointer + "/${currentDataValue.size}",
                     action = JsonPointerAction.SetValue(JsonNull),
                 )
+                markAsTouched()
             },
             enabled = isEnabled,
         ) {

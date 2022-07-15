@@ -1,7 +1,6 @@
 package com.copperleaf.forms.example.desktop
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,13 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.singleWindowApplication
 
 val allForms = listOf(
-    "/fields/boolean",
-    "/fields/integer",
-    "/fields/number",
-    "/fields/string",
-    "/fields/richText",
-    "/fields/object",
-    "/fields/array",
+    "/kitchenSink",
     "/form1",
     "/form2",
     "/basic",
@@ -48,7 +40,7 @@ val allForms = listOf(
 
 fun main() = singleWindowApplication {
     Row(Modifier.fillMaxSize()) {
-        val (selectedForm, setSelectedForm) = remember { mutableStateOf("/fields/boolean") }
+        val (selectedForm, setSelectedForm) = remember { mutableStateOf("/kitchenSink") }
         Column(Modifier.width(240.dp).verticalScroll(rememberScrollState())) {
             allForms.forEach {
                 ListItem(

@@ -18,7 +18,7 @@ public fun UiElement.ElementWithChildren.optionIsEnabled(name: String): Boolean 
 }
 
 public fun UiElement.ElementWithChildren.optionFieldIs(name: String, value: String): Boolean {
-    val optionsObject = uiSchemaConfig.optional { objectAt("options") }
-    val optionsProperty = optionsObject?.optional { string(name) }
-    return optionsProperty == value
+    return uiSchemaConfig
+        .optional { objectAt("options") }
+        ?.optional { string(name) } == value
 }
