@@ -61,6 +61,14 @@
                     "type": "Category",
                     "label": "Multi-Select",
                     "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/checkboxesEnum"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/checkboxesOneOf"
+                        }
                     ]
                 },
                 {

@@ -9,6 +9,8 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public static field lambda-15 Lkotlin/jvm/functions/Function3;
 	public static field lambda-16 Lkotlin/jvm/functions/Function3;
 	public static field lambda-17 Lkotlin/jvm/functions/Function3;
+	public static field lambda-18 Lkotlin/jvm/functions/Function3;
+	public static field lambda-19 Lkotlin/jvm/functions/Function3;
 	public static field lambda-2 Lkotlin/jvm/functions/Function3;
 	public static field lambda-3 Lkotlin/jvm/functions/Function3;
 	public static field lambda-4 Lkotlin/jvm/functions/Function3;
@@ -27,6 +29,8 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public final fun getLambda-15$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-16$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-17$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-18$json_forms_compose ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-19$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-3$json_forms_compose ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-4$json_forms_compose ()Lkotlin/jvm/functions/Function3;
@@ -77,6 +81,8 @@ public final class com/copperleaf/forms/compose/controls/ControlScope {
 
 public final class com/copperleaf/forms/compose/controls/DefaultControlsKt {
 	public static final fun checkbox (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun checkboxesEnum (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun checkboxesOneOf (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun codeEditor (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/IntegerControl;)Lcom/copperleaf/forms/compose/form/Registered;
@@ -96,10 +102,14 @@ public final class com/copperleaf/forms/compose/controls/LayoutKt {
 }
 
 public final class com/copperleaf/forms/compose/controls/TestersKt {
+	public static final fun hasArrayItemProperty (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+	public static final fun hasArrayItemType (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/forms/core/StringControl;)Z
 	public static final fun hasSchemaProperty (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
 	public static final fun matchesControlType (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/forms/core/ControlType;)Z
 	public static final fun optionFieldIs (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Ljava/lang/String;)Z
 	public static final fun optionIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+	public static final fun schemaPropertyIs (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun schemaPropertyIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
 }
 
 public final class com/copperleaf/forms/compose/elements/ComposableSingletons$DefaultUiElementsKt {

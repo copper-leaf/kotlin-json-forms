@@ -86,7 +86,7 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-// StringControls
+// Text Field Controls
 // ---------------------------------------------------------------------------------------------------------------------
 
 public fun StringControl.control(): Registered<UiElement.Control, ControlRenderer> = uiControl {
@@ -204,6 +204,9 @@ public fun StringControl.codeEditor(): Registered<UiElement.Control, ControlRend
     }
 }
 
+// Single-Select Controls
+// ---------------------------------------------------------------------------------------------------------------------
+
 public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
     rank = 20,
     tester = { hasSchemaProperty("enum") }
@@ -220,7 +223,7 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
     )
 
     var dropdownIsVisible by remember { mutableStateOf(false) }
-    val allDropdownOptions: List<String> = remember {
+    val allOptions: List<String> = remember {
         control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
     }
 
@@ -248,8 +251,8 @@ public fun StringControl.dropdownEnum(): Registered<UiElement.Control, ControlRe
             expanded = dropdownIsVisible && isEnabled,
             onDismissRequest = { dropdownIsVisible = false },
         ) {
-            if (allDropdownOptions.isNotEmpty()) {
-                allDropdownOptions.forEach { option ->
+            if (allOptions.isNotEmpty()) {
+                allOptions.forEach { option ->
                     DropdownMenuItem(
                         onClick = {
                             updateText(TextFieldValue(option))
@@ -283,7 +286,7 @@ public fun StringControl.dropdownOneOf(): Registered<UiElement.Control, ControlR
     )
 
     var dropdownIsVisible by remember { mutableStateOf(false) }
-    val allDropdownOptions: List<Pair<String, String>> = remember {
+    val allOptions: List<Pair<String, String>> = remember {
         control.schemaConfig.arrayAt("oneOf").map {
             it.jsonObject.string("const") to it.jsonObject.string("title")
         }
@@ -314,8 +317,8 @@ public fun StringControl.dropdownOneOf(): Registered<UiElement.Control, ControlR
             expanded = dropdownIsVisible && isEnabled,
             onDismissRequest = { dropdownIsVisible = false },
         ) {
-            if (allDropdownOptions.isNotEmpty()) {
-                allDropdownOptions.forEach { (const, title) ->
+            if (allOptions.isNotEmpty()) {
+                allOptions.forEach { (const, title) ->
                     DropdownMenuItem(
                         onClick = {
                             updateText(TextFieldValue(const))
@@ -341,12 +344,12 @@ public fun StringControl.radioButtonEnum(): Registered<UiElement.Control, Contro
         it.jsonPrimitive.content
     }
 
-    val allDropdownOptions: List<String> = remember {
+    val allOptions: List<String> = remember {
         control.schemaConfig.arrayAt("enum").map { it.jsonPrimitive.content }
     }
 
     Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        allDropdownOptions.forEach {
+        allOptions.forEach {
             Row(Modifier.clickable { updateFormState(it) }) {
                 RadioButton(
                     selected = currentValue == it,
@@ -367,18 +370,105 @@ public fun StringControl.radioButtonOneOf(): Registered<UiElement.Control, Contr
         it.jsonPrimitive.content
     }
 
-    val allDropdownOptions: List<Pair<String, String>> = remember {
+    val allOptions: List<Pair<String, String>> = remember {
         control.schemaConfig.arrayAt("oneOf").map {
             it.jsonObject.string("const") to it.jsonObject.string("title")
         }
     }
 
     Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        allDropdownOptions.forEach { (const, title) ->
+        allOptions.forEach { (const, title) ->
             Row(Modifier.clickable { updateFormState(const) }) {
                 RadioButton(
                     selected = currentValue == const,
                     onClick = null,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(title)
+            }
+        }
+    }
+}
+
+// Multi-Select Controls
+// ---------------------------------------------------------------------------------------------------------------------
+
+public fun ArrayControl.checkboxesEnum(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 20,
+    tester = { hasSchemaProperty("uniqueItems") && hasArrayItemType(StringControl) && hasArrayItemProperty("enum") }
+) {
+    val selectedValues: List<String> = getTypedValue(emptyList()) {
+        if (it == JsonNull) {
+            emptyList()
+        } else {
+            it.jsonArray.map { it.jsonPrimitive.content }
+        }
+    }
+    val allOptions: List<String> = remember {
+        control.schemaConfig.objectAt("items").arrayAt("enum").map { it.jsonPrimitive.content }
+    }
+
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        allOptions.forEach { option ->
+            Row(Modifier.clickable {
+                if (option in selectedValues) {
+                    sendFormAction(
+                        pointer = dataPointer + "/${selectedValues.indexOf(option)}",
+                        action = JsonPointerAction.RemoveValue,
+                    )
+                } else {
+                    sendFormAction(
+                        pointer = dataPointer + "/${selectedValues.size}",
+                        action = JsonPointerAction.SetValue(option),
+                    )
+                }
+                markAsTouched()
+            }) {
+                Checkbox(
+                    checked = option in selectedValues,
+                    onCheckedChange = null,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(option)
+            }
+        }
+    }
+}
+
+public fun ArrayControl.checkboxesOneOf(): Registered<UiElement.Control, ControlRenderer> = uiControl(
+    rank = 21,
+    tester = { hasSchemaProperty("uniqueItems") && hasArrayItemProperty("oneOf") }
+) {
+    val selectedValues: List<String> = getTypedValue(emptyList()) {
+        if (it == JsonNull) {
+            emptyList()
+        } else {
+            it.jsonArray.map { it.jsonPrimitive.content }
+        }
+    }
+    val allOptions: List<Pair<String, String>> = remember {
+        control.schemaConfig.objectAt("items").arrayAt("oneOf").map { it.string("const") to it.string("title") }
+    }
+
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        allOptions.forEach { (const, title) ->
+            Row(Modifier.clickable {
+                if (const in selectedValues) {
+                    sendFormAction(
+                        pointer = dataPointer + "/${selectedValues.indexOf(const)}",
+                        action = JsonPointerAction.RemoveValue,
+                    )
+                } else {
+                    sendFormAction(
+                        pointer = dataPointer + "/${selectedValues.size}",
+                        action = JsonPointerAction.SetValue(const),
+                    )
+                }
+                markAsTouched()
+            }) {
+                Checkbox(
+                    checked = const in selectedValues,
+                    onCheckedChange = null,
                     modifier = Modifier.padding(end = 8.dp)
                 )
                 Text(title)

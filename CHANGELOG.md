@@ -2,6 +2,7 @@
 
 - Adds code editor control
 - Connects rich text widget to form state
+- adds multi-select checkbox controls
 
 ## 0.2.0 - 2022-07-05
 

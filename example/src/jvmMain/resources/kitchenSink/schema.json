@@ -62,6 +62,39 @@
                             "title": "FooBar"
                         }
                     ]
+                },
+
+                "checkboxesEnum": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "foo",
+                            "bar",
+                            "foobar"
+                        ]
+                    }
+                },
+                "checkboxesOneOf": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "oneOf": [
+                            {
+                                "const": "foo",
+                                "title": "Foo"
+                            },
+                            {
+                                "const": "bar",
+                                "title": "Bar"
+                            },
+                            {
+                                "const": "foobar",
+                                "title": "FooBar"
+                            }
+                        ]
+                    }
                 }
             }
         },
