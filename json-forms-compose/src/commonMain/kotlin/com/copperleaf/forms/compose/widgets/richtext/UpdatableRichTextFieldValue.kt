@@ -1,78 +1,64 @@
 package com.copperleaf.forms.compose.widgets.richtext
 
-//class UpdatableRichTextFieldValue(
-//    private val richTextValue: MutableState<RichTextValue>,
-//    private val textString: MutableState<String>,
-//    private val onTextChange: (String) -> Unit
-//) {
-//    private val currentText: String get() = textString.value
-//    private val currentValue: State<RichTextValue> = derivedStateOf {
-//        richTextValue.value.copy()
-//    }
-//
-//    fun get(): RichTextValue {
-//        return currentValue.value
-//    }
-//    operator fun component1(): RichTextValue {
-//        return currentValue.value
-//    }
-//
-//    fun update(newValue: RichTextValue, sendUpdate: Boolean = true) {
-//        if (newValue.value.text != currentText && sendUpdate) {
-//            onTextChange(newValue.value.text)
-//        }
-//
-//        textString.value = newValue.value.text
-//        richTextValue.value = newValue
-//    }
-//
-//    operator fun component2(): (RichTextValue) -> Unit {
-//        return { tfv: RichTextValue -> update(tfv) }
-//    }
-//}
-//
-//fun UpdatableRichTextFieldValue.updateText(newValue: String, sendUpdate: Boolean = true) {
-//    update(get().copy(text = newValue), sendUpdate)
-//}
-//
-//@Composable
-//fun rememberUpdatableRichText(
-//    initialValue: String,
-//    onTextChange: (String) -> Unit
-//): UpdatableRichTextFieldValue {
-//    return rememberUpdatableRichText(mutableStateOf(initialValue), onTextChange)
-//}
-//
-//@Composable
-//fun rememberUpdatableRichText(
-//    inputState: State<String>,
-//    onTextChange: (String) -> Unit
-//): UpdatableRichTextFieldValue {
-//    val value by inputState
-//    val textPosition = remember { mutableStateOf(TextFieldValue()) }
-//    val textString = remember(value) { mutableStateOf(value) }
-//
-//    return UpdatableRichTextFieldValue(
-//        textPosition,
-//        textString,
-//        onTextChange
-//    )
-//}
-//
-//@Composable
-//fun <T : Any> rememberUpdatableRichText(
-//    inputState: State<T>,
-//    mapStateToText: (T) -> String,
-//    onTextChange: (String) -> Unit,
-//): UpdatableRichTextFieldValue {
-//    val value: T by inputState
-//    val textPosition: MutableState<TextFieldValue> = remember { mutableStateOf(TextFieldValue()) }
-//    val textString: MutableState<String> = remember(value) { mutableStateOf(mapStateToText(value)) }
-//
-//    return UpdatableRichTextFieldValue(
-//        textPosition,
-//        textString,
-//        onTextChange
-//    )
-//}
-//
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import com.darkrockstudios.richtexteditor.model.RichTextValue
+
+public class UpdatableRichTextFieldValue(
+    private val currentValue: MutableState<RichTextValue>,
+    private val onTextChange: (RichTextValue) -> Unit,
+) {
+
+    public fun get(): RichTextValue {
+        return currentValue.value
+    }
+
+    public operator fun component1(): RichTextValue {
+        return currentValue.value
+    }
+
+    public fun update(newValue: RichTextValue, sendUpdate: Boolean = true) {
+        if (newValue.value.annotatedString != currentValue.value.value.annotatedString && sendUpdate) {
+            onTextChange(newValue)
+        }
+        currentValue.value = newValue
+    }
+
+    public operator fun component2(): (RichTextValue) -> Unit {
+        return { tfv: RichTextValue -> update(tfv) }
+    }
+}
+
+@Composable
+public fun rememberUpdatableRichText(
+    initialValue: String,
+    serializer: RichTextValueSnapshotSerializer = RichTextJsonSerializer(),
+    onTextChange: (String) -> Unit
+): UpdatableRichTextFieldValue {
+    return rememberUpdatableRichText(mutableStateOf(initialValue), serializer, onTextChange)
+}
+
+@Composable
+public fun rememberUpdatableRichText(
+    inputState: State<String>,
+    serializer: RichTextValueSnapshotSerializer = RichTextJsonSerializer(),
+    onTextChange: (String) -> Unit
+): UpdatableRichTextFieldValue {
+    val inputText: String by inputState
+    val inputRichTextSnapshot: MutableState<RichTextValue> = remember(inputText) {
+        val decodedSnapshot = serializer.decodeFromString(inputText)
+        val snapshot = RichTextValue.fromSnapshot(decodedSnapshot)
+        mutableStateOf(snapshot)
+    }
+
+    return UpdatableRichTextFieldValue(
+        inputRichTextSnapshot
+    ) {
+        val encoded = serializer.encodeToString(it.getLastSnapshot())
+        onTextChange(encoded)
+    }
+}

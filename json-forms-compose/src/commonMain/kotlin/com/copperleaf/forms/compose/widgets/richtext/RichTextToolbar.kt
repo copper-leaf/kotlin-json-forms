@@ -6,6 +6,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.widgets.dropdown.IconButtonWithDescription
@@ -29,6 +35,28 @@ public fun RichTextToolbar(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+public fun Modifier.richTextShortcuts(
+    value: RichTextValue,
+    onValueChange: (RichTextValue) -> Unit,
+    toolbar: RichTextToolbar = RichTextEditorDefaults.defaultToolbar,
+): Modifier = composed {
+    onPreviewKeyEvent { pressedKey ->
+        if (pressedKey.isMetaPressed && pressedKey.type == KeyEventType.KeyUp) {
+            toolbar
+                .groups.flatMap { it.actions }
+                .firstOrNull { it.shortcutKey == pressedKey.key }
+                ?.run {
+                    onValueChange(value.insertStyle(style))
+                    true
+                }
+                ?: false
+        } else {
+            false
         }
     }
 }

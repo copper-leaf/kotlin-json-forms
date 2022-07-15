@@ -1,4 +1,4 @@
-package com.copperleaf.forms.compose.util
+package com.copperleaf.forms.compose.widgets.text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState

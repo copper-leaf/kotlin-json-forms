@@ -149,6 +149,7 @@ public final class com/copperleaf/json/utils/JsonObjectBuilder {
 	public final fun get (Ljava/lang/String;[Ljava/lang/Object;)V
 	public final fun to (Ljava/lang/String;Ljava/lang/Number;)V
 	public final fun to (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun to (Ljava/lang/String;Ljava/util/List;)V
 	public final fun to (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
 	public final fun to (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)V
 	public final fun to (Ljava/lang/String;Z)V

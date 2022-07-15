@@ -4,7 +4,6 @@ package com.copperleaf.forms.compose.widgets.codeeditor.prettify.lang
 import com.copperleaf.forms.compose.widgets.codeeditor.prettify.parser.Prettify
 import com.copperleaf.forms.compose.widgets.codeeditor.prettify.parser.StylePattern
 import com.copperleaf.forms.compose.widgets.codeeditor.utils.new
-import java.util.*
 
 internal class LangLogtalk : Lang() {
 

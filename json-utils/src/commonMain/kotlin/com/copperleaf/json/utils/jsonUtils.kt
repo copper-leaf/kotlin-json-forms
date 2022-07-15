@@ -41,6 +41,10 @@ public class JsonObjectBuilder {
         content[this] = JsonPrimitive(element)
     }
 
+    public infix fun String.to(elements: List<JsonElement>) {
+        content[this] = JsonArray(elements)
+    }
+
     public fun build(): JsonObject {
         return JsonObject(content.toMap())
     }

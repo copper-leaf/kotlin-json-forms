@@ -46,9 +46,6 @@ import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
 import com.copperleaf.forms.compose.form.uiControl
-import com.copperleaf.forms.compose.util.rememberUpdatableAnnotatedText
-import com.copperleaf.forms.compose.util.rememberUpdatableText
-import com.copperleaf.forms.compose.util.updateText
 import com.copperleaf.forms.compose.widgets.codeeditor.model.CodeLang
 import com.copperleaf.forms.compose.widgets.codeeditor.prettify.PrettifyParser
 import com.copperleaf.forms.compose.widgets.codeeditor.theme.CodeThemeType
@@ -56,7 +53,11 @@ import com.copperleaf.forms.compose.widgets.codeeditor.utils.parseCodeAsAnnotate
 import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenu
 import com.copperleaf.forms.compose.widgets.dropdown.DropdownMenuItem
 import com.copperleaf.forms.compose.widgets.richtext.RichTextToolbar
-import com.copperleaf.forms.compose.widgets.richtext.richTextToolbarShortcuts
+import com.copperleaf.forms.compose.widgets.richtext.rememberUpdatableRichText
+import com.copperleaf.forms.compose.widgets.richtext.richTextShortcuts
+import com.copperleaf.forms.compose.widgets.text.rememberUpdatableAnnotatedText
+import com.copperleaf.forms.compose.widgets.text.rememberUpdatableText
+import com.copperleaf.forms.compose.widgets.text.updateText
 import com.copperleaf.forms.core.ArrayControl
 import com.copperleaf.forms.core.BooleanControl
 import com.copperleaf.forms.core.IntegerControl
@@ -70,8 +71,8 @@ import com.copperleaf.json.pointer.plus
 import com.copperleaf.json.pointer.toUriFragment
 import com.copperleaf.json.values.arrayAt
 import com.copperleaf.json.values.objectAt
+import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
-import com.darkrockstudios.richtexteditor.model.RichTextValue
 import com.darkrockstudios.richtexteditor.ui.RichTextEditor
 import com.darkrockstudios.richtexteditor.ui.defaultRichTextFieldStyle
 import kotlinx.serialization.json.JsonArray
@@ -113,22 +114,27 @@ public fun StringControl.richText(): Registered<UiElement.Control, ControlRender
     rank = 10,
     tester = { optionIsEnabled("richText") }
 ) {
-    var value by remember { mutableStateOf(RichTextValue.get()) }
+    val currentValue = getTypedValue("") {
+        it.jsonPrimitive.content
+    }
+    val (text, updateText) = rememberUpdatableRichText(currentValue) {
+        updateFormState(it)
+    }
 
     Text(control.label, style = MaterialTheme.typography.subtitle1)
     RichTextToolbar(
         modifier = Modifier,
-        value = value,
-        onValueChange = { value = it },
+        value = text,
+        onValueChange = updateText,
     )
 
     RichTextEditor(
         modifier = Modifier
-            .richTextToolbarShortcuts(value, { value = it })
+            .richTextShortcuts(text, updateText)
             .defaultMinSize(minHeight = 120.dp)
             .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(4.dp)),
-        value = value,
-        onValueChange = { value = it },
+        value = text,
+        onValueChange = updateText,
         textFieldStyle = defaultRichTextFieldStyle().copy(
             textColor = MaterialTheme.colors.onSurface,
             cursorColor = MaterialTheme.colors.primary
@@ -140,7 +146,13 @@ public fun StringControl.codeEditor(): Registered<UiElement.Control, ControlRend
     rank = 20,
     tester = { optionIsEnabled("codeEditor") }
 ) {
-    val language = CodeLang.Kotlin
+    val language = control.uiSchemaConfig.optional {
+        this.objectAt("options").string("lang").let { languageName ->
+            CodeLang.values().firstOrNull { language ->
+                languageName in language.value || languageName == language.name
+            }
+        }
+    } ?: CodeLang.HTML
     val parser = remember { PrettifyParser() } // try getting from LocalPrettifyParser.current
     val theme = remember { CodeThemeType.Monokai.getTheme() }
     val currentValue = getTypedValue(AnnotatedString("")) {

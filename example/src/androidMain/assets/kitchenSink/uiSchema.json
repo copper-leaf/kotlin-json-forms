@@ -23,7 +23,8 @@
                             "type": "Control",
                             "scope": "#/properties/strings/properties/codeString",
                             "options": {
-                                "codeEditor": true
+                                "codeEditor": true,
+                                "lang": "kt"
                             }
                         }
                     ]
