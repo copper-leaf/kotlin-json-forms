@@ -17,7 +17,6 @@ import com.copperleaf.json.values.arrayAt
 import com.copperleaf.json.values.objectAt
 import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
@@ -181,7 +180,7 @@ internal fun JsonElement.resolveRule(
 
     val schemaJson = schema.objectAt(scopeJsonPointer)
     val conditionSchemaJson = condition.objectAt("schema")
-    val conditionSchema = JsonSchema.parse(Json.encodeToString(JsonElement.serializer(), conditionSchemaJson))
+    val conditionSchema = JsonSchema.parse(conditionSchemaJson)
 
     return Rule(
         schemaScope = scopeJsonPointer,

@@ -76,12 +76,12 @@ public final class com/copperleaf/json/pointer/UtilsKt {
 
 public final class com/copperleaf/json/schema/JsonSchema {
 	public static final field Companion Lcom/copperleaf/json/schema/JsonSchema$Companion;
-	public fun <init> (Ljava/lang/String;)V
+	public fun <init> (Lkotlinx/serialization/json/JsonElement;)V
 	public final fun validate (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/json/schema/SchemaValidationResult;
 }
 
 public final class com/copperleaf/json/schema/JsonSchema$Companion {
-	public final fun parse (Ljava/lang/String;)Lcom/copperleaf/json/schema/JsonSchema;
+	public final fun parse (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/json/schema/JsonSchema;
 }
 
 public abstract class com/copperleaf/json/schema/SchemaValidationResult {

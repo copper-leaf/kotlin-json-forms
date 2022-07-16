@@ -21,7 +21,7 @@ public object FormContract {
         val saveType: SaveType = SaveType.OnCommit,
         val validationMode: ValidationMode = ValidationMode.ValidateAndShow,
         val debug: Boolean = false,
-        val readonly: Boolean = false,
+        val readOnly: Boolean = false,
 
         val schemaJson: JsonElement = JsonNull,
         val schema: JsonSchema? = null,
@@ -45,9 +45,16 @@ public object FormContract {
     }
 
     public sealed class Inputs {
+        // Inputs for updating the configuration or data of the form after it has been initialized
         public data class SetDebugMode(val isDebug: Boolean) : Inputs()
+        public data class SetValidationMode(val validationMode: ValidationMode) : Inputs()
         public data class SetSaveType(val saveType: SaveType) : Inputs()
+        public data class SetReadOnly(val readOnly: Boolean) : Inputs()
+        public data class UpdateSchema(val schemaJson: JsonElement) : Inputs()
+        public data class UpdateUiSchema(val uiSchemaJson: JsonElement) : Inputs()
+        public data class FormDataChangedExternally(val newFormData: JsonElement) : Inputs()
 
+        // These should only be used by Controls
         public data class UpdateFormState(
             val pointer: JsonPointer,
             val action: JsonPointerAction,
@@ -56,6 +63,7 @@ public object FormContract {
             val pointer: JsonPointer,
         ) : Inputs()
 
+        // This may be used by a Submit Button, or anywhere in your UI to manually trigger a "save" of the form data
         public object CommitChanges : Inputs()
     }
 

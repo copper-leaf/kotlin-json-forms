@@ -2,7 +2,9 @@ package com.copperleaf.forms.core.vm
 
 import com.copperleaf.ballast.InputHandler
 import com.copperleaf.ballast.InputHandlerScope
+import com.copperleaf.forms.core.internal.resolveUiSchema
 import com.copperleaf.json.pointer.mutate
+import com.copperleaf.json.schema.JsonSchema
 
 public class FormInputHandler : InputHandler<
     FormContract.Inputs,
@@ -17,9 +19,41 @@ public class FormInputHandler : InputHandler<
         is FormContract.Inputs.SetDebugMode -> {
             updateState { it.copy(debug = input.isDebug) }
         }
+        is FormContract.Inputs.SetValidationMode -> {
+            updateState { it.copy(validationMode = input.validationMode) }
+        }
         is FormContract.Inputs.SetSaveType -> {
             updateState { it.copy(saveType = input.saveType) }
         }
+        is FormContract.Inputs.SetReadOnly -> {
+            updateState { it.copy(readOnly = input.readOnly) }
+        }
+        is FormContract.Inputs.UpdateSchema -> {
+            updateState {
+                it.copy(
+                    schemaJson = input.schemaJson,
+                    schema = JsonSchema.parse(input.schemaJson)
+                )
+            }
+        }
+        is FormContract.Inputs.UpdateUiSchema -> {
+            updateState {
+                it.copy(
+                    uiSchemaJson = input.uiSchemaJson,
+                    uiSchema = input.uiSchemaJson.resolveUiSchema(it.schemaJson)
+                )
+            }
+        }
+        is FormContract.Inputs.FormDataChangedExternally -> {
+            updateState {
+                it.copy(
+                    originalData = input.newFormData,
+                    updatedData = input.newFormData,
+                    touchedProperties = emptySet(),
+                )
+            }
+        }
+
         is FormContract.Inputs.UpdateFormState -> {
             val currentState = getCurrentState()
 
@@ -54,9 +88,10 @@ public class FormInputHandler : InputHandler<
         }
         is FormContract.Inputs.MarkAsTouched -> {
             updateState {
-                it.copy(touchedProperties = it.touchedProperties + input.pointer,)
+                it.copy(touchedProperties = it.touchedProperties + input.pointer)
             }
         }
+
         is FormContract.Inputs.CommitChanges -> {
             updateState {
                 if (it.isValid) {

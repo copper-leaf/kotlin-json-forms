@@ -21,7 +21,7 @@ targets, such as Compose for Web.
 
 This library is based on [Ballast](https://github.com/copper-leaf/ballast) for state management, and uses the the JSON
 models and (de)serialization capabilities from [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization), 
-though knowledge of either library is not necessary to use Kotlin Json Forms. 
+though knowledge of either library is not strictly necessary to use Kotlin Json Forms. 
 
 Additionally, schema validation is supported individually for each platform, because schema validator libraries are 
 large and too complex to reimplement for this project, so it's easier to find appropriate libraries on each platform as
@@ -56,7 +56,14 @@ fun RenderFormPreview(
 ```
 
 `FormSavedStateAdapter.Store` is an interface that must be implemented by you, and is how the Form schema gets 
-populated, and where form state is saved and loaded from. All values returned from the Store must be JSON strings.
+populated, and where form state is saved and loaded from. All values returned from the Store are instances of 
+`kotlinx.serialization.json.JsonElement`, which is the parsed DOM-like structure of JSON from the Kotlinx Serialization
+library. This means that you're not actually locked into using JSON Strings for the schemas of this library, you're free
+to parse the input in another format and convert that format's in-memory representation to `JsonElement` if you need. An
+example would be writing your schemas in `.yaml` files instead of `.json`.
+
+Since the library works with the already-parsed JSON models, you also have the flexibility to work entirely with 
+in-memory if you want, to avoid the wasted overhead of continually parsing and serializing those elements to Strings.
 
 # Form State
 

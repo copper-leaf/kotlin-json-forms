@@ -3,11 +3,11 @@ package com.copperleaf.json.schema
 import com.copperleaf.json.pointer.JsonPointer
 import kotlinx.serialization.json.JsonElement
 
-public expect class JsonSchema(input: String) {
+public expect class JsonSchema(input: JsonElement) {
     public fun validate(element: JsonElement): SchemaValidationResult
 
     public companion object {
-        public fun parse(input: String): JsonSchema
+        public fun parse(input: JsonElement): JsonSchema
     }
 }
 

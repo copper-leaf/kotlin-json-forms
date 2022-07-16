@@ -2,6 +2,7 @@ package com.copperleaf.json.schema
 
 import com.copperleaf.json.pointer.JsonPointer
 import com.copperleaf.json.pointer.toUriFragment
+import com.copperleaf.json.utils.toJsonString
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
@@ -25,9 +26,9 @@ import net.pwall.json.schema.output.BasicOutput
 import net.pwall.json.schema.output.DetailedOutput
 import net.pwall.json.schema.output.Output
 
-public actual class JsonSchema actual constructor(input: String) {
+public actual class JsonSchema actual constructor(input: JsonElement) {
 
-    private val schema = JSONSchema.parse(input)
+    private val schema = JSONSchema.parse(input.toJsonString())
 
     public actual fun validate(element: JsonElement): SchemaValidationResult {
         return schema
@@ -113,9 +114,8 @@ public actual class JsonSchema actual constructor(input: String) {
     }
 
     public actual companion object {
-        public actual fun parse(input: String): JsonSchema {
+        public actual fun parse(input: JsonElement): JsonSchema {
             return JsonSchema(input)
         }
     }
-
 }

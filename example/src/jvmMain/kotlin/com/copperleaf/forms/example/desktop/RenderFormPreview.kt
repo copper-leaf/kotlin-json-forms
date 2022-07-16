@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.Form
 import com.copperleaf.forms.core.vm.BasicFormViewModel
 import com.copperleaf.forms.core.vm.FormSavedStateAdapter
+import com.copperleaf.json.utils.toJsonString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonElement
 import org.jetbrains.compose.splitpane.VerticalSplitPane
 import org.jetbrains.compose.splitpane.rememberSplitPaneState
 
@@ -66,7 +66,7 @@ fun RenderFormPreview(
                     )
                     SelectionContainer {
                         Text(
-                            json.encodeToString(JsonElement.serializer(), vmState.originalData),
+                            vmState.originalData.toJsonString(json),
                             fontFamily = FontFamily.Monospace
                         )
                     }
@@ -79,7 +79,7 @@ fun RenderFormPreview(
                     )
                     SelectionContainer {
                         Text(
-                            json.encodeToString(JsonElement.serializer(), vmState.updatedData),
+                            vmState.updatedData.toJsonString(json),
                             fontFamily = FontFamily.Monospace
                         )
                     }
