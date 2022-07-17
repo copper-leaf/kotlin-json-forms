@@ -1,0 +1,31 @@
+{
+  "ownKey": "home",
+  "ownPages": [
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://copper-leaf.github.io/kotlin-json-forms",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://copper-leaf.github.io/kotlin-json-forms"
+      },
+      "description": "",
+      "title": "Home",
+      "content": ""
+    },
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://copper-leaf.github.io/kotlin-json-forms",
+        "fileName": "404",
+        "extension": "html",
+        "usePrettyUrl": false,
+        "link": "https://copper-leaf.github.io/kotlin-json-forms/404.html"
+      },
+      "description": "",
+      "title": "Not Found",
+      "content": ""
+    }
+  ]
+}
