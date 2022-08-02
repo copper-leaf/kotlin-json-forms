@@ -62,7 +62,7 @@ kotlin {
 
 # Documentation
 
-See the [website](https://copper-leaf.github.io/json-forms/) for detailed documentation and usage instructions.
+See the [website](https://copper-leaf.github.io/kotlin-json-forms/) for detailed documentation and usage instructions.
 
 # License
 
