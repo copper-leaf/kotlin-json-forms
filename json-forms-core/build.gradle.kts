@@ -49,11 +49,22 @@ kotlin {
     android {
         publishAllLibraryVariants()
     }
+    js(BOTH) {
+        browser {
+            testTask {
+                enabled = false
+            }
+        }
+    }
 
     // sourcesets
     sourceSets {
         all {
             languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlin.ExperimentalStdlibApi")
+                optIn("kotlin.time.ExperimentalTime")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
             }
         }
 
@@ -69,11 +80,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-
-                implementation("io.kotest:kotest-runner-junit5:5.3.0")
-                implementation("io.kotest:kotest-assertions-core:5.3.0")
-                implementation("io.kotest:kotest-property:5.3.0")
-                implementation("io.kotest:kotest-framework-datatest:5.3.0")
             }
         }
 
@@ -83,6 +89,10 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
+                implementation("io.kotest:kotest-runner-junit5:5.4.2")
+                implementation("io.kotest:kotest-assertions-core:5.4.2")
+                implementation("io.kotest:kotest-property:5.4.2")
+                implementation("io.kotest:kotest-framework-datatest:5.4.2")
             }
         }
 
@@ -94,6 +104,19 @@ kotlin {
         val androidAndroidTestRelease by getting { }
         val androidTest by getting {
             dependsOn(androidAndroidTestRelease)
+            dependencies {
+                implementation("io.kotest:kotest-runner-junit5:5.4.2")
+                implementation("io.kotest:kotest-assertions-core:5.4.2")
+                implementation("io.kotest:kotest-property:5.4.2")
+                implementation("io.kotest:kotest-framework-datatest:5.4.2")
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+            }
+        }
+        val jsTest by getting {
             dependencies {
             }
         }
@@ -113,11 +136,5 @@ tasks.withType<Test> {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = Config.javaVersion
-        freeCompilerArgs += listOf(
-            "-Xopt-in=kotlin.RequiresOptIn",
-            "-Xopt-in=kotlin.ExperimentalStdlibApi",
-            "-Xopt-in=kotlin.time.ExperimentalTime",
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-        )
     }
 }

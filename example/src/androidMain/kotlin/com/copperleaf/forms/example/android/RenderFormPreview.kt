@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.form.Form
+import com.copperleaf.forms.compose.form.MaterialForm
 import com.copperleaf.forms.core.vm.BasicFormViewModel
 import com.copperleaf.forms.core.vm.FormSavedStateAdapter
 import com.copperleaf.json.utils.toJsonString
@@ -49,7 +49,7 @@ fun RenderFormPreview(
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
         ) {
-            Form(vm)
+            MaterialForm(vm)
         }
         Column(
             Modifier

@@ -1,3 +1,9 @@
+## 0.5.0 - 2022-07-16
+
+- New `json-forms-compose-core` artifact has been added with all the base functionality using only Compose Runtime
+- Added `json-forms-compose-bulma` to display forms in Compose/Web with Bulma styling, based on `json-forms-compose-core` 
+- `json-forms-compose` has been renamed to `json-forms-compose-material`, which is also based on `json-forms-compose-core`
+
 ## 0.4.0 - 2022-07-16
 
 - Use already-parsed JsonElement instead of forcing the library to only work with JSON Strings

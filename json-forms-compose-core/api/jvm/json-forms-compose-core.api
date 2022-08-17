@@ -1,0 +1,218 @@
+public final class com/copperleaf/forms/compose/FormLocalsKt {
+	public static final fun getLocalArrayIndices ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalDesignSystem ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalFormConfig ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalViewModel ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocallyEnabled ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocallyVisible ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+}
+
+public final class com/copperleaf/forms/compose/controls/ControlScope : com/copperleaf/forms/compose/design/DesignSystem {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;)V
+	public fun box (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun button (Lkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun checkbox (ZLkotlin/jvm/functions/Function1;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun column (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public final fun component1 ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun component10 ()Z
+	public final fun component11 ()Z
+	public final fun component12 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component2 ()Lcom/copperleaf/forms/compose/design/DesignSystem;
+	public final fun component3 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public final fun component4 ()Lcom/copperleaf/forms/core/ui/UiElement$Control;
+	public final fun component5 ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun component6 ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun component7 ()Z
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Z
+	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/compose/controls/ControlScope;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZLjava/util/List;ZZZLkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/controls/ControlScope;
+	public fun divider (Landroidx/compose/runtime/Composer;I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getControl ()Lcom/copperleaf/forms/core/ui/UiElement$Control;
+	public final fun getCurrentValue ()Lkotlinx/serialization/json/JsonElement;
+	public final fun getDataPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun getDesignSystem ()Lcom/copperleaf/forms/compose/design/DesignSystem;
+	public final fun getSchemaPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun getTypedValue (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun getValidationErrors ()Ljava/util/List;
+	public final fun getVm ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public fun hashCode ()I
+	public final fun isChanged ()Z
+	public final fun isEnabled ()Z
+	public final fun isTouched ()Z
+	public final fun isValid ()Z
+	public final fun markAsTouched (Lcom/copperleaf/json/pointer/JsonPointer;)V
+	public static synthetic fun markAsTouched$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)V
+	public fun row (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public final fun sendFormAction (Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;)V
+	public static synthetic fun sendFormAction$default (Lcom/copperleaf/forms/compose/controls/ControlScope;Lcom/copperleaf/json/pointer/JsonPointerAction;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)V
+	public fun text (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+	public fun text (Ljava/lang/String;ZLandroidx/compose/runtime/Composer;I)V
+	public fun toString ()Ljava/lang/String;
+	public final fun updateFormState (Ljava/lang/Object;)V
+	public fun visibility (ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/controls/LayoutKt {
+	public static final fun ControlLayout (Lcom/copperleaf/forms/core/ui/UiElement$Control;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/controls/TestersKt {
+	public static final fun hasArrayItemProperty (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+	public static final fun hasArrayItemType (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/forms/core/ControlType;)Z
+	public static final fun hasSchemaProperty (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+	public static final fun matchesControlType (Lcom/copperleaf/forms/core/ui/UiElement$Control;Lcom/copperleaf/forms/core/ControlType;)Z
+	public static final fun optionFieldIs (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun optionIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+	public static final fun schemaPropertyIs (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun schemaPropertyIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$Control;Ljava/lang/String;)Z
+}
+
+public abstract interface class com/copperleaf/forms/compose/design/DesignSystem {
+	public abstract fun box (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun button (Lkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun checkbox (ZLkotlin/jvm/functions/Function1;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun column (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun divider (Landroidx/compose/runtime/Composer;I)V
+	public abstract fun row (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun text (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun text (Ljava/lang/String;ZLandroidx/compose/runtime/Composer;I)V
+	public abstract fun visibility (ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/elements/ComposableSingletons$DefaultUiElementsKt {
+	public static final field INSTANCE Lcom/copperleaf/forms/compose/elements/ComposableSingletons$DefaultUiElementsKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function3;
+	public static field lambda-2 Lkotlin/jvm/functions/Function3;
+	public static field lambda-3 Lkotlin/jvm/functions/Function3;
+	public static field lambda-4 Lkotlin/jvm/functions/Function3;
+	public static field lambda-5 Lkotlin/jvm/functions/Function3;
+	public static field lambda-6 Lkotlin/jvm/functions/Function3;
+	public fun <init> ()V
+	public final fun getLambda-1$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-2$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-3$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-4$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-5$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-6$json_forms_compose_core ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class com/copperleaf/forms/compose/elements/DefaultUiElementsKt {
+	public static final fun element (Lcom/copperleaf/forms/core/Group;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun element (Lcom/copperleaf/forms/core/HorizontalLayout;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun element (Lcom/copperleaf/forms/core/Label;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun element (Lcom/copperleaf/forms/core/VerticalLayout;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun submit (Lcom/copperleaf/forms/core/Button;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun toggleDebug (Lcom/copperleaf/forms/core/Button;)Lcom/copperleaf/forms/compose/form/Registered;
+}
+
+public final class com/copperleaf/forms/compose/elements/LayoutKt {
+	public static final fun UiElementLayout (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/elements/TestersKt {
+	public static final fun matchesElementType (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Lcom/copperleaf/forms/core/UiElementType;)Z
+	public static final fun optionFieldIs (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun optionIsEnabled (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;Ljava/lang/String;)Z
+}
+
+public final class com/copperleaf/forms/compose/elements/UiElementScope : com/copperleaf/forms/compose/design/DesignSystem {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)V
+	public fun box (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun button (Lkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun checkbox (ZLkotlin/jvm/functions/Function1;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun column (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public final fun component1 ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun component2 ()Lcom/copperleaf/forms/compose/design/DesignSystem;
+	public final fun component3 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public final fun component4 ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
+	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/elements/UiElementScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/design/DesignSystem;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/elements/UiElementScope;
+	public fun divider (Landroidx/compose/runtime/Composer;I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDesignSystem ()Lcom/copperleaf/forms/compose/design/DesignSystem;
+	public final fun getElement ()Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;
+	public final fun getVm ()Lcom/copperleaf/ballast/BallastViewModel;
+	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public fun hashCode ()I
+	public fun row (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun text (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+	public fun text (Ljava/lang/String;ZLandroidx/compose/runtime/Composer;I)V
+	public fun toString ()Ljava/lang/String;
+	public fun visibility (ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/form/ComposeFormConfig {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;Ljava/util/List;Lcom/copperleaf/forms/compose/design/DesignSystem;)V
+	public final fun getControl (Lcom/copperleaf/forms/core/ui/UiElement$Control;)Lkotlin/jvm/functions/Function3;
+	public final fun getDesignSystem ()Lcom/copperleaf/forms/compose/design/DesignSystem;
+	public final fun getElement (Lcom/copperleaf/forms/core/ui/UiElement$ElementWithChildren;)Lkotlin/jvm/functions/Function3;
+}
+
+public final class com/copperleaf/forms/compose/form/LayoutKt {
+	public static final fun BasicForm (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/compose/form/ComposeFormConfig;Landroidx/compose/runtime/Composer;I)V
+	public static final fun UiElement (Lcom/copperleaf/forms/core/ui/UiElement;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/form/Registered {
+	public static final field $stable I
+	public fun <init> (ILkotlin/jvm/functions/Function1;Ljava/lang/Object;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lkotlin/jvm/functions/Function1;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun copy (ILkotlin/jvm/functions/Function1;Ljava/lang/Object;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/form/Registered;ILkotlin/jvm/functions/Function1;Ljava/lang/Object;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/form/Registered;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRank ()I
+	public final fun getRenderer ()Ljava/lang/Object;
+	public final fun getTester ()Lkotlin/jvm/functions/Function1;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/forms/compose/form/RegistrationKt {
+	public static final fun uiControl (Lcom/copperleaf/forms/core/ControlType;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static synthetic fun uiControl$default (Lcom/copperleaf/forms/core/ControlType;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static final fun uiElement (Lcom/copperleaf/forms/core/UiElementType;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;)Lcom/copperleaf/forms/compose/form/Registered;
+	public static synthetic fun uiElement$default (Lcom/copperleaf/forms/core/UiElementType;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/form/Registered;
+}
+
+public final class com/copperleaf/forms/compose/form/UtilsKt {
+	public static final fun WithArrayIndex (ILkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/rules/LayoutKt {
+	public static final fun RuleLayout (Lcom/copperleaf/forms/core/ui/UiElement;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/rules/RuleScope {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/Rule;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZZZLkotlinx/serialization/json/JsonElement;)V
+	public final fun component2 ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public final fun component3 ()Lcom/copperleaf/forms/core/ui/Rule;
+	public final fun component4 ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun component5 ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun component6 ()Z
+	public final fun component7 ()Z
+	public final fun component8 ()Z
+	public final fun component9 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun copy (Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/Rule;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZZZLkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/compose/rules/RuleScope;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/rules/RuleScope;Lcom/copperleaf/ballast/BallastViewModel;Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/ui/Rule;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointer;ZZZLkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/rules/RuleScope;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCurrentValue ()Lkotlinx/serialization/json/JsonElement;
+	public final fun getDataPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun getRule ()Lcom/copperleaf/forms/core/ui/Rule;
+	public final fun getSchemaPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
+	public final fun getVmState ()Lcom/copperleaf/forms/core/vm/FormContract$State;
+	public fun hashCode ()I
+	public final fun isEnabled ()Z
+	public final fun isValid ()Z
+	public final fun isVisible ()Z
+	public fun toString ()Ljava/lang/String;
+}
+

@@ -59,7 +59,7 @@ public class BasicFormViewModel(
                 name = name,
             )
             .apply {
-                this += LoggingInterceptor()
+//                this += LoggingInterceptor()
                 logger = { PrintlnLogger(it) }
             }
             .build()

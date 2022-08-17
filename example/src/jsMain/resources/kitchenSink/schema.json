@@ -1,0 +1,192 @@
+{
+    "type": "object",
+    "properties": {
+        "strings": {
+            "type": "object",
+            "properties": {
+                "basicString": {
+                    "type": "string"
+                },
+                "richTextString": {
+                    "type": "string"
+                },
+                "codeString": {
+                    "type": "string"
+                },
+                "stringEnum": {
+                    "type": "string",
+                    "enum": [
+                        "foo",
+                        "bar",
+                        "foobar"
+                    ]
+                },
+                "stringOneOf": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "const": "foo",
+                            "title": "Foo"
+                        },
+                        {
+                            "const": "bar",
+                            "title": "Bar"
+                        },
+                        {
+                            "const": "foobar",
+                            "title": "FooBar"
+                        }
+                    ]
+                },
+                "stringEnumRadio": {
+                    "type": "string",
+                    "enum": [
+                        "foo",
+                        "bar",
+                        "foobar"
+                    ]
+                },
+                "stringOneOfRadio": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "const": "foo",
+                            "title": "Foo"
+                        },
+                        {
+                            "const": "bar",
+                            "title": "Bar"
+                        },
+                        {
+                            "const": "foobar",
+                            "title": "FooBar"
+                        }
+                    ]
+                },
+
+                "checkboxesEnum": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "foo",
+                            "bar",
+                            "foobar"
+                        ]
+                    }
+                },
+                "checkboxesOneOf": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "oneOf": [
+                            {
+                                "const": "foo",
+                                "title": "Foo"
+                            },
+                            {
+                                "const": "bar",
+                                "title": "Bar"
+                            },
+                            {
+                                "const": "foobar",
+                                "title": "FooBar"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "numbers": {
+            "type": "object",
+            "properties": {
+                "basicInt": {
+                    "type": "integer"
+                },
+                "basicDouble": {
+                    "type": "number"
+                }
+            }
+        },
+        "booleans": {
+            "type": "object",
+            "properties": {
+                "checkbox": {
+                    "type": "boolean"
+                },
+                "switch": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "objects": {
+            "type": "object",
+            "properties": {
+                "basicObject": {
+                    "type": "object",
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "integer"
+                        },
+                        "c": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "arrays": {
+            "type": "object",
+            "properties": {
+                "arrayOfStrings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "arrayOfIntegers": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "arrayOfCheckboxes": {
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                },
+                "arrayOfObjects": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "a": {
+                                "type": "string"
+                            },
+                            "b": {
+                                "type": "integer"
+                            },
+                            "c": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "arrayOfArrays": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -9,15 +9,15 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/kotlin-json-forms)](https://github.com/copper-leaf/kotlin-json-forms/releases)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/json-forms-core)](https://search.maven.org/artifact/io.github.copper-leaf/json-forms-core)
 
-This project aims to reimplement [JSON Forms](https://github.com/eclipsesource/jsonforms) in Kotlin for use in 
-Compose-based applications. Rather than defining its own formats or standards, this repo adopts JSON for form 
-configuration and layout of well-known or standardized formats. Form fields and validation is provided in 
-[JSON Schema format](https://json-schema.org/), and the way the form is laid out and displayed is through 
-[JSON Forms format](https://github.com/eclipsesource/jsonforms) format. Using JSON as as the form definition gives an 
+This project aims to reimplement [JSON Forms](https://github.com/eclipsesource/jsonforms) in Kotlin for use in
+Compose-based applications. Rather than defining its own formats or standards, this repo adopts JSON for form
+configuration and layout of well-known or standardized formats. Form fields and validation is provided in
+[JSON Schema format](https://json-schema.org/), and the way the form is laid out and displayed is through
+[JSON Forms format](https://github.com/eclipsesource/jsonforms) format. Using JSON as as the form definition gives an
 easy, portable way to display and dynamically change forms in your application.
 
 This repo aims to support all features of the original [JSON Forms](https://github.com/eclipsesource/jsonforms) library,
-which is written in Javascript, as well as following similar architectural patterns. For all topic related to the JSON 
+which is written in Javascript, as well as following similar architectural patterns. For all topic related to the JSON
 format itself, that library's documentation will be a valid reference for this library.
 
 See the video below for an example form in action:
@@ -26,10 +26,10 @@ https://user-images.githubusercontent.com/6157866/179068902-a8e3da2e-2a00-4a30-8
 
 # Supported Platforms/Features
 
-Currently, JSON Schema validation is provided by the JVM-only 
-[json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema), so is only available for JVM-compatible targets. 
-In following the architecture of the original JSON Forms library, the core functionality is not tied to any particular 
-UI framework, and displaying forms in Compose is an extension on top of the core library. 
+Currently, JSON Schema validation is provided by the JVM-only
+[json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema), so is only available for JVM-compatible targets.
+In following the architecture of the original JSON Forms library, the core functionality is not tied to any particular
+UI framework, and displaying forms in Compose is an extension on top of the core library.
 
 Kotlin JSON Forms is currently available for Compose on Android and Desktop platforms. Adding support for Compose Web
 is planned.
@@ -75,7 +75,7 @@ Kotlin JSON Forms is licensed under the BSD 3-Clause License, see [LICENSE.md](h
 
 This project depends on the following libraries:
 
-- [json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema) for providing JSON parsing and validation on JVM, 
+- [json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema) for providing JSON parsing and validation on JVM,
   which itself depends on many other Java or Kotlin JSON libraries by the same author
 - [Ballast](https://github.com/copper-leaf/ballast) for state management
 - [richtext-compose-multiplatform](https://github.com/Wavesonics/richtext-compose-multiplatform) for rich text editor capabilities

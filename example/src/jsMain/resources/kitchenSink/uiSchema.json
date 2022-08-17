@@ -1,0 +1,161 @@
+{
+    "type": "VerticalLayout",
+    "elements": [
+        {
+            "type": "Categorization",
+            "elements": [
+                {
+                    "type": "Category",
+                    "label": "Text Fields",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/basicString"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/richTextString",
+                            "options": {
+                                "richText": true
+                            }
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/codeString",
+                            "options": {
+                                "codeEditor": true,
+                                "lang": "kt"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Single-Select",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/stringEnum"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/stringOneOf"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/stringEnumRadio",
+                            "options": {
+                                "format": "radio"
+                            }
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/stringOneOfRadio",
+                            "options": {
+                                "format": "radio"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Multi-Select",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/checkboxesEnum"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/strings/properties/checkboxesOneOf"
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Numbers",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/numbers/properties/basicInt"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/numbers/properties/basicDouble"
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Booleans",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/booleans/properties/checkbox"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/booleans/properties/switch",
+                            "options": {
+                                "toggle": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Objects",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/objects/properties/basicObject"
+                        }
+                    ]
+                },
+                {
+                    "type": "Category",
+                    "label": "Arrays",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/arrays/properties/arrayOfStrings"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/arrays/properties/arrayOfIntegers"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/arrays/properties/arrayOfCheckboxes"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/arrays/properties/arrayOfObjects"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/arrays/properties/arrayOfArrays"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "HorizontalLayout",
+            "elements": [
+                {
+                    "type": "Button",
+                    "options": {
+                        "action": "submit"
+                    }
+                },
+                {
+                    "type": "Button",
+                    "options": {
+                        "action": "toggleDebug"
+                    }
+                }
+            ]
+        }
+    ]
+}

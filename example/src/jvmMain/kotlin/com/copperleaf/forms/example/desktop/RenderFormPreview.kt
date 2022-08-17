@@ -19,7 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.copperleaf.forms.compose.form.Form
+import com.copperleaf.forms.compose.form.MaterialForm
 import com.copperleaf.forms.core.vm.BasicFormViewModel
 import com.copperleaf.forms.core.vm.FormSavedStateAdapter
 import com.copperleaf.json.utils.toJsonString
@@ -46,7 +46,7 @@ fun RenderFormPreview(
         VerticalSplitPane(splitPaneState = rememberSplitPaneState(0.85f)) {
             first(minSize = 64.dp) {
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-                    Form(vm)
+                    MaterialForm(vm)
                 }
             }
             second(minSize = 64.dp) {

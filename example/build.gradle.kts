@@ -46,6 +46,14 @@ kotlin {
     jvm { }
     android {
     }
+    js(IR) {
+        browser {
+            testTask {
+                enabled = false
+            }
+            binaries.executable()
+        }
+    }
 
     // sourcesets
     sourceSets {
@@ -57,18 +65,12 @@ kotlin {
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-                implementation(project(":json-forms-compose"))
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-
-                implementation("io.kotest:kotest-runner-junit5:5.3.0")
-                implementation("io.kotest:kotest-assertions-core:5.3.0")
-                implementation("io.kotest:kotest-property:5.3.0")
-                implementation("io.kotest:kotest-framework-datatest:5.3.0")
             }
         }
 
@@ -77,6 +79,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.desktop.components.splitPane)
+                implementation(project(":json-forms-compose-material"))
             }
         }
         val jvmTest by getting {
@@ -88,11 +91,23 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.androidx.compose.activity)
+                implementation(project(":json-forms-compose-material"))
             }
         }
         val androidAndroidTestRelease by getting { }
         val androidTest by getting {
             dependsOn(androidAndroidTestRelease)
+            dependencies {
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation(compose.web.core)
+                implementation(project(":json-forms-compose-bulma"))
+            }
+        }
+        val jsTest by getting {
             dependencies {
             }
         }

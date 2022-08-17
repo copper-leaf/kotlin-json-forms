@@ -7,7 +7,7 @@ object Config {
     val groupId = "io.github.copper-leaf"
     val githubUrl = "https://github.com/copper-leaf/json-forms"
     val license = License.BSD3
-    val javaVersion = JavaVersion.VERSION_1_8.toString()
+    val javaVersion = JavaVersion.VERSION_11.toString()
 
     object Developer {
         val id = "cjbrooks12"

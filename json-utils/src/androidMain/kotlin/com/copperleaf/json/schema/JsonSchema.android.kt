@@ -80,6 +80,7 @@ public actual class JsonSchema actual constructor(input: JsonElement) {
             }
         }
 
+        @Suppress("UNUSED_PARAMETER")
         private fun BasicOutput.getBasicValidationErrorMessages(
             pointer: String,
             listBuilder: MutableList<String>,
