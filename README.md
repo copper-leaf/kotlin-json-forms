@@ -26,13 +26,13 @@ https://user-images.githubusercontent.com/6157866/179068902-a8e3da2e-2a00-4a30-8
 
 # Supported Platforms/Features
 
-Currently, JSON Schema validation is provided by the JVM-only
-[json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema), so is only available for JVM-compatible targets.
-In following the architecture of the original JSON Forms library, the core functionality is not tied to any particular
-UI framework, and displaying forms in Compose is an extension on top of the core library.
+This project currently supports Android and Desktop targets with the `json-forms-compose-material` artifact, which uses
+[json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema) for schema validation.
 
-Kotlin JSON Forms is currently available for Compose on Android and Desktop platforms. Adding support for Compose Web
-is planned.
+JavaScript is also supported for Compose DOM (no Canvas implementation yet), using the `json-forms-compose-bulma` 
+artifact. This displays forms based on [Bulma CSS](https://bulma.io/) for styling and class names. JS target uses 
+[Ajv](https://github.com/ajv-validator/ajv) for schema validation (the same validator library used in the original
+[JSON Forms](https://github.com/eclipsesource/jsonforms) library).
 
 # Installation
 
@@ -43,17 +43,28 @@ repositories {
 
 // for plain JVM or Android projects
 dependencies {
-    implementation("io.github.copper-leaf:json-forms-core:{{site.version}}")
-    implementation("io.github.copper-leaf:json-forms-compose:{{site.version}}")
+    implementation("io.github.copper-leaf:json-forms-compose-material:{{site.version}}")
 }
 
 // for multiplatform projects
 kotlin {
     sourceSets {
+        val jvmMain by getting {
+            dependencies {
+                // Forms using Material components for Compose Desktop
+                implementation("io.github.copper-leaf:json-forms-compose-material:{{site.version}}")
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                // Forms using Material components for Compose Android
+                implementation("io.github.copper-leaf:json-forms-compose-material:{{site.version}}")
+            }
+        }
         val commonMain by getting {
             dependencies {
-                implementation("io.github.copper-leaf:json-forms-core:{{site.version}}")
-                implementation("io.github.copper-leaf:json-forms-compose:{{site.version}}")
+                // Forms using HTML widgets for Compose Web DOM, using Bulma CSS framework for styling
+                implementation("io.github.copper-leaf:json-forms-compose-bulma:{{site.version}}")
             }
         }
     }
@@ -63,6 +74,10 @@ kotlin {
 # Documentation
 
 See the [website](https://copper-leaf.github.io/kotlin-json-forms/) for detailed documentation and usage instructions.
+
+The documentation site, and this library in general, is very much a POC at this point, and everything is subject to 
+change without warning. But you can always find the most up-to-date usage in the
+[example apps](https://github.com/copper-leaf/kotlin-json-forms/tree/main/example).
 
 # License
 
@@ -77,6 +92,7 @@ This project depends on the following libraries:
 
 - [json-kotlin-schema](https://github.com/pwall567/json-kotlin-schema) for providing JSON parsing and validation on JVM,
   which itself depends on many other Java or Kotlin JSON libraries by the same author
+- [Ajv](https://github.com/ajv-validator/ajv) for providing JSON parsing and validation on JS
 - [Ballast](https://github.com/copper-leaf/ballast) for state management
 - [richtext-compose-multiplatform](https://github.com/Wavesonics/richtext-compose-multiplatform) for rich text editor capabilities
 - [compose-code-editor](https://github.com/Qawaz/compose-code-editor) for code editor capabilities
