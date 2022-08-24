@@ -3,7 +3,6 @@ package com.copperleaf.forms.compose.controls
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import com.copperleaf.forms.compose.LocalArrayIndices
 import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
@@ -27,7 +26,7 @@ public fun ControlLayout(controlElement: UiElement.Control) {
             val vm = LocalViewModel.current
             val vmState by vm.observeStates().collectAsState()
 
-            val controlScope = remember(controlElement, vmState, localArrayIndices, locallyEnabled) {
+            val controlScope = run {
                 val currentDataPointer = controlElement.dataScope.reifyPointer(localArrayIndices)
                 val currentSchemaPointer = controlElement.schemaScope
                 val validationErrors = vmState.errors(currentDataPointer)
@@ -59,8 +58,6 @@ public fun ControlLayout(controlElement: UiElement.Control) {
                     currentValue = currentValue,
                 )
             }
-
-
 
             controlRenderer(controlScope)
             if (!controlScope.isValid) {

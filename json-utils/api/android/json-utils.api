@@ -165,6 +165,8 @@ public final class com/copperleaf/json/utils/JsonObjectBuilder {
 public final class com/copperleaf/json/utils/JsonUtilsKt {
 	public static final fun get (Lkotlinx/serialization/json/JsonArray$Companion;[Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
 	public static final fun json (Lkotlin/jvm/functions/Function1;)Lkotlinx/serialization/json/JsonObject;
+	public static final fun jsonArray ([Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
+	public static final fun merge (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
 	public static final fun parseJson (Ljava/lang/String;Lkotlinx/serialization/json/Json;)Lkotlinx/serialization/json/JsonElement;
 	public static final fun parseJson (Ljava/lang/String;Z)Lkotlinx/serialization/json/JsonElement;
 	public static synthetic fun parseJson$default (Ljava/lang/String;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;

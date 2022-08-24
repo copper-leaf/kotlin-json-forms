@@ -2,9 +2,7 @@ package com.copperleaf.forms.compose.elements
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
 import com.copperleaf.forms.compose.LocalViewModel
@@ -22,16 +20,12 @@ public fun UiElementLayout(
             val vm = LocalViewModel.current
             val vmState by vm.observeStates().collectAsState()
 
-            val elementScope by remember(element, vm, vmState, designSystem) {
-                derivedStateOf {
-                    UiElementScope(
-                        vm = vm,
-                        designSystem = designSystem,
-                        vmState = vmState,
-                        element = element
-                    )
-                }
-            }
+            val elementScope = UiElementScope(
+                vm = vm,
+                designSystem = designSystem,
+                vmState = vmState,
+                element = element
+            )
             uiElementRenderer(elementScope)
         }
     } else {

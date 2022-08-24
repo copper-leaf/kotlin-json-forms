@@ -63,7 +63,7 @@ public fun JsonElement.resolveAsControl(
         schemaScope = scopeJsonPointer,
         dataScope = staticallyDetermineDataScope(schema, scopeJsonPointer),
         required = isControlRequired(schema, scopeJsonPointer),
-        label = label(schema, scopeJsonPointer, uiSchemaConfig),
+        label = label(schema, scopeJsonPointer, uiSchemaConfig, schemaConfig),
         rule = rule,
     )
 }
@@ -116,10 +116,12 @@ internal fun staticallyDetermineDataScope(
                     // it's an object, append the token to the data scope
                     currentDataScope.add(token)
                 }
+
                 "array" -> {
                     // it's an array, append the '[]' placeholder to the data scope
                     currentDataScope.add("[]")
                 }
+
                 else -> {
                     // assume it's a primitive, append the token to the data scope
                     currentDataScope.add(token)
@@ -136,10 +138,12 @@ internal fun staticallyDetermineDataScope(
                     // it's an object, append the token to the data scope
                     currentDataScope.add(token)
                 }
+
                 "array" -> {
                     // it's an array, append the '[]' placeholder to the data scope
                     currentDataScope.add("[]")
                 }
+
                 else -> {
                     // assume it's a primitive, append the token to the data scope
                     currentDataScope.add(token)
@@ -218,18 +222,19 @@ internal fun isControlRequired(
     return isCurrentPointerValueRequired
 }
 
-@Suppress("UNUSED_PARAMETER")
 internal fun label(
     schema: JsonElement,
     pointer: JsonPointer,
-    uiSchema: JsonElement,
+    uiSchemaObject: JsonElement,
+    schemaObject: JsonObject,
 ): String {
-    return uiSchema
+    return uiSchemaObject
         .jsonObject
         .optional { string("label") }
+        ?: schemaObject
+            .optional { string("title") }
         ?: SplitTransformer()
             .splitEach { camelCase }
             .transformEach { pascalCase }
             .convertTo(pointer.current ?: "") { words }
-
 }

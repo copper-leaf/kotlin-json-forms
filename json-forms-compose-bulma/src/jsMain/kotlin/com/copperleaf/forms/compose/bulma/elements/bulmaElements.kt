@@ -21,8 +21,6 @@ import org.jetbrains.compose.web.dom.Li
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Ul
 
-
-
 public fun Categorization.element(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement {
     column {
         var selectedTab by remember { mutableStateOf(0) }
