@@ -35,7 +35,7 @@ import com.copperleaf.forms.core.ObjectControl
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
 import com.copperleaf.forms.core.vm.FormViewModel
 
 @Composable
@@ -48,13 +48,15 @@ public fun BulmaForm(
     ),
 ) {
     val vmState by viewModel.observeStates().collectAsState()
-    BulmaForm(vmState, { viewModel.trySend(it) }, config)
+    vmState.lite?.let {
+        BulmaForm(it, { viewModel.trySend(it.full()) }, config)
+    }
 }
 
 @Composable
 public fun BulmaForm(
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs) -> Unit,
+    vmState: FormContractLite.State,
+    postInput: (FormContractLite.Inputs) -> Unit,
     config: ComposeFormConfig = ComposeFormConfig(
         elements = UiElement.bulmaDefaults(),
         controls = UiElement.Control.bulmaDefaults(),

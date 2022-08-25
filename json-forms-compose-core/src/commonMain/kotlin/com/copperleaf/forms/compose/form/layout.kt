@@ -8,30 +8,28 @@ import com.copperleaf.forms.compose.controls.ControlLayout
 import com.copperleaf.forms.compose.elements.UiElementLayout
 import com.copperleaf.forms.compose.rules.RuleLayout
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
+import com.copperleaf.forms.core.vm.FormFieldsState
 
 @Composable
 public fun BasicForm(
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs)->Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs)->Unit,
     config: ComposeFormConfig,
 ) {
-
-    if (vmState.isReady) {
-        CompositionLocalProvider(
-            LocalFormConfig providesDefault config,
-            LocalDesignSystem providesDefault config.designSystem,
-        ) {
-            UiElement(vmState.uiSchema!!.rootUiElement, vmState, postInput)
-        }
+    CompositionLocalProvider(
+        LocalFormConfig providesDefault config,
+        LocalDesignSystem providesDefault config.designSystem,
+    ) {
+        UiElement(vmState.uiSchema.rootUiElement, vmState, postInput)
     }
 }
 
 @Composable
 public fun UiElement(
     element: UiElement,
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs)->Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs)->Unit,
 ) {
     RuleLayout(element, vmState, postInput) {
         when (element) {

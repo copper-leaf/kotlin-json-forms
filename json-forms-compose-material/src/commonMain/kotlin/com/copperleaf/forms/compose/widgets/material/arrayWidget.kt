@@ -93,7 +93,7 @@ public fun ControlScope.arrayWidget(
                                             "type" to JsonPrimitive("Control"),
                                             "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
                                         )
-                                    ).resolveAsControl(vmState.schemaJson)
+                                    ).resolveAsControl(vmState.schema)
                                 }
                             }
                             UiElement(

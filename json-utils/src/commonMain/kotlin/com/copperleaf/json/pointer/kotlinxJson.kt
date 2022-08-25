@@ -35,7 +35,7 @@ internal fun JsonObject.findNextInJsonObject(
 
     val (head, tail) = tokens.takeHead()
     val next = checkNotNull(this[head]) {
-        "Property '$head' could not be found in object ($this)"
+        "Property '$head' could not be found in object"
     }
 
     return next.findNext(pointer, tail)
@@ -48,8 +48,8 @@ internal fun JsonArray.findNextInJsonArray(
     if (tokens.isEmpty()) return this
 
     val (head, tail) = tokens.takeHead()
-    val index = checkNotNull(head.toIntOrNull()) { "$head should represent an index value in array ($this)" }
-    val next = checkNotNull(this.getOrNull(index)) { "Item at '$index' could not be found in array ($this)" }
+    val index = checkNotNull(head.toIntOrNull()) { "$head should represent an index value in array" }
+    val next = checkNotNull(this.getOrNull(index)) { "Item at '$index' could not be found in array" }
 
     return next.findNext(pointer, tail)
 }
@@ -60,7 +60,7 @@ internal fun JsonPrimitive.findNextInJsonPrimitive(
 ): JsonElement {
     if (tokens.isEmpty()) return this
 
-    error("value at pointer '${pointer.toUriFragment()}' could not be found in primitive ($this)")
+    error("value at pointer '${pointer.toUriFragment()}' could not be found")
 }
 
 // Mutate

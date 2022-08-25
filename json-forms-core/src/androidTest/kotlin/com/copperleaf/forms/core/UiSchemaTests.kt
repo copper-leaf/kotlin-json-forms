@@ -4,6 +4,7 @@ import com.copperleaf.forms.core.internal.resolveUiSchema
 import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.json.pointer.AbstractJsonPointer
 import com.copperleaf.json.pointer.JsonPointer
+import com.copperleaf.json.schema.JsonSchema
 import com.copperleaf.json.utils.json
 import com.copperleaf.json.utils.parseJson
 import io.kotest.core.spec.style.FreeSpec
@@ -376,7 +377,7 @@ class UiSchemaTests : FreeSpec({
     companion object {
         fun FreeSpecTerminalScope.testSchema(expectedResolvedSchema: () -> UiElement?) {
             val rootPath = testScope.testCase.name.testName
-            val schema = getJsonFromResources("$rootPath/schema.json").parseJson()
+            val schema = JsonSchema.parse(getJsonFromResources("$rootPath/schema.json").parseJson())
             val uiSchema = getJsonFromResources("$rootPath/uiSchema.json").parseJson()
 
             val resolvedSchema = uiSchema.resolveUiSchema(schema)

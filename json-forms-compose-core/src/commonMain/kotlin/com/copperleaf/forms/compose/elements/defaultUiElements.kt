@@ -1,6 +1,5 @@
 package com.copperleaf.forms.compose.elements
 
-import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.uiElement
@@ -10,7 +9,6 @@ import com.copperleaf.forms.core.HorizontalLayout
 import com.copperleaf.forms.core.Label
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
 
@@ -63,24 +61,24 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
 public fun Button.submit(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement(
     tester = { optionFieldIs("action", "submit") }
 ) {
-    if (vmState.saveType == FormContract.SaveType.OnCommit) {
-        button(
-            onClick = { postInput(FormContract.Inputs.CommitChanges) },
-            enabled = vmState.isValid,
-        ) {
+//    if (vmState.saveType == FormContract.SaveType.OnCommit) {
+//        button(
+//            onClick = { postInput(FormContract.Inputs.CommitChanges) },
+//            enabled = vmState.isValid,
+//        ) {
             text("Submit")
-        }
-    }
+//        }
+//    }
 }
 
 public fun Button.toggleDebug(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement(
     tester = { optionFieldIs("action", "toggleDebug") }
 ) {
-    row {
-        checkbox(
-            checked = vmState.debug,
-            onCheckedChange = { postInput(FormContract.Inputs.SetDebugMode(it)) },
-            enabled = LocallyEnabled.current,
-        ) { text("Debug") }
-    }
+//    row {
+//        checkbox(
+//            checked = vmState.debug,
+//            onCheckedChange = { postInput(FormContract.Inputs.SetDebugMode(it)) },
+//            enabled = LocallyEnabled.current,
+//        ) { text("Debug") }
+//    }
 }

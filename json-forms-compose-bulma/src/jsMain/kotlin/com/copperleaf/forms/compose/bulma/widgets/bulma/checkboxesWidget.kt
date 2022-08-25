@@ -29,26 +29,14 @@ public fun ControlScope.checkboxWidget() {
             if (!isEnabled) {
                 disabled()
             }
-            onInput { event -> event.value?.let { updateFormState(it) } }
+            onInput { event -> updateFormState(event.value) }
         }
     }
 }
 
 @Composable
 public fun ControlScope.switchWidget() {
-    val currentValue = getTypedValue(false) {
-        it.jsonPrimitive.booleanOrNull
-    }
-    val isEnabled = LocallyEnabled.current
-
-    BulmaField(control.label) {
-        CheckboxInput(currentValue) {
-            if (!isEnabled) {
-                disabled()
-            }
-            onInput { event -> event.value?.let { updateFormState(it) } }
-        }
-    }
+    checkboxWidget()
 }
 
 @Composable

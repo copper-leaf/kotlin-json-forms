@@ -8,7 +8,8 @@ import androidx.compose.ui.Modifier
 import com.copperleaf.forms.compose.controls.ControlRenderer
 import com.copperleaf.forms.compose.elements.UiElementRenderer
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
+import com.copperleaf.forms.core.vm.FormFieldsState
 import com.copperleaf.forms.core.vm.FormViewModel
 
 @Composable
@@ -22,13 +23,15 @@ public fun MaterialForm(
     ),
 ) {
     val vmState by viewModel.observeStates().collectAsState()
-    MaterialForm(vmState, { viewModel.trySend(it) }, modifier, config)
+    vmState.lite?.let {
+        MaterialForm(it, { viewModel.trySend(it.full()) }, modifier, config)
+    }
 }
 
 @Composable
 public fun MaterialForm(
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs) -> Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs) -> Unit,
     modifier: Modifier = Modifier,
     config: ComposeFormConfig = ComposeFormConfig(
         elements = UiElement.materialDefaults(),

@@ -1,3 +1,8 @@
 package com.copperleaf.forms.core.ui
 
-public class UiSchema(public val rootUiElement: UiElement)
+import kotlinx.serialization.json.JsonElement
+
+public class UiSchema(
+    public val rootUiElement: UiElement,
+    public val json: JsonElement
+)

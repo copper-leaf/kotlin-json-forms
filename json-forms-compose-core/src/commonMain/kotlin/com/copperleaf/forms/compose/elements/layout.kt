@@ -4,13 +4,14 @@ import androidx.compose.runtime.Composable
 import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
+import com.copperleaf.forms.core.vm.FormFieldsState
 
 @Composable
 public fun UiElementLayout(
     element: UiElement.ElementWithChildren,
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs)->Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs)->Unit,
 ) {
     val uiElementRenderer = LocalFormConfig.current.getElement(element)
     val designSystem = LocalDesignSystem.current

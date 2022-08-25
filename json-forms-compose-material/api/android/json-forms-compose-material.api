@@ -1,5 +1,5 @@
-public final class com/copperleaf/forms/compose/controls/ComposableSingletons$DefaultControlsKt {
-	public static final field INSTANCE Lcom/copperleaf/forms/compose/controls/ComposableSingletons$DefaultControlsKt;
+public final class com/copperleaf/forms/compose/controls/ComposableSingletons$MaterialControlsKt {
+	public static final field INSTANCE Lcom/copperleaf/forms/compose/controls/ComposableSingletons$MaterialControlsKt;
 	public static field lambda-1 Lkotlin/jvm/functions/Function3;
 	public static field lambda-10 Lkotlin/jvm/functions/Function3;
 	public static field lambda-11 Lkotlin/jvm/functions/Function3;
@@ -8,14 +8,7 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public static field lambda-14 Lkotlin/jvm/functions/Function3;
 	public static field lambda-15 Lkotlin/jvm/functions/Function3;
 	public static field lambda-16 Lkotlin/jvm/functions/Function3;
-	public static field lambda-17 Lkotlin/jvm/functions/Function3;
-	public static field lambda-18 Lkotlin/jvm/functions/Function3;
-	public static field lambda-19 Lkotlin/jvm/functions/Function3;
 	public static field lambda-2 Lkotlin/jvm/functions/Function3;
-	public static field lambda-20 Lkotlin/jvm/functions/Function3;
-	public static field lambda-21 Lkotlin/jvm/functions/Function2;
-	public static field lambda-22 Lkotlin/jvm/functions/Function3;
-	public static field lambda-23 Lkotlin/jvm/functions/Function3;
 	public static field lambda-3 Lkotlin/jvm/functions/Function3;
 	public static field lambda-4 Lkotlin/jvm/functions/Function3;
 	public static field lambda-5 Lkotlin/jvm/functions/Function3;
@@ -32,14 +25,7 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public final fun getLambda-14$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-15$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-16$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-17$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-18$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-19$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-20$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-21$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-22$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-23$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-3$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-4$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-5$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
@@ -49,7 +35,7 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$De
 	public final fun getLambda-9$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 }
 
-public final class com/copperleaf/forms/compose/controls/DefaultControlsKt {
+public final class com/copperleaf/forms/compose/controls/MaterialControlsKt {
 	public static final fun arrayOfObjects (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun checkbox (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun checkboxesEnum (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
@@ -107,6 +93,7 @@ public final class com/copperleaf/forms/compose/form/MaterialDesignSystem : com/
 
 public final class com/copperleaf/forms/compose/form/MaterialLayoutKt {
 	public static final fun MaterialForm (Lcom/copperleaf/ballast/BallastViewModel;Landroidx/compose/ui/Modifier;Lcom/copperleaf/forms/compose/form/ComposeFormConfig;Landroidx/compose/runtime/Composer;II)V
+	public static final fun MaterialForm (Lcom/copperleaf/forms/core/vm/FormFieldsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lcom/copperleaf/forms/compose/form/ComposeFormConfig;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/copperleaf/forms/compose/form/Registration_androidKt {
@@ -137,6 +124,46 @@ public final class com/copperleaf/forms/compose/widgets/dropdown/IconButtonWithD
 
 public final class com/copperleaf/forms/compose/widgets/dropdown/IconButtonWithDescription_androidKt {
 	public static final fun IconButtonWithDescriptionInternal (Landroidx/compose/ui/graphics/vector/ImageVector;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/ArrayWidgetKt {
+	public static final fun arrayWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/CheckboxesWidgetKt {
+	public static final fun checkboxWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Landroidx/compose/runtime/Composer;I)V
+	public static final fun checkboxesWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public static final fun switchWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/ComposableSingletons$ArrayWidgetKt {
+	public static final field INSTANCE Lcom/copperleaf/forms/compose/widgets/material/ComposableSingletons$ArrayWidgetKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function3;
+	public fun <init> ()V
+	public final fun getLambda-1$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/ComposableSingletons$DropdownWidgetKt {
+	public static final field INSTANCE Lcom/copperleaf/forms/compose/widgets/material/ComposableSingletons$DropdownWidgetKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function3;
+	public fun <init> ()V
+	public final fun getLambda-1$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/DropdownWidgetKt {
+	public static final fun dropdownWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/ObjectWidgetKt {
+	public static final fun objectWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/RadioButtonsWidgetKt {
+	public static final fun radioButtonsWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/forms/compose/widgets/material/TextFieldWidgetKt {
+	public static final fun textFieldWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/copperleaf/forms/compose/widgets/richtext/RichTextEditorAction {

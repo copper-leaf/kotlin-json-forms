@@ -5,6 +5,7 @@ import com.copperleaf.json.utils.asDynamicJson
 import kotlinx.serialization.json.JsonElement
 
 public actual class JsonSchema actual constructor(input: JsonElement) {
+    public actual val json: JsonElement = input
 
     private val schema: (dynamic) -> dynamic = try {
         val ajv = Ajv()

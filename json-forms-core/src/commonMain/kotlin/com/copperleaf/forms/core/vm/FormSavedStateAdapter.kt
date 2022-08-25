@@ -51,12 +51,10 @@ public class FormSavedStateAdapter(
         val initialDataJsonElement = initialDataStringAsync.await()
 
         val schema = JsonSchema.parse(schemaJsonElement)
-        val uiSchema: UiSchema = uiSchemaJsonElement.resolveUiSchema(schemaJsonElement)
+        val uiSchema: UiSchema = uiSchemaJsonElement.resolveUiSchema(schema)
 
         initialState().copy(
-            schemaJson = schemaJsonElement,
             schema = schema,
-            uiSchemaJson = uiSchemaJsonElement,
             uiSchema = uiSchema,
 
             originalData = initialDataJsonElement ?: JsonNull,

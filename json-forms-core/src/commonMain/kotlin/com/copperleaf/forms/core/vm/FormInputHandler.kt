@@ -19,31 +19,35 @@ public class FormInputHandler : InputHandler<
         is FormContract.Inputs.SetDebugMode -> {
             updateState { it.copy(debug = input.isDebug) }
         }
+
         is FormContract.Inputs.SetValidationMode -> {
             updateState { it.copy(validationMode = input.validationMode) }
         }
+
         is FormContract.Inputs.SetSaveType -> {
             updateState { it.copy(saveType = input.saveType) }
         }
+
         is FormContract.Inputs.SetReadOnly -> {
             updateState { it.copy(readOnly = input.readOnly) }
         }
+
         is FormContract.Inputs.UpdateSchema -> {
             updateState {
                 it.copy(
-                    schemaJson = input.schemaJson,
                     schema = JsonSchema.parse(input.schemaJson)
                 )
             }
         }
+
         is FormContract.Inputs.UpdateUiSchema -> {
-            updateState {
-                it.copy(
-                    uiSchemaJson = input.uiSchemaJson,
-                    uiSchema = input.uiSchemaJson.resolveUiSchema(it.schemaJson)
+            updateState { state ->
+                state.copy(
+                    uiSchema = state.schema?.let { input.uiSchemaJson.resolveUiSchema(it) }
                 )
             }
         }
+
         is FormContract.Inputs.FormDataChangedExternally -> {
             updateState {
                 it.copy(
@@ -69,6 +73,7 @@ public class FormInputHandler : InputHandler<
                         touchedProperties = emptySet()
                     )
                 }
+
                 FormContract.SaveType.OnValidChange -> {
                     if (updatedTemporaryState.isValid) {
                         updatedTemporaryState.copy(
@@ -79,6 +84,7 @@ public class FormInputHandler : InputHandler<
                         updatedTemporaryState
                     }
                 }
+
                 FormContract.SaveType.OnCommit -> {
                     updatedTemporaryState
                 }
@@ -86,6 +92,7 @@ public class FormInputHandler : InputHandler<
 
             updateState { updatedState }
         }
+
         is FormContract.Inputs.MarkAsTouched -> {
             updateState {
                 it.copy(touchedProperties = it.touchedProperties + input.pointer)

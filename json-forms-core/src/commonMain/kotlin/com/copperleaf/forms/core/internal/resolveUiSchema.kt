@@ -23,15 +23,16 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 internal fun JsonElement.resolveUiSchema(
-    schema: JsonElement
+    schema: JsonSchema
 ): UiSchema {
     return UiSchema(
-        this.resolveUiElement(schema)
+        this.resolveUiElement(schema),
+        this,
     )
 }
 
 internal fun JsonElement.resolveUiElement(
-    schema: JsonElement
+    schema: JsonSchema
 ): UiElement {
     val type = string("type")
 
@@ -43,12 +44,12 @@ internal fun JsonElement.resolveUiElement(
 }
 
 public fun JsonElement.resolveAsControl(
-    schema: JsonElement
+    schema: JsonSchema
 ): UiElement.Control {
     val scope = string("scope")
     val scopeJsonPointer = JsonPointer.parse(scope)
 
-    val schemaConfig = schema.objectAt(scopeJsonPointer)
+    val schemaConfig = schema.json.objectAt(scopeJsonPointer)
     val controlType = schemaConfig.string("type")
     val uiSchemaConfig = this
 
@@ -67,7 +68,7 @@ public fun JsonElement.resolveAsControl(
 }
 
 internal fun JsonElement.resolveAsIntermediateElement(
-    schema: JsonElement
+    schema: JsonSchema
 ): UiElement.ElementWithChildren {
     val type = string("type")
 
@@ -91,7 +92,7 @@ internal fun JsonElement.resolveAsIntermediateElement(
  * replaced by actual index values when rendering the form's `array` controls.
  */
 internal fun staticallyDetermineDataScope(
-    schema: JsonElement,
+    schema: JsonSchema,
     pointer: JsonPointer,
 ): AbstractJsonPointer {
     val currentSchemaScope = StringBuilder("#")
@@ -106,7 +107,7 @@ internal fun staticallyDetermineDataScope(
         } else if (token == "items") {
             // get the value at the current schema scope
             val testedPointer = JsonPointer.parse(currentSchemaScope.toString())
-            val referencedProperty = schema.objectAt(testedPointer.parent())
+            val referencedProperty = schema.json.objectAt(testedPointer.parent())
             val referencedPropertyType = referencedProperty.string("type")
 
             when (referencedPropertyType) {
@@ -128,7 +129,7 @@ internal fun staticallyDetermineDataScope(
         } else {
             // get the value at the current schema scope
             val testedPointer = JsonPointer.parse(currentSchemaScope.toString())
-            val referencedProperty = schema.objectAt(testedPointer.parent().parent())
+            val referencedProperty = schema.json.objectAt(testedPointer.parent().parent())
             val referencedPropertyType = referencedProperty.string("type")
 
             when (referencedPropertyType) {
@@ -157,7 +158,7 @@ internal fun staticallyDetermineDataScope(
  *
  */
 internal fun JsonElement.resolveRule(
-    schema: JsonElement
+    schema: JsonSchema
 ): Rule? {
     check(this is JsonObject) { "Rule definition must be an object" }
     if (!this.containsKey("rule") || this["rule"] == null) return null
@@ -180,7 +181,7 @@ internal fun JsonElement.resolveRule(
     val scopeJsonPointer = JsonPointer.parse(scope)
     val dataScope = staticallyDetermineDataScope(schema, scopeJsonPointer)
 
-    val schemaJson = schema.objectAt(scopeJsonPointer)
+    val schemaJson = schema.json.objectAt(scopeJsonPointer)
     val conditionSchemaJson = condition.objectAt("schema")
     val conditionSchema = JsonSchema.parse(conditionSchemaJson)
 
@@ -195,15 +196,15 @@ internal fun JsonElement.resolveRule(
 }
 
 internal fun isControlRequired(
-    schema: JsonElement,
+    schema: JsonSchema,
     pointer: JsonPointer
 ): Boolean {
     val parentObject = if (pointer.tokens.size <= 2) {
         // The parent object will refer to the root, but that cannot be resolved directly via JsonPointer lib. Just
         // access the schema directly
-        schema
+        schema.json
     } else {
-        schema.find(pointer.parent().parent())
+        schema.json.find(pointer.parent().parent())
     }
 
     check(parentObject is JsonObject) { "Parent must be an object" }
@@ -222,7 +223,7 @@ internal fun isControlRequired(
 
 @Suppress("UNUSED_PARAMETER")
 internal fun label(
-    schema: JsonElement,
+    schema: JsonSchema,
     pointer: JsonPointer,
     uiSchemaObject: JsonElement,
     schemaObject: JsonObject,

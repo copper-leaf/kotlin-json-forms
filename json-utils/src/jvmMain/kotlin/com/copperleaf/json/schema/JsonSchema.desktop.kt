@@ -27,6 +27,7 @@ import net.pwall.json.schema.output.DetailedOutput
 import net.pwall.json.schema.output.Output
 
 public actual class JsonSchema actual constructor(input: JsonElement) {
+    public actual val json: JsonElement = input
 
     private val schema = JSONSchema.parse(input.toJsonString())
 

@@ -77,6 +77,7 @@ public final class com/copperleaf/json/pointer/UtilsKt {
 public final class com/copperleaf/json/schema/JsonSchema {
 	public static final field Companion Lcom/copperleaf/json/schema/JsonSchema$Companion;
 	public fun <init> (Lkotlinx/serialization/json/JsonElement;)V
+	public final fun getJson ()Lkotlinx/serialization/json/JsonElement;
 	public final fun validate (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/json/schema/SchemaValidationResult;
 }
 

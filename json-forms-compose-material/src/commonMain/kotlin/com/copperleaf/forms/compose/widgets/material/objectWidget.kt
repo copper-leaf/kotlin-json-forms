@@ -25,7 +25,7 @@ public fun ControlScope.objectWidget() {
                         "type" to JsonPrimitive("Control"),
                         "scope" to JsonPrimitive((control.schemaScope + "/properties/$key").toUriFragment())
                     )
-                ).resolveAsControl(vmState.schemaJson)
+                ).resolveAsControl(vmState.schema)
             }
         }
 

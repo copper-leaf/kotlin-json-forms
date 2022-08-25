@@ -10,7 +10,8 @@ import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.LocallyVisible
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
+import com.copperleaf.forms.core.vm.FormFieldsState
 import com.copperleaf.json.pointer.find
 import com.copperleaf.json.pointer.reifyPointer
 import kotlinx.serialization.json.JsonNull
@@ -18,8 +19,8 @@ import kotlinx.serialization.json.JsonNull
 @Composable
 public fun RuleLayout(
     uiElement: UiElement,
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs)->Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs)->Unit,
     content: @Composable () -> Unit,
 ) {
     val rule = uiElement.rule
@@ -35,7 +36,7 @@ public fun RuleLayout(
                 val currentDataPointer = rule.dataScope.reifyPointer(localArrayIndices)
                 val currentSchemaPointer = rule.schemaScope
                 val currentValue = runCatching {
-                    vmState.updatedData.find(currentDataPointer)
+                    vmState.data.find(currentDataPointer)
                 }.getOrDefault(JsonNull)
 
                 val result = rule.conditionSchema.validate(currentValue)

@@ -6,17 +6,17 @@ import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
 import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContract
+import com.copperleaf.forms.core.vm.FormContractLite
+import com.copperleaf.forms.core.vm.FormFieldsState
 import com.copperleaf.json.pointer.find
 import com.copperleaf.json.pointer.reifyPointer
-import com.copperleaf.json.pointer.toUriFragment
 import kotlinx.serialization.json.JsonNull
 
 @Composable
 public fun ControlLayout(
     controlElement: UiElement.Control,
-    vmState: FormContract.State,
-    postInput: (FormContract.Inputs)->Unit,
+    vmState: FormFieldsState,
+    postInput: (FormContractLite.Inputs)->Unit,
 ) {
     val designSystem = LocalDesignSystem.current
     designSystem.column {
@@ -29,14 +29,10 @@ public fun ControlLayout(
                 val currentDataPointer = controlElement.dataScope.reifyPointer(localArrayIndices)
                 val currentSchemaPointer = controlElement.schemaScope
                 val validationErrors = vmState.errors(currentDataPointer)
-                val originalValue = runCatching {
-                    vmState.originalData.find(currentDataPointer)
-                }.getOrDefault(JsonNull)
                 val currentValue = runCatching {
-                    vmState.updatedData.find(currentDataPointer)
+                    vmState.data.find(currentDataPointer)
                 }.getOrDefault(JsonNull)
                 val isTouched = currentDataPointer in vmState.touchedProperties
-                val isChanged = originalValue != currentValue
 
                 ControlScope(
                     vmState = vmState,
@@ -52,7 +48,6 @@ public fun ControlLayout(
                     validationErrors = validationErrors,
 
                     isTouched = isTouched,
-                    isChanged = isChanged,
 
                     isEnabled = locallyEnabled,
                     currentValue = currentValue,
@@ -62,17 +57,6 @@ public fun ControlLayout(
             controlRenderer(controlScope)
             if (!controlScope.isValid) {
                 controlScope.validationErrors.forEach { designSystem.text(it, isError = true) }
-            }
-            if (vmState.debug) {
-                with(controlScope) {
-                    text("schema scope: ${schemaPointer.toUriFragment()}")
-                    text("data scope: ${dataPointer.toUriFragment()}")
-                    text("type: ${control.controlType}")
-                    text("Required: ${control.required}")
-                    text("Has Rule?: ${control.rule != null}")
-                    text("touched?: $isTouched")
-                    text("changed?: $isChanged")
-                }
             }
         } else {
             designSystem.text("No UI control with type '${controlElement.controlType}' could be found.", isError = true)

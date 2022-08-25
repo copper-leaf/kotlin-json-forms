@@ -13,6 +13,7 @@ public object FormContract {
     public enum class SaveType {
         OnValidChange, OnAnyChange, OnCommit
     }
+
     public enum class ValidationMode {
         ValidateAndShow, ValidateAndHide, NoValidation
     }
@@ -23,9 +24,7 @@ public object FormContract {
         val debug: Boolean = false,
         val readOnly: Boolean = false,
 
-        val schemaJson: JsonElement = JsonNull,
         val schema: JsonSchema? = null,
-        val uiSchemaJson: JsonElement = JsonNull,
         val uiSchema: UiSchema? = null,
 
         val originalData: JsonElement = JsonNull,
@@ -35,13 +34,25 @@ public object FormContract {
     ) {
         val isReady: Boolean = schema != null && uiSchema != null
 
-        val validationResult: SchemaValidationResult? = schema?.validate(updatedData)
+        private val validationResult: SchemaValidationResult? = schema?.validate(updatedData)
         val isValid: Boolean = validationResult?.isValid == true
         val isChanged: Boolean = originalData != updatedData
 
         public fun errors(pointer: JsonPointer): List<String> {
             return validationResult?.issues(pointer) ?: emptyList()
         }
+
+        public val lite: FormFieldsState?
+            get() {
+                return if (schema != null && uiSchema != null) {
+                    FormFieldsState(
+                        schema = schema,
+                        uiSchema = uiSchema,
+                    )
+                } else {
+                    null
+                }
+            }
     }
 
     public sealed class Inputs {
@@ -59,6 +70,7 @@ public object FormContract {
             val pointer: JsonPointer,
             val action: JsonPointerAction,
         ) : Inputs()
+
         public data class MarkAsTouched(
             val pointer: JsonPointer,
         ) : Inputs()

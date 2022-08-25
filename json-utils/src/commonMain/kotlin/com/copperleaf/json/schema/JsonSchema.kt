@@ -4,6 +4,8 @@ import com.copperleaf.json.pointer.JsonPointer
 import kotlinx.serialization.json.JsonElement
 
 public expect class JsonSchema(input: JsonElement) {
+    public val json: JsonElement
+
     public fun validate(element: JsonElement): SchemaValidationResult
 
     public companion object {
