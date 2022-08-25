@@ -1,6 +1,8 @@
 package com.copperleaf.forms.compose.bulma.form
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.copperleaf.forms.compose.bulma.controls.checkbox
 import com.copperleaf.forms.compose.bulma.controls.checkboxesEnum
 import com.copperleaf.forms.compose.bulma.controls.checkboxesOneOf
@@ -33,6 +35,7 @@ import com.copperleaf.forms.core.ObjectControl
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
 
 @Composable
@@ -44,8 +47,22 @@ public fun BulmaForm(
         designSystem = BulmaDesignSystem(),
     ),
 ) {
+    val vmState by viewModel.observeStates().collectAsState()
+    BulmaForm(vmState, { viewModel.trySend(it) }, config)
+}
+
+@Composable
+public fun BulmaForm(
+    vmState: FormContract.State,
+    postInput: (FormContract.Inputs) -> Unit,
+    config: ComposeFormConfig = ComposeFormConfig(
+        elements = UiElement.bulmaDefaults(),
+        controls = UiElement.Control.bulmaDefaults(),
+        designSystem = BulmaDesignSystem(),
+    ),
+) {
     config.designSystem.column {
-        BasicForm(viewModel, config)
+        BasicForm(vmState, postInput, config)
     }
 }
 
