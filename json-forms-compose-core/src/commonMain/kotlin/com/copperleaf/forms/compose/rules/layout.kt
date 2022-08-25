@@ -2,16 +2,15 @@ package com.copperleaf.forms.compose.rules
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.copperleaf.forms.compose.LocalArrayIndices
 import com.copperleaf.forms.compose.LocalDesignSystem
-import com.copperleaf.forms.compose.LocalViewModel
 import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.LocallyVisible
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.json.pointer.find
 import com.copperleaf.json.pointer.reifyPointer
 import kotlinx.serialization.json.JsonNull
@@ -19,6 +18,8 @@ import kotlinx.serialization.json.JsonNull
 @Composable
 public fun RuleLayout(
     uiElement: UiElement,
+    vmState: FormContract.State,
+    postInput: (FormContract.Inputs)->Unit,
     content: @Composable () -> Unit,
 ) {
     val rule = uiElement.rule
@@ -28,9 +29,6 @@ public fun RuleLayout(
     } else {
         val localArrayIndices = LocalArrayIndices.current
         val locallyEnabled = LocallyEnabled.current
-
-        val vm = LocalViewModel.current
-        val vmState by vm.observeStates().collectAsState()
 
         val ruleScope by remember(rule, vmState, localArrayIndices, locallyEnabled) {
             derivedStateOf {
@@ -45,8 +43,8 @@ public fun RuleLayout(
                 val effect = if (result.isValid) rule.effect else rule.effect.inverse()
 
                 RuleScope(
-                    vm = vm,
                     vmState = vmState,
+                    postInput = postInput,
 
                     rule = rule,
                     dataPointer = currentDataPointer,

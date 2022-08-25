@@ -3,16 +3,16 @@ package com.copperleaf.forms.compose.controls
 import com.copperleaf.forms.compose.design.DesignSystem
 import com.copperleaf.forms.core.ui.UiElement
 import com.copperleaf.forms.core.vm.FormContract
-import com.copperleaf.forms.core.vm.FormViewModel
 import com.copperleaf.json.pointer.JsonPointer
 import com.copperleaf.json.pointer.JsonPointerAction
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 
 public data class ControlScope(
-    val vm: FormViewModel,
-    val designSystem: DesignSystem,
     val vmState: FormContract.State,
+    val postInput: (FormContract.Inputs)->Unit,
+
+    val designSystem: DesignSystem,
     val control: UiElement.Control,
     val dataPointer: JsonPointer,
     val schemaPointer: JsonPointer,
@@ -30,7 +30,7 @@ public data class ControlScope(
     public fun updateFormState(
         value: Any?,
     ) {
-        vm.trySend(
+        postInput(
             FormContract.Inputs.UpdateFormState(
                 pointer = dataPointer,
                 action = JsonPointerAction.SetValue(value),
@@ -42,7 +42,7 @@ public data class ControlScope(
         action: JsonPointerAction,
         pointer: JsonPointer = dataPointer,
     ) {
-        vm.trySend(
+        postInput(
             FormContract.Inputs.UpdateFormState(
                 pointer = pointer,
                 action = action,
@@ -53,7 +53,7 @@ public data class ControlScope(
     public fun markAsTouched(
         pointer: JsonPointer = dataPointer,
     ) {
-        vm.trySend(
+        postInput(
             FormContract.Inputs.MarkAsTouched(
                 pointer = pointer,
             )

@@ -150,6 +150,25 @@ public final class com/copperleaf/json/utils/Encode_androidKt {
 public abstract interface annotation class com/copperleaf/json/utils/JsonBuilderDsl : java/lang/annotation/Annotation {
 }
 
+public final class com/copperleaf/json/utils/JsonBuilderKt {
+	public static final fun get (Lkotlinx/serialization/json/JsonArray$Companion;[Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
+	public static final fun json (Lkotlin/jvm/functions/Function1;)Lkotlinx/serialization/json/JsonObject;
+	public static final fun jsonArray ([Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
+}
+
+public final class com/copperleaf/json/utils/JsonExtensionsKt {
+	public static final fun parseJson (Ljava/lang/String;Lkotlinx/serialization/json/Json;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun parseJson (Ljava/lang/String;Z)Lkotlinx/serialization/json/JsonElement;
+	public static synthetic fun parseJson$default (Ljava/lang/String;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;)Ljava/lang/String;
+	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Z)Ljava/lang/String;
+	public static synthetic fun toJsonString$default (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/json/utils/JsonMergeKt {
+	public static final fun merge (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
+}
+
 public final class com/copperleaf/json/utils/JsonObjectBuilder {
 	public fun <init> ()V
 	public final fun build ()Lkotlinx/serialization/json/JsonObject;
@@ -160,19 +179,6 @@ public final class com/copperleaf/json/utils/JsonObjectBuilder {
 	public final fun to (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
 	public final fun to (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)V
 	public final fun to (Ljava/lang/String;Z)V
-}
-
-public final class com/copperleaf/json/utils/JsonUtilsKt {
-	public static final fun get (Lkotlinx/serialization/json/JsonArray$Companion;[Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
-	public static final fun json (Lkotlin/jvm/functions/Function1;)Lkotlinx/serialization/json/JsonObject;
-	public static final fun jsonArray ([Ljava/lang/Object;)Lkotlinx/serialization/json/JsonArray;
-	public static final fun merge (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
-	public static final fun parseJson (Ljava/lang/String;Lkotlinx/serialization/json/Json;)Lkotlinx/serialization/json/JsonElement;
-	public static final fun parseJson (Ljava/lang/String;Z)Lkotlinx/serialization/json/JsonElement;
-	public static synthetic fun parseJson$default (Ljava/lang/String;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
-	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;)Ljava/lang/String;
-	public static final fun toJsonString (Lkotlinx/serialization/json/JsonElement;Z)Ljava/lang/String;
-	public static synthetic fun toJsonString$default (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Ljava/lang/String;
 }
 
 public final class com/copperleaf/json/utils/ListUtilsKt {

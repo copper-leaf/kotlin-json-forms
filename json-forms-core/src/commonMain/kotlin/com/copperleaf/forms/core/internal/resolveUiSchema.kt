@@ -48,10 +48,8 @@ public fun JsonElement.resolveAsControl(
     val scope = string("scope")
     val scopeJsonPointer = JsonPointer.parse(scope)
 
-    val controlInSchema = schema.objectAt(scopeJsonPointer)
-    val controlType = controlInSchema.string("type")
-
     val schemaConfig = schema.objectAt(scopeJsonPointer)
+    val controlType = schemaConfig.string("type")
     val uiSchemaConfig = this
 
     val rule = resolveRule(schema)
@@ -222,6 +220,7 @@ internal fun isControlRequired(
     return isCurrentPointerValueRequired
 }
 
+@Suppress("UNUSED_PARAMETER")
 internal fun label(
     schema: JsonElement,
     pointer: JsonPointer,

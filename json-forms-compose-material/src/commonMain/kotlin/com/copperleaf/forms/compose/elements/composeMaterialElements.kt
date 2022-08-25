@@ -36,7 +36,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
                 selectedTabIndex = selectedTab,
             ) {
                 element.elements.forEachIndexed { index, category ->
-                    RuleLayout(uiElement = category) {
+                    RuleLayout(category, vmState, postInput) {
                         val label = category.uiSchemaConfig.string("label")
                         Tab(
                             selected = index == selectedTab,
@@ -47,7 +47,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
                 }
             }
             AnimatedContent(selectedTab) { selectedIndex ->
-                UiElement(element.elements[selectedIndex])
+                UiElement(element.elements[selectedIndex], vmState, postInput)
             }
         }
     }
@@ -62,7 +62,7 @@ public fun Category.element(): Registered<UiElement.ElementWithChildren, UiEleme
 
             element.elements.forEach { childElement ->
                 Box {
-                    UiElement(childElement)
+                    UiElement(childElement, vmState, postInput)
                 }
             }
         }

@@ -4,6 +4,8 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.datatest.WithDataTestName
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.sample
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -14,6 +16,9 @@ class TestJsonPointerFind : FreeSpec({
     val json = Json { prettyPrint = true }
 
     "Basic 1-level document with strange keys" - {
+        flowOf(Unit).sample(100L)
+
+
         val document = """
             {
               "foo": ["bar", "baz"],

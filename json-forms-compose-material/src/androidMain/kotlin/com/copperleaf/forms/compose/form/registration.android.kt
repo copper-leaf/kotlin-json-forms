@@ -4,13 +4,11 @@ import com.copperleaf.forms.compose.controls.ControlRenderer
 import com.copperleaf.forms.compose.controls.checkbox
 import com.copperleaf.forms.compose.controls.checkboxesEnum
 import com.copperleaf.forms.compose.controls.checkboxesOneOf
-import com.copperleaf.forms.compose.controls.codeEditor
 import com.copperleaf.forms.compose.controls.control
 import com.copperleaf.forms.compose.controls.dropdownEnum
 import com.copperleaf.forms.compose.controls.dropdownOneOf
 import com.copperleaf.forms.compose.controls.radioButtonEnum
 import com.copperleaf.forms.compose.controls.radioButtonOneOf
-import com.copperleaf.forms.compose.controls.richText
 import com.copperleaf.forms.compose.controls.switch
 import com.copperleaf.forms.compose.elements.UiElementRenderer
 import com.copperleaf.forms.compose.elements.element
@@ -35,8 +33,8 @@ public actual fun UiElement.Control.Companion.materialDefaults(): List<Registere
     listOf(
         // text fields
         StringControl.control(),
-        StringControl.richText(),
-        StringControl.codeEditor(),
+//        StringControl.richText(),
+//        StringControl.codeEditor(),
 
         // single-select
         StringControl.dropdownEnum(),

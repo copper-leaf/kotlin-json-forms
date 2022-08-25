@@ -1,30 +1,29 @@
 package com.copperleaf.forms.compose.controls
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.copperleaf.forms.compose.LocalArrayIndices
 import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
-import com.copperleaf.forms.compose.LocalViewModel
 import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.json.pointer.find
 import com.copperleaf.json.pointer.reifyPointer
 import com.copperleaf.json.pointer.toUriFragment
 import kotlinx.serialization.json.JsonNull
 
 @Composable
-public fun ControlLayout(controlElement: UiElement.Control) {
+public fun ControlLayout(
+    controlElement: UiElement.Control,
+    vmState: FormContract.State,
+    postInput: (FormContract.Inputs)->Unit,
+) {
     val designSystem = LocalDesignSystem.current
     designSystem.column {
         val controlRenderer = LocalFormConfig.current.getControl(controlElement)
         if (controlRenderer != null) {
             val localArrayIndices = LocalArrayIndices.current
             val locallyEnabled = LocallyEnabled.current
-
-            val vm = LocalViewModel.current
-            val vmState by vm.observeStates().collectAsState()
 
             val controlScope = run {
                 val currentDataPointer = controlElement.dataScope.reifyPointer(localArrayIndices)
@@ -40,9 +39,10 @@ public fun ControlLayout(controlElement: UiElement.Control) {
                 val isChanged = originalValue != currentValue
 
                 ControlScope(
-                    vm = vm,
-                    designSystem = designSystem,
                     vmState = vmState,
+                    postInput = postInput,
+
+                    designSystem = designSystem,
 
                     control = controlElement,
                     dataPointer = currentDataPointer,

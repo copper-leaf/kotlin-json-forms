@@ -41,6 +41,7 @@ public class FormSavedStateAdapter(
         FormContract.Inputs,
         FormContract.Events,
         FormContract.State>.restore(): FormContract.State = coroutineScope {
+        println("restoring form state")
         val schemaJsonStringAsync = async { store.loadSchema() }
         val uiSchemaJsonStringAsync = async { store.loadUiSchema() }
         val initialDataStringAsync = async { store.loadInitialData() }

@@ -1,9 +1,9 @@
 package com.copperleaf.forms.compose.elements
 
+import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.uiElement
-import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.core.Button
 import com.copperleaf.forms.core.Group
 import com.copperleaf.forms.core.HorizontalLayout
@@ -18,7 +18,7 @@ public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, U
     column {
         element.elements.forEach {
             box {
-                UiElement(it)
+                UiElement(it, vmState, postInput)
             }
         }
     }
@@ -28,7 +28,7 @@ public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren,
     row {
         element.elements.forEach {
             box {
-                UiElement(it)
+                UiElement(it, vmState, postInput)
             }
         }
     }
@@ -52,7 +52,7 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
         }
         element.elements.forEach {
             box {
-                UiElement(it)
+                UiElement(it, vmState, postInput)
             }
         }
     }
@@ -65,7 +65,7 @@ public fun Button.submit(): Registered<UiElement.ElementWithChildren, UiElementR
 ) {
     if (vmState.saveType == FormContract.SaveType.OnCommit) {
         button(
-            onClick = { vm.trySend(FormContract.Inputs.CommitChanges) },
+            onClick = { postInput(FormContract.Inputs.CommitChanges) },
             enabled = vmState.isValid,
         ) {
             text("Submit")
@@ -79,7 +79,7 @@ public fun Button.toggleDebug(): Registered<UiElement.ElementWithChildren, UiEle
     row {
         checkbox(
             checked = vmState.debug,
-            onCheckedChange = { vm.trySend(FormContract.Inputs.SetDebugMode(it)) },
+            onCheckedChange = { postInput(FormContract.Inputs.SetDebugMode(it)) },
             enabled = LocallyEnabled.current,
         ) { text("Debug") }
     }

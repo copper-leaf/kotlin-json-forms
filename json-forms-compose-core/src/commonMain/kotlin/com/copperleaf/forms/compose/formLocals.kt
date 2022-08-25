@@ -5,12 +5,8 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.copperleaf.forms.compose.design.DesignSystem
 import com.copperleaf.forms.compose.form.ComposeFormConfig
-import com.copperleaf.forms.core.vm.FormViewModel
 
 public val LocalFormConfig: ProvidableCompositionLocal<ComposeFormConfig> = staticCompositionLocalOf {
-    error("LocalViewModel not defined")
-}
-public val LocalViewModel: ProvidableCompositionLocal<FormViewModel> = staticCompositionLocalOf {
     error("LocalViewModel not defined")
 }
 public val LocalDesignSystem: ProvidableCompositionLocal<DesignSystem> = compositionLocalOf {

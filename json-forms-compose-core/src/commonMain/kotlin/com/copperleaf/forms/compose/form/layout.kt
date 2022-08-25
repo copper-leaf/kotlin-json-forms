@@ -6,11 +6,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.copperleaf.forms.compose.LocalDesignSystem
 import com.copperleaf.forms.compose.LocalFormConfig
-import com.copperleaf.forms.compose.LocalViewModel
 import com.copperleaf.forms.compose.controls.ControlLayout
 import com.copperleaf.forms.compose.elements.UiElementLayout
 import com.copperleaf.forms.compose.rules.RuleLayout
 import com.copperleaf.forms.core.ui.UiElement
+import com.copperleaf.forms.core.vm.FormContract
 import com.copperleaf.forms.core.vm.FormViewModel
 
 @Composable
@@ -23,10 +23,26 @@ public fun BasicForm(
     if (vmState.isReady) {
         CompositionLocalProvider(
             LocalFormConfig providesDefault config,
-            LocalViewModel providesDefault viewModel,
             LocalDesignSystem providesDefault config.designSystem,
         ) {
-            UiElement(vmState.uiSchema!!.rootUiElement)
+            UiElement(vmState.uiSchema!!.rootUiElement, vmState) { viewModel.trySend(it) }
+        }
+    }
+}
+
+@Composable
+public fun BasicForm(
+    vmState: FormContract.State,
+    postInput: (FormContract.Inputs)->Unit,
+    config: ComposeFormConfig,
+) {
+
+    if (vmState.isReady) {
+        CompositionLocalProvider(
+            LocalFormConfig providesDefault config,
+            LocalDesignSystem providesDefault config.designSystem,
+        ) {
+            UiElement(vmState.uiSchema!!.rootUiElement, vmState, postInput)
         }
     }
 }
@@ -34,15 +50,17 @@ public fun BasicForm(
 @Composable
 public fun UiElement(
     element: UiElement,
+    vmState: FormContract.State,
+    postInput: (FormContract.Inputs)->Unit,
 ) {
-    RuleLayout(uiElement = element) {
+    RuleLayout(element, vmState, postInput) {
         when (element) {
             is UiElement.ElementWithChildren -> {
-                UiElementLayout(element)
+                UiElementLayout(element, vmState, postInput)
             }
 
             is UiElement.Control -> {
-                ControlLayout(element)
+                ControlLayout(element, vmState, postInput)
             }
         }
     }

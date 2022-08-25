@@ -24,6 +24,7 @@ import org.jetbrains.compose.web.dom.Ul
 import org.jetbrains.compose.web.renderComposable
 
 val allForms = listOf(
+    "/arkham",
     "/kitchenSink",
     "/form1",
     "/form2",
@@ -45,7 +46,7 @@ val allForms = listOf(
 
 fun main() {
     renderComposable("root") {
-        var selectedForm by remember { mutableStateOf("/kitchenSink") }
+        var selectedForm by remember { mutableStateOf("/arkham") }
 
         val coroutineScope = rememberCoroutineScope()
         val vm = remember(coroutineScope, selectedForm) {
