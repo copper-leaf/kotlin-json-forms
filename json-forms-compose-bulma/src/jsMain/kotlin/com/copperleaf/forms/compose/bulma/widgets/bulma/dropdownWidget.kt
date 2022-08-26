@@ -2,7 +2,6 @@ package com.copperleaf.forms.compose.bulma.widgets.bulma
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.bulma.controls.BulmaField
 import com.copperleaf.forms.compose.controls.ControlScope
 import kotlinx.serialization.json.JsonElement
@@ -25,8 +24,6 @@ public fun ControlScope.dropdownWidget(
     val allOptions: List<Pair<String, String>> = remember {
         control.schemaConfig.getOptions()
     }
-
-    val isEnabled = LocallyEnabled.current
 
     BulmaField(control.label) {
         Div({ classes("select") }) {

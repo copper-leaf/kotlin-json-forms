@@ -8,22 +8,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.form.MaterialForm
-import com.copperleaf.forms.core.vm.BasicFormViewModel
-import com.copperleaf.forms.core.vm.FormSavedStateAdapter
+import com.copperleaf.forms.core.ui.UiSchema
+import com.copperleaf.json.schema.JsonSchema
 import com.copperleaf.json.utils.toJsonString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
 import org.jetbrains.compose.splitpane.VerticalSplitPane
 import org.jetbrains.compose.splitpane.rememberSplitPaneState
 
@@ -31,22 +33,32 @@ import org.jetbrains.compose.splitpane.rememberSplitPaneState
 fun RenderFormPreview(
     path: String,
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val vm = remember(coroutineScope, path) {
-        BasicFormViewModel(
-            coroutineScope,
-            FormSavedStateAdapter(
-                PreviewFormDataStore.getStoreAt(path),
-            )
-        )
+    val store = remember(path) {
+        PreviewFormDataStore.getStoreAt(path)
     }
-    val vmState by vm.observeStates().collectAsState()
+    val schemas by produceState<Pair<JsonSchema, UiSchema>?>(null, store) { value = store.loadSchema() }
+    val schema: JsonSchema? = schemas?.first
+    val uiSchema: UiSchema? = schemas?.second
+
+    val initialData: JsonElement by produceState<JsonElement>(JsonNull, store) { value = store.loadInitialData() }
+    var data: JsonElement by remember(initialData) { mutableStateOf(initialData) }
 
     Box(Modifier.fillMaxSize()) {
         VerticalSplitPane(splitPaneState = rememberSplitPaneState(0.85f)) {
             first(minSize = 64.dp) {
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-                    MaterialForm(vm)
+                    if (schema != null && uiSchema != null) {
+                        MaterialForm(
+                            schema = schema,
+                            uiSchema = uiSchema,
+                            data = data,
+                            onDataChanged = {
+                                println("data changed: ${it.toJsonString(true)}")
+                                data = it
+                                store.saveUpdatedData(it)
+                            },
+                        )
+                    }
                 }
             }
             second(minSize = 64.dp) {
@@ -60,26 +72,13 @@ fun RenderFormPreview(
                     val json = Json { prettyPrint = true }
 
                     Text(
-                        "Original Value",
-                        style = MaterialTheme.typography.subtitle1,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                    SelectionContainer {
-                        Text(
-                            vmState.originalData.toJsonString(json),
-                            fontFamily = FontFamily.Monospace
-                        )
-                    }
-                    Divider(Modifier.padding(bottom = 16.dp))
-
-                    Text(
                         "Updated Value",
                         style = MaterialTheme.typography.subtitle1,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     SelectionContainer {
                         Text(
-                            vmState.updatedData.toJsonString(json),
+                            data.toJsonString(json),
                             fontFamily = FontFamily.Monospace
                         )
                     }

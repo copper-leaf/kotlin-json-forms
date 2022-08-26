@@ -1,4 +1,9 @@
-## 0.5.0 - 2022-07-16
+## 0.6.0 - 2022-08-26
+
+- Significant refactor, removes Ballast as a dependency to use normal Compose state management without enforcing any
+  particular pattern
+
+## 0.5.0 - 2022-08-19
 
 - New `json-forms-compose-core` artifact has been added with all the base functionality using only Compose Runtime
 - Added `json-forms-compose-bulma` to display forms in Compose/Web with Bulma styling, based on `json-forms-compose-core` 

@@ -1,69 +1,45 @@
 package com.copperleaf.forms.compose.controls
 
-import com.copperleaf.forms.compose.design.DesignSystem
+import com.copperleaf.forms.compose.form.FormScope
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContractLite
-import com.copperleaf.forms.core.vm.FormFieldsState
 import com.copperleaf.json.pointer.JsonPointer
-import com.copperleaf.json.pointer.JsonPointerAction
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonNull
 
-public data class ControlScope(
-    val vmState: FormFieldsState,
-    val postInput: (FormContractLite.Inputs)->Unit,
+public interface ControlScope : FormScope {
+    public val control: UiElement.Control
+    public val dataPointer: JsonPointer
+    public val schemaPointer: JsonPointer
 
-    val designSystem: DesignSystem,
-    val control: UiElement.Control,
-    val dataPointer: JsonPointer,
-    val schemaPointer: JsonPointer,
+    public val currentValue: JsonElement
+    public val isTouched: Boolean
+    public val isEnabled: Boolean
+    public val isControlValid: Boolean
+    public val validationErrors: List<String>
 
-    val currentValue: JsonElement,
-    val isTouched: Boolean,
-    val isEnabled: Boolean,
-    val isValid: Boolean,
-    val validationErrors: List<String>,
-) : DesignSystem by designSystem {
     public fun updateFormState(
         value: Any?,
-    ) {
-        postInput(
-            FormContractLite.Inputs.UpdateFormState(
-                pointer = dataPointer,
-                action = JsonPointerAction.SetValue(value),
-            )
-        )
-    }
-
-    public fun sendFormAction(
-        action: JsonPointerAction,
         pointer: JsonPointer = dataPointer,
-    ) {
-        postInput(
-            FormContractLite.Inputs.UpdateFormState(
-                pointer = pointer,
-                action = action,
-            )
-        )
-    }
-
-    public fun markAsTouched(
-        pointer: JsonPointer = dataPointer,
-    ) {
-        postInput(
-            FormContractLite.Inputs.MarkAsTouched(
-                pointer = pointer,
-            )
-        )
-    }
+    )
 
     public fun <T> getTypedValue(
         defaultValue: T,
         mapper: (JsonElement) -> T?,
-    ): T {
-        return currentValue
-            .takeIf { it != JsonNull }
-            ?.let(mapper)
-            ?: defaultValue
-    }
+    ): T
+
+    public fun getChildObjectControl(
+        key: String
+    ): UiElement.Control
+
+    public fun getChildArrayControl(): UiElement.Control
+
+    public fun addArrayItem(
+        newIndex: Int,
+        value: Any?,
+        pointer: JsonPointer = dataPointer,
+    )
+
+    public fun removeArrayItem(
+        indexToRemove: Int,
+        pointer: JsonPointer = dataPointer,
+    )
 }

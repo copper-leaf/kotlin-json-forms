@@ -52,7 +52,7 @@ class TestJsonPointerFind : FreeSpec({
         ) {
             with(it) {
                 val pointer = JsonPointer.parse(input)
-                val result = document.find(pointer)
+                val result = document.findOrThrow(pointer)
                 result shouldBe expectedValue
             }
         }
@@ -85,7 +85,7 @@ class TestJsonPointerFind : FreeSpec({
         ) {
             with(it) {
                 val pointer = JsonPointer.parse(input)
-                val result = document.find(pointer)
+                val result = document.findOrThrow(pointer)
                 result shouldBe expectedValue
             }
         }
@@ -118,7 +118,7 @@ class TestJsonPointerFind : FreeSpec({
         ) {
             with(it) {
                 val pointer = JsonPointer.parse(input)
-                val result = document.find(pointer)
+                val result = document.findOrThrow(pointer)
                 result shouldBe expectedValue
             }
         }

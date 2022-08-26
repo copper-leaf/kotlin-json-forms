@@ -92,8 +92,8 @@ public final class com/copperleaf/forms/compose/form/MaterialDesignSystem : com/
 }
 
 public final class com/copperleaf/forms/compose/form/MaterialLayoutKt {
-	public static final fun MaterialForm (Lcom/copperleaf/ballast/BallastViewModel;Landroidx/compose/ui/Modifier;Lcom/copperleaf/forms/compose/form/ComposeFormConfig;Landroidx/compose/runtime/Composer;II)V
-	public static final fun MaterialForm (Lcom/copperleaf/forms/core/vm/FormFieldsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lcom/copperleaf/forms/compose/form/ComposeFormConfig;Landroidx/compose/runtime/Composer;II)V
+	public static final fun MaterialForm (Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lcom/copperleaf/json/schema/SchemaValidationResult;Landroidx/compose/runtime/Composer;II)V
+	public static final fun MaterialForm (Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/copperleaf/forms/compose/form/Registration_desktopKt {

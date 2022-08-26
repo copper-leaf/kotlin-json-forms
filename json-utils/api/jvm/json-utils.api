@@ -59,7 +59,8 @@ public final class com/copperleaf/json/pointer/JsonPointerAction$SwapArrayIndice
 }
 
 public final class com/copperleaf/json/pointer/KotlinxJsonKt {
-	public static final fun find (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun findOrNull (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun findOrThrow (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;)Lkotlinx/serialization/json/JsonElement;
 	public static final fun mutate (Lkotlinx/serialization/json/JsonElement;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lkotlinx/serialization/json/JsonElement;
 	public static final fun toKotlinxJsonValue (Ljava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
 }

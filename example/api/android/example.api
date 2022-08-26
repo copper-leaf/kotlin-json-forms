@@ -26,7 +26,13 @@ public final class com/copperleaf/forms/example/android/MainActivityKt {
 public final class com/copperleaf/forms/example/android/PreviewFormDataStore {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/copperleaf/forms/example/android/PreviewFormDataStore;
-	public final fun getStoreAt (Landroid/content/Context;Ljava/lang/String;)Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter$Store;
+	public final fun getStoreAt (Landroid/content/Context;Ljava/lang/String;)Lcom/copperleaf/forms/example/android/PreviewFormDataStore$Store;
+}
+
+public abstract interface class com/copperleaf/forms/example/android/PreviewFormDataStore$Store {
+	public abstract fun loadInitialData (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun loadSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun saveUpdatedData (Lkotlinx/serialization/json/JsonElement;)V
 }
 
 public final class com/copperleaf/forms/example/android/RenderFormPreviewKt {

@@ -1,8 +1,10 @@
 package com.copperleaf.forms.compose.bulma.form
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.copperleaf.forms.compose.bulma.controls.checkbox
 import com.copperleaf.forms.compose.bulma.controls.checkboxesEnum
 import com.copperleaf.forms.compose.bulma.controls.checkboxesOneOf
@@ -19,7 +21,7 @@ import com.copperleaf.forms.compose.elements.element
 import com.copperleaf.forms.compose.elements.submit
 import com.copperleaf.forms.compose.elements.toggleDebug
 import com.copperleaf.forms.compose.form.BasicForm
-import com.copperleaf.forms.compose.form.ComposeFormConfig
+import com.copperleaf.forms.compose.form.FormScopeImpl
 import com.copperleaf.forms.compose.form.Registered
 import com.copperleaf.forms.core.ArrayControl
 import com.copperleaf.forms.core.BooleanControl
@@ -35,39 +37,61 @@ import com.copperleaf.forms.core.ObjectControl
 import com.copperleaf.forms.core.StringControl
 import com.copperleaf.forms.core.VerticalLayout
 import com.copperleaf.forms.core.ui.UiElement
-import com.copperleaf.forms.core.vm.FormContractLite
-import com.copperleaf.forms.core.vm.FormViewModel
+import com.copperleaf.forms.core.ui.UiSchema
+import com.copperleaf.forms.core.vm.FormFieldsContract
+import com.copperleaf.json.pointer.JsonPointer
+import com.copperleaf.json.schema.JsonSchema
+import com.copperleaf.json.schema.SchemaValidationResult
+import kotlinx.serialization.json.JsonElement
 
 @Composable
 public fun BulmaForm(
-    viewModel: FormViewModel,
-    config: ComposeFormConfig = ComposeFormConfig(
-        elements = UiElement.bulmaDefaults(),
-        controls = UiElement.Control.bulmaDefaults(),
-        designSystem = BulmaDesignSystem(),
-    ),
+    schema: JsonSchema,
+    uiSchema: UiSchema,
+    data: JsonElement,
+    onDataChanged: (JsonElement) -> Unit,
 ) {
-    val vmState by viewModel.observeStates().collectAsState()
-    vmState.lite?.let {
-        BulmaForm(it, { viewModel.trySend(it.full()) }, config)
-    }
+    var touchedProperties: Set<JsonPointer> by remember { mutableStateOf(emptySet()) }
+
+    BulmaForm(
+        schema = schema,
+        uiSchema = uiSchema,
+        data = data,
+        touchedProperties = touchedProperties,
+        postInputCallback = {
+            val (newData, newTouchedProperties) = it.applyToState(data, touchedProperties)
+            val isChanged = newData != data
+            touchedProperties = newTouchedProperties
+
+            if (isChanged) {
+                onDataChanged(newData)
+            }
+        },
+    )
 }
 
 @Composable
 public fun BulmaForm(
-    vmState: FormContractLite.State,
-    postInput: (FormContractLite.Inputs) -> Unit,
-    config: ComposeFormConfig = ComposeFormConfig(
+    schema: JsonSchema,
+    uiSchema: UiSchema,
+    data: JsonElement,
+    touchedProperties: Set<JsonPointer>,
+    postInputCallback: (FormFieldsContract.Inputs) -> Unit,
+    validationResult: SchemaValidationResult = schema.validate(data),
+) {
+    val formScope = FormScopeImpl(
+        schema = schema,
+        uiSchema = uiSchema,
+        data = data,
+        touchedProperties = touchedProperties,
         elements = UiElement.bulmaDefaults(),
         controls = UiElement.Control.bulmaDefaults(),
         designSystem = BulmaDesignSystem(),
-    ),
-) {
-    config.designSystem.column {
-        BasicForm(vmState, postInput, config)
-    }
+        postInputCallback = postInputCallback,
+        validationResult = validationResult,
+    )
+    formScope.BasicForm()
 }
-
 
 public fun UiElement.Control.Companion.bulmaDefaults(): List<Registered<UiElement.Control, ControlRenderer>> =
     listOf(

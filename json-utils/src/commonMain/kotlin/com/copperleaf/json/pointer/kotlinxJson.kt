@@ -10,10 +10,16 @@ import kotlinx.serialization.json.JsonPrimitive
 // Find values
 // ---------------------------------------------------------------------------------------------------------------------
 
-public fun JsonElement.find(
+public fun JsonElement.findOrThrow(
     pointer: JsonPointer,
 ): JsonElement {
     return this.findNext(pointer, pointer.tokens)
+}
+
+public fun JsonElement.findOrNull(
+    pointer: JsonPointer,
+): JsonElement {
+    return runCatching { this.findNext(pointer, pointer.tokens) }.getOrElse { JsonNull }
 }
 
 internal fun JsonElement.findNext(

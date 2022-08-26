@@ -1,7 +1,7 @@
 package com.copperleaf.forms.core
 
 fun getJsonFromResources(name: String): String {
-    return TestFormSavedStateAdapter::class.java
+    return UiSchemaTests::class.java
         .getResourceAsStream(name)
         .let {
             if(it == null) {

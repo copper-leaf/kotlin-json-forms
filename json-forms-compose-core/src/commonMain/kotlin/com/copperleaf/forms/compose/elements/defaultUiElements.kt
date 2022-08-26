@@ -16,7 +16,7 @@ public fun VerticalLayout.element(): Registered<UiElement.ElementWithChildren, U
     column {
         element.elements.forEach {
             box {
-                UiElement(it, vmState, postInput)
+                UiElement(it)
             }
         }
     }
@@ -26,7 +26,7 @@ public fun HorizontalLayout.element(): Registered<UiElement.ElementWithChildren,
     row {
         element.elements.forEach {
             box {
-                UiElement(it, vmState, postInput)
+                UiElement(it)
             }
         }
     }
@@ -50,7 +50,7 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
         }
         element.elements.forEach {
             box {
-                UiElement(it, vmState, postInput)
+                UiElement(it)
             }
         }
     }
@@ -66,7 +66,7 @@ public fun Button.submit(): Registered<UiElement.ElementWithChildren, UiElementR
 //            onClick = { postInput(FormContract.Inputs.CommitChanges) },
 //            enabled = vmState.isValid,
 //        ) {
-            text("Submit")
+//            text("Submit")
 //        }
 //    }
 }

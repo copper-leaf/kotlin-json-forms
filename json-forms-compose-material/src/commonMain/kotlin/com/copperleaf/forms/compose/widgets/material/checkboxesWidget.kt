@@ -14,8 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.controls.ControlScope
-import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.plus
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.booleanOrNull
@@ -77,17 +75,10 @@ public fun ControlScope.checkboxesWidget(
         allOptions.forEach { (const, title) ->
             Row(Modifier.clickable {
                 if (const in selectedValues) {
-                    sendFormAction(
-                        pointer = dataPointer + "/${selectedValues.indexOf(const)}",
-                        action = JsonPointerAction.RemoveValue,
-                    )
+                    removeArrayItem(selectedValues.indexOf(const))
                 } else {
-                    sendFormAction(
-                        pointer = dataPointer + "/${selectedValues.size}",
-                        action = JsonPointerAction.SetValue(const),
-                    )
+                    addArrayItem(selectedValues.size, const)
                 }
-                markAsTouched()
             }) {
                 Checkbox(
                     checked = const in selectedValues,

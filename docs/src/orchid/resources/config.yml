@@ -78,12 +78,6 @@ snippets:
         type: 'file'
         baseDirs: [ 'snippets' ]
         recursive: false
-#    - tags: ['embedded_snippets']
-#      adapter:
-#        type: 'embedded'
-#        recursive: true
-#        baseDirs:
-#          - './../../../../ballast-core/'
 
 assets:
   sourceDirs:

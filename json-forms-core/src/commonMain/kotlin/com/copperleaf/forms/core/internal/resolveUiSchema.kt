@@ -6,7 +6,7 @@ import com.copperleaf.forms.core.ui.UiSchema
 import com.copperleaf.json.pointer.AbstractJsonPointer
 import com.copperleaf.json.pointer.JsonPointer
 import com.copperleaf.json.pointer.current
-import com.copperleaf.json.pointer.find
+import com.copperleaf.json.pointer.findOrThrow
 import com.copperleaf.json.pointer.parent
 import com.copperleaf.json.schema.JsonSchema
 import com.copperleaf.json.utils.SplitTransformer
@@ -204,7 +204,7 @@ internal fun isControlRequired(
         // access the schema directly
         schema.json
     } else {
-        schema.json.find(pointer.parent().parent())
+        schema.json.findOrThrow(pointer.parent().parent())
     }
 
     check(parentObject is JsonObject) { "Parent must be an object" }

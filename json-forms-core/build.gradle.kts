@@ -72,8 +72,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":json-utils"))
-                api("io.github.copper-leaf:ballast-core:1.2.1")
-                api("io.github.copper-leaf:ballast-saved-state:1.2.1")
             }
         }
         val commonTest by getting {

@@ -28,7 +28,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
         Div({ classes("tabs") }) {
             Ul {
                 element.elements.forEachIndexed { index, category ->
-                    RuleLayout(category, vmState, postInput) {
+                    RuleLayout(category) {
                         val label = category.uiSchemaConfig.string("label")
                         Li({
                             if (index == selectedTab) {
@@ -45,7 +45,7 @@ public fun Categorization.element(): Registered<UiElement.ElementWithChildren, U
             }
         }
 
-        UiElement(element.elements[selectedTab], vmState, postInput)
+        UiElement(element.elements[selectedTab])
     }
 }
 
@@ -58,7 +58,7 @@ public fun Category.element(): Registered<UiElement.ElementWithChildren, UiEleme
 
         element.elements.forEach { childElement ->
             box {
-                UiElement(childElement, vmState, postInput)
+                UiElement(childElement)
             }
         }
     }

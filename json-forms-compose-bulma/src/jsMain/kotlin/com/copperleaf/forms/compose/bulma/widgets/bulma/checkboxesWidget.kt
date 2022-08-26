@@ -2,11 +2,8 @@ package com.copperleaf.forms.compose.bulma.widgets.bulma
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.copperleaf.forms.compose.LocallyEnabled
 import com.copperleaf.forms.compose.bulma.controls.BulmaField
 import com.copperleaf.forms.compose.controls.ControlScope
-import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.plus
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.booleanOrNull
@@ -22,8 +19,6 @@ public fun ControlScope.checkboxWidget() {
     val currentValue = getTypedValue(false) {
         it.jsonPrimitive.booleanOrNull
     }
-    val isEnabled = LocallyEnabled.current
-
     BulmaField(control.label) {
         CheckboxInput(currentValue) {
             if (!isEnabled) {
@@ -60,17 +55,10 @@ public fun ControlScope.checkboxesWidget(
                 CheckboxInput(optionValue in selectedValues) {
                     onClick {
                         if (optionValue in selectedValues) {
-                            sendFormAction(
-                                pointer = dataPointer + "/${selectedValues.indexOf(optionValue)}",
-                                action = JsonPointerAction.RemoveValue,
-                            )
+                            removeArrayItem(selectedValues.indexOf(optionValue))
                         } else {
-                            sendFormAction(
-                                pointer = dataPointer + "/${selectedValues.size}",
-                                action = JsonPointerAction.SetValue(optionValue),
-                            )
+                            addArrayItem(selectedValues.size, optionValue)
                         }
-                        markAsTouched()
                     }
                     if (!isEnabled) {
                         disabled()

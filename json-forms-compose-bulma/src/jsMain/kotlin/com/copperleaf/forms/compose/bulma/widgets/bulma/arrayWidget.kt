@@ -1,7 +1,6 @@
 package com.copperleaf.forms.compose.bulma.widgets.bulma
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -9,10 +8,6 @@ import androidx.compose.runtime.setValue
 import com.copperleaf.forms.compose.controls.ControlScope
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
-import com.copperleaf.forms.core.internal.resolveAsControl
-import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.plus
-import com.copperleaf.json.pointer.toUriFragment
 import com.copperleaf.json.values.optional
 import com.copperleaf.json.values.string
 import kotlinx.serialization.json.JsonArray
@@ -85,11 +80,7 @@ public fun ControlScope.arrayWidget(
                         Li({
                             onClick {
                                 selectedItem = currentDataValue.lastIndex + 1
-                                sendFormAction(
-                                    pointer = dataPointer + "/${currentDataValue.size}",
-                                    action = JsonPointerAction.SetValue(JsonNull),
-                                )
-                                markAsTouched()
+                                addArrayItem(currentDataValue.size, JsonNull)
                             }
                         }) { A { Text(addButtonText) } }
                     }
@@ -99,32 +90,15 @@ public fun ControlScope.arrayWidget(
         Div({ classes("column", "is-8") }) {
             selectedItem?.let { index ->
                 WithArrayIndex(index) {
-                    val arrayFieldControl by remember {
-                        derivedStateOf {
-                            JsonObject(
-                                mapOf(
-                                    "type" to JsonPrimitive("Control"),
-                                    "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
-                                )
-                            ).resolveAsControl(vmState.schemaJson)
-                        }
-                    }
-
-                    UiElement(
-                        arrayFieldControl,
-                        vmState,
-                        postInput,
-                    )
+                    val arrayFieldControl = getChildArrayControl()
+                    UiElement(arrayFieldControl)
 
                     Div {
                         Button(
                             {
                                 classes("button")
                                 onClick {
-                                    sendFormAction(
-                                        pointer = dataPointer + "/$index",
-                                        action = JsonPointerAction.RemoveValue
-                                    )
+                                    removeArrayItem(index)
                                 }
                                 if (!isEnabled) {
                                     disabled()

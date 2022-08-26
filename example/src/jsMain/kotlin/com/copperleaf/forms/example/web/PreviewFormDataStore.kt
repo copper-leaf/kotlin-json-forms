@@ -1,6 +1,7 @@
 package com.copperleaf.forms.example.web
 
-import com.copperleaf.forms.core.vm.FormSavedStateAdapter
+import com.copperleaf.forms.core.ui.UiSchema
+import com.copperleaf.json.schema.JsonSchema
 import com.copperleaf.json.utils.parseJson
 import com.copperleaf.json.utils.toJsonString
 import kotlinx.browser.window
@@ -9,24 +10,32 @@ import kotlinx.serialization.json.JsonElement
 
 object PreviewFormDataStore {
 
+    interface Store {
+        public suspend fun loadSchema(): Pair<JsonSchema, UiSchema>
+        public suspend fun loadInitialData(): JsonElement
+        public fun saveUpdatedData(data: JsonElement)
+    }
+
     private val allData = mutableMapOf<String, String>()
 
-    fun getStoreAt(path: String): FormSavedStateAdapter.Store {
-        return object : FormSavedStateAdapter.Store {
-            override suspend fun loadSchema(): JsonElement {
-                return window.fetch("http://localhost:8080/$path/schema.json")
+    fun getStoreAt(path: String): Store {
+        return object : Store {
+            override suspend fun loadSchema(): Pair<JsonSchema, UiSchema> {
+                val schema = window.fetch("http://localhost:8080/$path/schema.json")
                     .await()
                     .text()
                     .await()
                     .parseJson()
-            }
+                    .let { JsonSchema.parse(it) }
 
-            override suspend fun loadUiSchema(): JsonElement {
-                return window.fetch("http://localhost:8080/$path/uiSchema.json")
+                val uiSchema = window.fetch("http://localhost:8080/$path/uiSchema.json")
                     .await()
                     .text()
                     .await()
                     .parseJson()
+                    .let { UiSchema.parse(schema, it) }
+
+                return schema to uiSchema
             }
 
             override suspend fun loadInitialData(): JsonElement {
@@ -38,7 +47,7 @@ object PreviewFormDataStore {
                 }.parseJson()
             }
 
-            override suspend fun saveUpdatedData(data: JsonElement) {
+            override fun saveUpdatedData(data: JsonElement) {
                 allData[path] = data.toJsonString()
             }
         }

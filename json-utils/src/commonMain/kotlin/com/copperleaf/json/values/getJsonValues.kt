@@ -1,7 +1,7 @@
 package com.copperleaf.json.values
 
 import com.copperleaf.json.pointer.JsonPointer
-import com.copperleaf.json.pointer.find
+import com.copperleaf.json.pointer.findOrThrow
 import com.copperleaf.json.utils.Either
 import com.copperleaf.json.utils.asLeft
 import com.copperleaf.json.utils.asRight
@@ -110,33 +110,33 @@ public fun JsonElement.arrayAt(index: Int): JsonArray {
 // ---------------------------------------------------------------------------------------------------------------------
 
 public fun JsonElement.string(pointer: JsonPointer): String {
-    return this.find(pointer).jsonPrimitive.content
+    return this.findOrThrow(pointer).jsonPrimitive.content
 }
 
 public fun JsonElement.int(pointer: JsonPointer): Int {
-    return this.find(pointer).jsonPrimitive.int
+    return this.findOrThrow(pointer).jsonPrimitive.int
 }
 
 public fun JsonElement.long(pointer: JsonPointer): Long {
-    return this.find(pointer).jsonPrimitive.long
+    return this.findOrThrow(pointer).jsonPrimitive.long
 }
 
 public fun JsonElement.float(pointer: JsonPointer): Float {
-    return this.find(pointer).jsonPrimitive.float
+    return this.findOrThrow(pointer).jsonPrimitive.float
 }
 
 public fun JsonElement.double(pointer: JsonPointer): Double {
-    return this.find(pointer).jsonPrimitive.double
+    return this.findOrThrow(pointer).jsonPrimitive.double
 }
 
 public fun JsonElement.boolean(pointer: JsonPointer): Boolean {
-    return this.find(pointer).jsonPrimitive.boolean
+    return this.findOrThrow(pointer).jsonPrimitive.boolean
 }
 
 public fun JsonElement.objectAt(pointer: JsonPointer): JsonObject {
-    return this.find(pointer).jsonObject
+    return this.findOrThrow(pointer).jsonObject
 }
 
 public fun JsonElement.arrayAt(pointer: JsonPointer): JsonArray {
-    return this.find(pointer).jsonArray
+    return this.findOrThrow(pointer).jsonArray
 }

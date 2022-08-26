@@ -14,23 +14,14 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.copperleaf.forms.compose.controls.ControlScope
 import com.copperleaf.forms.compose.form.UiElement
 import com.copperleaf.forms.compose.form.WithArrayIndex
 import com.copperleaf.forms.compose.widgets.dropdown.IconButtonWithDescription
-import com.copperleaf.forms.core.internal.resolveAsControl
-import com.copperleaf.json.pointer.JsonPointerAction
-import com.copperleaf.json.pointer.plus
-import com.copperleaf.json.pointer.toUriFragment
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
 
 @Composable
@@ -55,11 +46,7 @@ public fun ControlScope.arrayWidget(
                     Icons.Default.Add,
                     addButtonText,
                     onClick = {
-                        sendFormAction(
-                            pointer = dataPointer + "/${currentDataValue.size}",
-                            action = JsonPointerAction.SetValue(JsonNull),
-                        )
-                        markAsTouched()
+                        addArrayItem(currentDataValue.size, JsonNull)
                     },
                     enabled = isEnabled,
                 )
@@ -76,31 +63,15 @@ public fun ControlScope.arrayWidget(
                         Column {
                             Button(
                                 onClick = {
-                                    sendFormAction(
-                                        pointer = dataPointer + "/$index",
-                                        action = JsonPointerAction.RemoveValue
-                                    )
+                                    removeArrayItem(index)
                                 },
                                 enabled = isEnabled,
                             ) {
                                 Text("Remove")
                             }
 
-                            val arrayFieldControl by remember {
-                                derivedStateOf {
-                                    JsonObject(
-                                        mapOf(
-                                            "type" to JsonPrimitive("Control"),
-                                            "scope" to JsonPrimitive((control.schemaScope + "/items").toUriFragment())
-                                        )
-                                    ).resolveAsControl(vmState.schema)
-                                }
-                            }
-                            UiElement(
-                                arrayFieldControl,
-                                vmState,
-                                postInput,
-                            )
+                            val arrayFieldControl = getChildArrayControl()
+                            UiElement(arrayFieldControl)
                         }
                     }
                 }

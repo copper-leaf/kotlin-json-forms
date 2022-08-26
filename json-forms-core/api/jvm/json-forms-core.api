@@ -146,269 +146,50 @@ public final class com/copperleaf/forms/core/ui/UiElement$ElementWithChildren : 
 }
 
 public final class com/copperleaf/forms/core/ui/UiSchema {
+	public static final field Companion Lcom/copperleaf/forms/core/ui/UiSchema$Companion;
 	public fun <init> (Lcom/copperleaf/forms/core/ui/UiElement;Lkotlinx/serialization/json/JsonElement;)V
 	public final fun getJson ()Lkotlinx/serialization/json/JsonElement;
 	public final fun getRootUiElement ()Lcom/copperleaf/forms/core/ui/UiElement;
 }
 
-public final class com/copperleaf/forms/core/vm/BasicFormViewModel : com/copperleaf/ballast/core/BasicViewModel {
-	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Lcom/copperleaf/ballast/BallastViewModelConfiguration;)V
-	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter;Ljava/lang/String;)V
-	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineScope;Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+public final class com/copperleaf/forms/core/ui/UiSchema$Companion {
+	public final fun parse (Lcom/copperleaf/json/schema/JsonSchema;Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/core/ui/UiSchema;
 }
 
-public final class com/copperleaf/forms/core/vm/FormContract {
-	public static final field INSTANCE Lcom/copperleaf/forms/core/vm/FormContract;
+public final class com/copperleaf/forms/core/vm/FormFieldsContract {
+	public static final field INSTANCE Lcom/copperleaf/forms/core/vm/FormFieldsContract;
 }
 
-public abstract class com/copperleaf/forms/core/vm/FormContract$Events {
+public abstract class com/copperleaf/forms/core/vm/FormFieldsContract$Events {
 }
 
-public abstract class com/copperleaf/forms/core/vm/FormContract$Inputs {
+public abstract class com/copperleaf/forms/core/vm/FormFieldsContract$Inputs {
+	public abstract fun applyToState (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lkotlin/Pair;
 }
 
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$CommitChanges : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public static final field INSTANCE Lcom/copperleaf/forms/core/vm/FormContract$Inputs$CommitChanges;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$FormDataChangedExternally : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Lkotlinx/serialization/json/JsonElement;)V
-	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun copy (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$FormDataChangedExternally;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$FormDataChangedExternally;Lkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$FormDataChangedExternally;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getNewFormData ()Lkotlinx/serialization/json/JsonElement;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$MarkAsTouched : com/copperleaf/forms/core/vm/FormContract$Inputs {
+public final class com/copperleaf/forms/core/vm/FormFieldsContract$Inputs$MarkAsTouched : com/copperleaf/forms/core/vm/FormFieldsContract$Inputs {
 	public fun <init> (Lcom/copperleaf/json/pointer/JsonPointer;)V
+	public fun applyToState (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lkotlin/Pair;
 	public final fun component1 ()Lcom/copperleaf/json/pointer/JsonPointer;
-	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$MarkAsTouched;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$MarkAsTouched;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$MarkAsTouched;
+	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;)Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$MarkAsTouched;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$MarkAsTouched;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$MarkAsTouched;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$SetDebugMode : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Z)V
-	public final fun component1 ()Z
-	public final fun copy (Z)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetDebugMode;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetDebugMode;ZILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetDebugMode;
-	public fun equals (Ljava/lang/Object;)Z
-	public fun hashCode ()I
-	public final fun isDebug ()Z
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$SetReadOnly : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Z)V
-	public final fun component1 ()Z
-	public final fun copy (Z)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetReadOnly;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetReadOnly;ZILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetReadOnly;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getReadOnly ()Z
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$SetSaveType : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Lcom/copperleaf/forms/core/vm/FormContract$SaveType;)V
-	public final fun component1 ()Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public final fun copy (Lcom/copperleaf/forms/core/vm/FormContract$SaveType;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetSaveType;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetSaveType;Lcom/copperleaf/forms/core/vm/FormContract$SaveType;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetSaveType;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getSaveType ()Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$SetValidationMode : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;)V
-	public final fun component1 ()Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public final fun copy (Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetValidationMode;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetValidationMode;Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$SetValidationMode;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValidationMode ()Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$UpdateFormState : com/copperleaf/forms/core/vm/FormContract$Inputs {
+public final class com/copperleaf/forms/core/vm/FormFieldsContract$Inputs$UpdateFormState : com/copperleaf/forms/core/vm/FormFieldsContract$Inputs {
 	public fun <init> (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)V
+	public fun applyToState (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lkotlin/Pair;
 	public final fun component1 ()Lcom/copperleaf/json/pointer/JsonPointer;
 	public final fun component2 ()Lcom/copperleaf/json/pointer/JsonPointerAction;
-	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateFormState;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateFormState;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateFormState;
+	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$UpdateFormState;
+	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$UpdateFormState;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormFieldsContract$Inputs$UpdateFormState;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAction ()Lcom/copperleaf/json/pointer/JsonPointerAction;
 	public final fun getPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$UpdateSchema : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Lkotlinx/serialization/json/JsonElement;)V
-	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun copy (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateSchema;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateSchema;Lkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateSchema;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getSchemaJson ()Lkotlinx/serialization/json/JsonElement;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$Inputs$UpdateUiSchema : com/copperleaf/forms/core/vm/FormContract$Inputs {
-	public fun <init> (Lkotlinx/serialization/json/JsonElement;)V
-	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun copy (Lkotlinx/serialization/json/JsonElement;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateUiSchema;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateUiSchema;Lkotlinx/serialization/json/JsonElement;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$Inputs$UpdateUiSchema;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getUiSchemaJson ()Lkotlinx/serialization/json/JsonElement;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$SaveType : java/lang/Enum {
-	public static final field OnAnyChange Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public static final field OnCommit Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public static final field OnValidChange Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public static fun valueOf (Ljava/lang/String;)Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public static fun values ()[Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$State {
-	public fun <init> ()V
-	public fun <init> (Lcom/copperleaf/forms/core/vm/FormContract$SaveType;Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;ZZLcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)V
-	public synthetic fun <init> (Lcom/copperleaf/forms/core/vm/FormContract$SaveType;Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;ZZLcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public final fun component2 ()Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public final fun component3 ()Z
-	public final fun component4 ()Z
-	public final fun component5 ()Lcom/copperleaf/json/schema/JsonSchema;
-	public final fun component6 ()Lcom/copperleaf/forms/core/ui/UiSchema;
-	public final fun component7 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun component8 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun component9 ()Ljava/util/Set;
-	public final fun copy (Lcom/copperleaf/forms/core/vm/FormContract$SaveType;Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;ZZLcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lcom/copperleaf/forms/core/vm/FormContract$State;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContract$State;Lcom/copperleaf/forms/core/vm/FormContract$SaveType;Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;ZZLcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContract$State;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun errors (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
-	public final fun getDebug ()Z
-	public final fun getLite ()Lcom/copperleaf/forms/core/vm/FormFieldsState;
-	public final fun getOriginalData ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getReadOnly ()Z
-	public final fun getSaveType ()Lcom/copperleaf/forms/core/vm/FormContract$SaveType;
-	public final fun getSchema ()Lcom/copperleaf/json/schema/JsonSchema;
-	public final fun getTouchedProperties ()Ljava/util/Set;
-	public final fun getUiSchema ()Lcom/copperleaf/forms/core/ui/UiSchema;
-	public final fun getUpdatedData ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getValidationMode ()Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public fun hashCode ()I
-	public final fun isChanged ()Z
-	public final fun isReady ()Z
-	public final fun isValid ()Z
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContract$ValidationMode : java/lang/Enum {
-	public static final field NoValidation Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public static final field ValidateAndHide Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public static final field ValidateAndShow Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public static fun valueOf (Ljava/lang/String;)Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-	public static fun values ()[Lcom/copperleaf/forms/core/vm/FormContract$ValidationMode;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContractLite {
-	public static final field INSTANCE Lcom/copperleaf/forms/core/vm/FormContractLite;
-}
-
-public abstract class com/copperleaf/forms/core/vm/FormContractLite$Events {
-}
-
-public abstract class com/copperleaf/forms/core/vm/FormContractLite$Inputs {
-	public abstract fun full ()Lcom/copperleaf/forms/core/vm/FormContract$Inputs;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContractLite$Inputs$CommitChanges : com/copperleaf/forms/core/vm/FormContractLite$Inputs {
-	public static final field INSTANCE Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$CommitChanges;
-	public fun full ()Lcom/copperleaf/forms/core/vm/FormContract$Inputs;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContractLite$Inputs$MarkAsTouched : com/copperleaf/forms/core/vm/FormContractLite$Inputs {
-	public fun <init> (Lcom/copperleaf/json/pointer/JsonPointer;)V
-	public final fun component1 ()Lcom/copperleaf/json/pointer/JsonPointer;
-	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;)Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$MarkAsTouched;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$MarkAsTouched;Lcom/copperleaf/json/pointer/JsonPointer;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$MarkAsTouched;
-	public fun equals (Ljava/lang/Object;)Z
-	public fun full ()Lcom/copperleaf/forms/core/vm/FormContract$Inputs;
-	public final fun getPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormContractLite$Inputs$UpdateFormState : com/copperleaf/forms/core/vm/FormContractLite$Inputs {
-	public fun <init> (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)V
-	public final fun component1 ()Lcom/copperleaf/json/pointer/JsonPointer;
-	public final fun component2 ()Lcom/copperleaf/json/pointer/JsonPointerAction;
-	public final fun copy (Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;)Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$UpdateFormState;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$UpdateFormState;Lcom/copperleaf/json/pointer/JsonPointer;Lcom/copperleaf/json/pointer/JsonPointerAction;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormContractLite$Inputs$UpdateFormState;
-	public fun equals (Ljava/lang/Object;)Z
-	public fun full ()Lcom/copperleaf/forms/core/vm/FormContract$Inputs;
-	public final fun getAction ()Lcom/copperleaf/json/pointer/JsonPointerAction;
-	public final fun getPointer ()Lcom/copperleaf/json/pointer/JsonPointer;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormFieldsState {
-	public fun <init> (Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)V
-	public synthetic fun <init> (Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Lcom/copperleaf/json/schema/JsonSchema;
-	public final fun component2 ()Lcom/copperleaf/forms/core/ui/UiSchema;
-	public final fun component3 ()Lkotlinx/serialization/json/JsonElement;
-	public final fun component4 ()Ljava/util/Set;
-	public final fun copy (Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lcom/copperleaf/forms/core/vm/FormFieldsState;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/core/vm/FormFieldsState;Lcom/copperleaf/json/schema/JsonSchema;Lcom/copperleaf/forms/core/ui/UiSchema;Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;ILjava/lang/Object;)Lcom/copperleaf/forms/core/vm/FormFieldsState;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun errors (Lcom/copperleaf/json/pointer/JsonPointer;)Ljava/util/List;
-	public final fun getData ()Lkotlinx/serialization/json/JsonElement;
-	public final fun getSchema ()Lcom/copperleaf/json/schema/JsonSchema;
-	public final fun getTouchedProperties ()Ljava/util/Set;
-	public final fun getUiSchema ()Lcom/copperleaf/forms/core/ui/UiSchema;
-	public final fun getValidationResult ()Lcom/copperleaf/json/schema/SchemaValidationResult;
-	public fun hashCode ()I
-	public final fun isValid ()Z
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/core/vm/FormInputHandler : com/copperleaf/ballast/InputHandler {
-	public fun <init> ()V
-	public fun handleInput (Lcom/copperleaf/ballast/InputHandlerScope;Lcom/copperleaf/forms/core/vm/FormContract$Inputs;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public synthetic fun handleInput (Lcom/copperleaf/ballast/InputHandlerScope;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public final class com/copperleaf/forms/core/vm/FormSavedStateAdapter : com/copperleaf/ballast/savedstate/SavedStateAdapter {
-	public fun <init> (Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter$Store;Lkotlin/jvm/functions/Function0;)V
-	public synthetic fun <init> (Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter$Store;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun onRestoreComplete (Lcom/copperleaf/forms/core/vm/FormContract$State;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public synthetic fun onRestoreComplete (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun restore (Lcom/copperleaf/ballast/savedstate/RestoreStateScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun save (Lcom/copperleaf/ballast/savedstate/SaveStateScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public abstract interface class com/copperleaf/forms/core/vm/FormSavedStateAdapter$Store {
-	public abstract fun loadInitialData (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun loadSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun loadUiSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun saveUpdatedData (Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public final class com/copperleaf/forms/core/vm/FormViewModelKt {
-	public static final fun withJsonForms (Lcom/copperleaf/ballast/BallastViewModelConfiguration$Builder;Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter;Ljava/lang/String;)Lcom/copperleaf/ballast/BallastViewModelConfiguration$Builder;
-	public static synthetic fun withJsonForms$default (Lcom/copperleaf/ballast/BallastViewModelConfiguration$Builder;Lcom/copperleaf/forms/core/vm/FormSavedStateAdapter;Ljava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/ballast/BallastViewModelConfiguration$Builder;
 }
 

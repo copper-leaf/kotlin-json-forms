@@ -19,9 +19,9 @@ targets, such as Compose for Web.
 
 # Dependencies
 
-This library is based on [Ballast](https://github.com/copper-leaf/ballast) for state management, and uses the the JSON
-models and (de)serialization capabilities from [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization), 
-though knowledge of either library is not strictly necessary to use Kotlin Json Forms. 
+This library is based on the JSON models and (de)serialization capabilities from 
+[Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization), though knowledge of that library is not 
+strictly necessary to use Kotlin Json Forms, nor is the Serialization gradle plugin. It only uses the runtime library. 
 
 Additionally, schema validation is supported individually for each platform, because schema validator libraries are 
 large and too complex to reimplement for this project, so it's easier to find appropriate libraries on each platform as
@@ -38,20 +38,7 @@ The simplest usage of this library looks like this:
 fun RenderFormPreview(
     formStore: FormSavedStateAdapter.Store
 ) {
-    // create the Ballast ViewModel which manages the form State
-    val coroutineScope = rememberCoroutineScope()
-    val vm = remember(coroutineScope, formStore) {
-        BasicFormViewModel(
-            coroutineScope,
-            FormSavedStateAdapter(formStore)
-        )
-    }
     
-    // render the Form UI
-    Form(vm)
-    
-    // if you need to do anything else with the form state, you can collect the ViewModel State to observe any changes
-    val vmState by vm.observeStates().collectAsState()
 }
 ```
 

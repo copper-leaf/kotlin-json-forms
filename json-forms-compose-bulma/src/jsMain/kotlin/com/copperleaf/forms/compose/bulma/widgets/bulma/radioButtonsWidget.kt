@@ -34,7 +34,7 @@ public fun ControlScope.radioButtonsWidget(
                     }
                     name(control.label)
                 }
-                Text(" ${optionTitle}")
+                Text(" $optionTitle")
             }
         }
     }
