@@ -42,9 +42,7 @@ class TestJsonBuilder : FreeSpec({
             2,
             3.4,
             true,
-            json {
-
-            }
+            json {}
         ]
 
         result.toJsonString(true) shouldBe """

@@ -20,6 +20,5 @@ public sealed class SchemaValidationResult(public val isValid: Boolean) {
         public override fun issues(pointer: JsonPointer): List<String> = emptyList()
     }
 
-    public abstract class Invalid : SchemaValidationResult(false) {
-    }
+    public abstract class Invalid : SchemaValidationResult(false)
 }

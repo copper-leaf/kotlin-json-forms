@@ -56,8 +56,6 @@ public fun Group.element(): Registered<UiElement.ElementWithChildren, UiElementR
     }
 }
 
-
-
 public fun Button.submit(): Registered<UiElement.ElementWithChildren, UiElementRenderer> = uiElement(
     tester = { optionFieldIs("action", "submit") }
 ) {

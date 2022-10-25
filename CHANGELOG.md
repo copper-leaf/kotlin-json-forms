@@ -1,3 +1,9 @@
+## 0.7.0 - 2022-10-25
+
+- Updates to Kotlin 1.7.20
+- Updates to Compose 1.2.0
+- Temporarily removes Compose Web and Bulma as targets, because Compose Web does not work with Kotlin 1.7.20
+
 ## 0.6.0 - 2022-08-26
 
 - Significant refactor, removes Ballast as a dependency to use normal Compose state management without enforcing any

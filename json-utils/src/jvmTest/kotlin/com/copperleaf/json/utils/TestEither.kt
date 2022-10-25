@@ -3,7 +3,6 @@ package com.copperleaf.json.utils
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-
 class TestEither : FreeSpec({
     "left" {
         val value: Either<String, Int> = "one".asLeft()

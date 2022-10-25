@@ -8,7 +8,11 @@ import io.kotest.matchers.shouldBe
 
 class TestJsonPointerParse : FreeSpec({
     "Non-abstract pointers" - {
-        data class TestCase(val input: String, val expectedFormattedUri: String, val expectedTokens: List<String>): WithDataTestName {
+        data class TestCase(
+            val input: String,
+            val expectedFormattedUri: String,
+            val expectedTokens: List<String>
+        ) : WithDataTestName {
             override fun dataTestName(): String = "a) '$input'"
         }
 
@@ -44,7 +48,7 @@ class TestJsonPointerParse : FreeSpec({
     }
 
     "invalid formats for non-abstract pointer" - {
-        data class TestCase(val input: String): WithDataTestName {
+        data class TestCase(val input: String) : WithDataTestName {
             override fun dataTestName(): String = "b) '$input'"
         }
         withData(
@@ -61,7 +65,7 @@ class TestJsonPointerParse : FreeSpec({
     }
 
     "invalid formats for abstract pointer" - {
-        data class TestCase(val input: String, val arrayIndices: List<Int>): WithDataTestName {
+        data class TestCase(val input: String, val arrayIndices: List<Int>) : WithDataTestName {
             override fun dataTestName(): String = "c) '$input'"
         }
         withData(
@@ -80,7 +84,8 @@ class TestJsonPointerParse : FreeSpec({
     }
 
     "parse and reify abstract pointer" - {
-        data class TestCase(val input: String, val arrayIndices: List<Int>, val expectedReifiedUri: String) : WithDataTestName {
+        data class TestCase(val input: String, val arrayIndices: List<Int>, val expectedReifiedUri: String) :
+            WithDataTestName {
             override fun dataTestName(): String = "d) '$input'"
         }
         withData(

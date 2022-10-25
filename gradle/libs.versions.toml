@@ -11,6 +11,7 @@ androidxLifecycle = "2.4.1"
 multiplatformSettings = "0.8.1"
 uuid = "0.3.1"
 slf4j = "1.7.36"
+kotest = "5.5.1"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -51,3 +52,8 @@ multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-n
 
 benasher44-uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
 slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" }
+
+kotest-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
+kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-dataTest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+kotest-propertyTest = { module = "io.kotest:kotest-property", version.ref = "kotest" }

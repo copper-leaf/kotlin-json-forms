@@ -22,7 +22,7 @@ public val JsonPointer.current: String?
         return this.tokens.lastOrNull()
     }
 
-public operator fun JsonPointer.plus(suffix: String) : JsonPointer {
+public operator fun JsonPointer.plus(suffix: String): JsonPointer {
     return JsonPointer.parse(this.toUriFragment() + suffix)
 }
 

@@ -22,10 +22,15 @@ public interface DesignSystem {
     public fun box(content: @Composable () -> Unit)
 
     @Composable
-    public fun button(onClick: ()->Unit, enabled: Boolean, content: @Composable () -> Unit)
+    public fun button(onClick: () -> Unit, enabled: Boolean, content: @Composable () -> Unit)
 
     @Composable
-    public fun checkbox(checked: Boolean, onCheckedChange: (Boolean)->Unit, enabled: Boolean, content: @Composable () -> Unit)
+    public fun checkbox(
+        checked: Boolean,
+        onCheckedChange: (Boolean) -> Unit,
+        enabled: Boolean,
+        content: @Composable () -> Unit
+    )
 
     @Composable
     public fun visibility(isVisible: Boolean, content: @Composable () -> Unit)

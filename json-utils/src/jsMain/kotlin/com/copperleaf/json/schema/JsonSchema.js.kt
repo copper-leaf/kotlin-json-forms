@@ -21,7 +21,7 @@ public actual class JsonSchema actual constructor(input: JsonElement) {
     public actual fun validate(element: JsonElement): SchemaValidationResult {
         val actualInput = element.asDynamicJson()
         return try {
-            if(schema(actualInput)) {
+            if (schema(actualInput)) {
                 SchemaValidationResult.Valid
             } else {
                 CustomInvalid()

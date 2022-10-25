@@ -37,7 +37,7 @@ android {
         }
     }
     lint {
-        disable("GradleDependency")
+        disable += "GradleDependency"
     }
 }
 

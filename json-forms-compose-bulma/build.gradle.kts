@@ -1,45 +1,26 @@
 plugins {
-    kotlin("multiplatform")
+    `copper-leaf-targets`
+    `copper-leaf-compose`
     `copper-leaf-base`
     `copper-leaf-version`
+    `copper-leaf-testing`
     `copper-leaf-lint`
     `copper-leaf-publish`
-    id("org.jetbrains.compose")
 }
 
+description = "Kotlin Multiplatform String markup and formatting utility"
+
 kotlin {
-    explicitApi()
-
-    // targets
-    js(IR) {
-        browser {
-            testTask {
-                enabled = false
-            }
-        }
-    }
-
-    // sourcesets
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlin.ExperimentalStdlibApi")
-                optIn("kotlin.time.ExperimentalTime")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
-
         // Common Sourcesets
         val commonMain by getting {
-            dependencies {
-            }
+            dependencies { }
         }
         val commonTest by getting {
-            dependencies {
-            }
+            dependencies { }
         }
 
+        // JS Sourcesets
         val jsMain by getting {
             dependencies {
                 api(project(":json-forms-core"))
@@ -48,24 +29,7 @@ kotlin {
             }
         }
         val jsTest by getting {
-            dependencies {
-            }
+            dependencies { }
         }
-    }
-}
-
-tasks.withType<JavaCompile> {
-    sourceCompatibility = Config.javaVersion
-    targetCompatibility = Config.javaVersion
-}
-tasks.withType<Test> {
-    useJUnitPlatform()
-    testLogging {
-        showStandardStreams = true
-    }
-}
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = Config.javaVersion
     }
 }

@@ -5,7 +5,7 @@
 
 > Customizable JSON Schema-based forms for Kotlin and Compose
 
-![Kotlin Version](https://img.shields.io/badge/Kotlin-1.6.10-orange)
+![Kotlin Version](https://img.shields.io/badge/Kotlin-1.7.20-orange)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/kotlin-json-forms)](https://github.com/copper-leaf/kotlin-json-forms/releases)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/json-forms-core)](https://search.maven.org/artifact/io.github.copper-leaf/json-forms-core)
 
@@ -32,7 +32,7 @@ This project currently supports Android and Desktop targets with the `json-forms
 JavaScript is also supported for Compose DOM (no Canvas implementation yet), using the `json-forms-compose-bulma` 
 artifact. This displays forms based on [Bulma CSS](https://bulma.io/) for styling and class names. JS target uses 
 [Ajv](https://github.com/ajv-validator/ajv) for schema validation (the same validator library used in the original
-[JSON Forms](https://github.com/eclipsesource/jsonforms) library).
+[JSON Forms](https://github.com/eclipsesource/jsonforms) library). 
 
 # Installation
 

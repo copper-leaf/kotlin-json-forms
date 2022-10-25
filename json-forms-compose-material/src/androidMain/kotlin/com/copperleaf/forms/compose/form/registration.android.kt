@@ -33,8 +33,6 @@ public actual fun UiElement.Control.Companion.materialDefaults(): List<Registere
     listOf(
         // text fields
         StringControl.control(),
-//        StringControl.richText(),
-//        StringControl.codeEditor(),
 
         // single-select
         StringControl.dropdownEnum(),

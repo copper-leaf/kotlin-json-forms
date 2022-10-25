@@ -39,7 +39,5 @@ public object FormFieldsContract {
         }
     }
 
-    public sealed class Events {
-
-    }
+    public sealed class Events
 }

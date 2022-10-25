@@ -4,11 +4,7 @@ fun getJsonFromResources(name: String): String {
     return UiSchemaTests::class.java
         .getResourceAsStream(name)
         .let {
-            if(it == null) {
-                error("'${name}' not found")
-            } else {
-                it
-            }
+            it ?: error("'$name' not found")
         }
         .bufferedReader()
         .readText()

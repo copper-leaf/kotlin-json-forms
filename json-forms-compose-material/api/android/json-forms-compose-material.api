@@ -6,8 +6,6 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$Ma
 	public static field lambda-12 Lkotlin/jvm/functions/Function3;
 	public static field lambda-13 Lkotlin/jvm/functions/Function3;
 	public static field lambda-14 Lkotlin/jvm/functions/Function3;
-	public static field lambda-15 Lkotlin/jvm/functions/Function3;
-	public static field lambda-16 Lkotlin/jvm/functions/Function3;
 	public static field lambda-2 Lkotlin/jvm/functions/Function3;
 	public static field lambda-3 Lkotlin/jvm/functions/Function3;
 	public static field lambda-4 Lkotlin/jvm/functions/Function3;
@@ -23,8 +21,6 @@ public final class com/copperleaf/forms/compose/controls/ComposableSingletons$Ma
 	public final fun getLambda-12$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-13$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-14$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-15$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-16$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-2$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-3$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda-4$json_forms_compose_material_release ()Lkotlin/jvm/functions/Function3;
@@ -40,7 +36,6 @@ public final class com/copperleaf/forms/compose/controls/MaterialControlsKt {
 	public static final fun checkbox (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun checkboxesEnum (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun checkboxesOneOf (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
-	public static final fun codeEditor (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/ArrayControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/IntegerControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun control (Lcom/copperleaf/forms/core/NumberControl;)Lcom/copperleaf/forms/compose/form/Registered;
@@ -50,7 +45,6 @@ public final class com/copperleaf/forms/compose/controls/MaterialControlsKt {
 	public static final fun dropdownOneOf (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun radioButtonEnum (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun radioButtonOneOf (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
-	public static final fun richText (Lcom/copperleaf/forms/core/StringControl;)Lcom/copperleaf/forms/compose/form/Registered;
 	public static final fun switch (Lcom/copperleaf/forms/core/BooleanControl;)Lcom/copperleaf/forms/compose/form/Registered;
 }
 
@@ -164,100 +158,6 @@ public final class com/copperleaf/forms/compose/widgets/material/RadioButtonsWid
 
 public final class com/copperleaf/forms/compose/widgets/material/TextFieldWidgetKt {
 	public static final fun textFieldWidget (Lcom/copperleaf/forms/compose/controls/ControlScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextEditorAction {
-	public static final field $stable I
-	public synthetic fun <init> (Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;Lcom/darkrockstudios/richtexteditor/model/Style;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Landroidx/compose/ui/graphics/vector/ImageVector;
-	public final fun component3 ()Lcom/darkrockstudios/richtexteditor/model/Style;
-	public final fun component4-EK5gGoQ ()J
-	public final fun copy-UWXXDno (Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;Lcom/darkrockstudios/richtexteditor/model/Style;J)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextEditorAction;
-	public static synthetic fun copy-UWXXDno$default (Lcom/copperleaf/forms/compose/widgets/richtext/RichTextEditorAction;Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;Lcom/darkrockstudios/richtexteditor/model/Style;JILjava/lang/Object;)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextEditorAction;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getIcon ()Landroidx/compose/ui/graphics/vector/ImageVector;
-	public final fun getName ()Ljava/lang/String;
-	public final fun getShortcutKey-EK5gGoQ ()J
-	public final fun getStyle ()Lcom/darkrockstudios/richtexteditor/model/Style;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextEditorDefaults {
-	public static final field $stable I
-	public static final field INSTANCE Lcom/copperleaf/forms/compose/widgets/richtext/RichTextEditorDefaults;
-	public final fun getDefaultToolbar ()Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextHtmlSerializer : com/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer {
-	public static final field $stable I
-	public fun <init> ()V
-	public fun decodeFromString (Ljava/lang/String;)Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;
-	public fun encodeToString (Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;)Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextJsonSerializer : com/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer {
-	public static final field $stable I
-	public fun <init> ()V
-	public fun decodeFromString (Ljava/lang/String;)Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;
-	public fun encodeToString (Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;)Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextMarkdownSerializer : com/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer {
-	public static final field $stable I
-	public fun <init> ()V
-	public fun decodeFromString (Ljava/lang/String;)Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;
-	public fun encodeToString (Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;)Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextToolbar {
-	public static final field $stable I
-	public fun <init> (Ljava/util/List;)V
-	public final fun component1 ()Ljava/util/List;
-	public final fun copy (Ljava/util/List;)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;Ljava/util/List;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getGroups ()Ljava/util/List;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextToolbarGroup {
-	public static final field $stable I
-	public fun <init> (Ljava/util/List;)V
-	public final fun component1 ()Ljava/util/List;
-	public final fun copy (Ljava/util/List;)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbarGroup;
-	public static synthetic fun copy$default (Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbarGroup;Ljava/util/List;ILjava/lang/Object;)Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbarGroup;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getActions ()Ljava/util/List;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/RichTextToolbarKt {
-	public static final fun RichTextToolbar (Lcom/darkrockstudios/richtexteditor/model/RichTextValue;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;Landroidx/compose/runtime/Composer;II)V
-	public static final fun richTextShortcuts (Landroidx/compose/ui/Modifier;Lcom/darkrockstudios/richtexteditor/model/RichTextValue;Lkotlin/jvm/functions/Function1;Lcom/copperleaf/forms/compose/widgets/richtext/RichTextToolbar;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/Modifier;
-}
-
-public abstract interface class com/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer {
-	public abstract fun decodeFromString (Ljava/lang/String;)Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;
-	public abstract fun encodeToString (Lcom/darkrockstudios/richtexteditor/utils/RichTextValueSnapshot;)Ljava/lang/String;
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/UpdatableRichTextFieldValue {
-	public static final field $stable I
-	public fun <init> (Landroidx/compose/runtime/MutableState;Lkotlin/jvm/functions/Function1;)V
-	public final fun component1 ()Lcom/darkrockstudios/richtexteditor/model/RichTextValue;
-	public final fun component2 ()Lkotlin/jvm/functions/Function1;
-	public final fun get ()Lcom/darkrockstudios/richtexteditor/model/RichTextValue;
-	public final fun update (Lcom/darkrockstudios/richtexteditor/model/RichTextValue;Z)V
-	public static synthetic fun update$default (Lcom/copperleaf/forms/compose/widgets/richtext/UpdatableRichTextFieldValue;Lcom/darkrockstudios/richtexteditor/model/RichTextValue;ZILjava/lang/Object;)V
-}
-
-public final class com/copperleaf/forms/compose/widgets/richtext/UpdatableRichTextFieldValueKt {
-	public static final fun rememberUpdatableRichText (Landroidx/compose/runtime/State;Lcom/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Lcom/copperleaf/forms/compose/widgets/richtext/UpdatableRichTextFieldValue;
-	public static final fun rememberUpdatableRichText (Ljava/lang/String;Lcom/copperleaf/forms/compose/widgets/richtext/RichTextValueSnapshotSerializer;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Lcom/copperleaf/forms/compose/widgets/richtext/UpdatableRichTextFieldValue;
 }
 
 public final class com/copperleaf/forms/compose/widgets/text/UpdatableAnnotatedTextFieldValue {
