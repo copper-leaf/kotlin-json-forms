@@ -1,0 +1,861 @@
+
+
+<!DOCTYPE html>
+<html class="">
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.1"/>
+<link rel="icon" href="https://copper-leaf.github.io/kotlin-json-forms/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Usage Guide</title>
+
+
+<meta name="description" content="Customizable JSON Schema-based forms for Kotlin and Compose">
+
+
+
+
+<link rel="next" href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog">
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/extraCss.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma-tooltip.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma-accordion.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/PrismJS/prism-themes/master/themes/prism-duotone-light.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/assets/css/mermaid_bulma.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.1","baseUrl":"https://copper-leaf.github.io/kotlin-json-forms","environment":"prod","version":"0.7.0"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<div class="columns is-marginless is-desktop">
+
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-mobile is-hidden-touch">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold is-fullheight">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/kotlin-json-forms"><img src="https://copper-leaf.github.io/kotlin-json-forms/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Customizable JSON Schema-based forms for Kotlin and Compose</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms 1700344615 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide" class="is-active">
+  
+  Usage Guide
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog" class="">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-desktop">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold ">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/kotlin-json-forms"><img src="https://copper-leaf.github.io/kotlin-json-forms/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Customizable JSON Schema-based forms for Kotlin and Compose</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms 1700344615 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide" class="is-active">
+  
+  Usage Guide
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog" class="">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+
+  <div class="column is-two-thirds-desktop is-three-quarters-widescreen is-four-fifths-fullhd is-paddingless column-main-right">
+  
+
+<nav
+  class="navbar is-white border-bottom"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="container">
+    <div class="navbar-brand is-marginless">
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu is-marginless" id="navbarMain">
+      <div class="navbar-start">
+      
+<div class="navbar-item">
+  <form id="search-input" data-orchid-search>
+    <div class="field is-marginless" id="search">
+      <div class="control has-icons-left input-control">
+        <input class="input" type="text" name="query" placeholder="Search Kotlin JSON Forms">
+
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+
+        <div id="search-progress" data-orchid-search-progress style="display: none;">
+          <div class="loader">Loading...</div>
+        </div>
+      </div>
+    </div>
+    <div id="search-results" data-orchid-search-results style="display: none;">
+      <div class="carat"></div>
+      <b>
+        Search Results
+        <i class="fa fa-times" aria-hidden="true" onclick="$('[data-orchid-search-results]').hide()"></i>
+      </b>
+      <ul></ul>
+    </div>
+  </form>
+</div>
+
+      
+
+  
+  
+    
+
+<a class="navbar-item " href="https://github.com/orchidhq/Orchid">
+Orchid
+</a>
+
+
+  
+
+  
+  
+    
+<div class="navbar-item has-dropdown is-hoverable">
+
+
+<a class="navbar-item " href="">
+Copper Leaf
+</a>
+
+
+  <div class="navbar-dropdown">
+  
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/common">
+Common
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/clog">
+Clog
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kudzu">
+Kudzu
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/trellis">
+Trellis
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/thistle">
+Thistle
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/ballast">
+Ballast
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kodiak">
+Kodiak
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/krow">
+Krow
+</a>
+
+
+    
+  </div>
+</div>
+
+  
+
+
+      </div>
+
+      <div class="navbar-end">
+      
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf" title="Copper Leaf Home">
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf/kotlin-json-forms" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://twitter.com/OrchidSSG" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="textured container" style="width: 100%;">
+    
+    
+
+    
+    
+      <article style="position: relative; margin-top: 60px; margin-bottom: 60px;" role="main">
+      
+      
+        <div class="box">
+        
+
+<div class="columns">
+  <div class="column is-three-quarters-desktop">
+  
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="content is-medium-tablet is-large-fullhd">
+<h1 id="usage-guide"><a href="#usage-guide" id="usage-guide" class="anchor"></a>Usage Guide</h1>
+<p>This library aims to re-implement the same JSON Schema-based forms from the
+<a href="https://jsonforms.io/docs">Javascript JSON Forms library</a>. As such, much of the documentation from that site will be
+valid here, in particular the values of anything in JSON files. All the <a href="https://jsonforms.io/examples/basic">examples</a>
+from that site are also valid form definitions here, and you can see examples in action for Desktop and Android targets
+<a href="https://github.com/copper-leaf/kotlin-json-forms">here</a>. Some specific widgets from those examples may not render the
+same as not all UI widgets have been implemented yet, but these features are planned.</p>
+<h1 id="supported-targets"><a href="#supported-targets" id="supported-targets" class="anchor"></a>Supported targets</h1>
+<p>Kotlin Json Forms currently supports Compose Material for Desktop and Android, but most of this project is built using
+common Kotlin APIs which should be able to support other UI targets. In cases where platform-specific functionality or
+dependencies are needed, they are implemented with <code>expect/actual</code> declarations to eventually aid in adopting other
+targets, such as Compose for Web.</p>
+<h1 id="dependencies"><a href="#dependencies" id="dependencies" class="anchor"></a>Dependencies</h1>
+<p>This library is based on the JSON models and (de)serialization capabilities from
+<a href="https://github.com/Kotlin/kotlinx.serialization">Kotlinx Serialization</a>, though knowledge of that library is not
+strictly necessary to use Kotlin Json Forms, nor is the Serialization gradle plugin. It only uses the runtime library.</p>
+<p>Additionally, schema validation is supported individually for each platform, because schema validator libraries are
+large and too complex to reimplement for this project, so it's easier to find appropriate libraries on each platform as
+needed, and use them through <code>expect/actual</code> declarations.
+<a href="https://github.com/pwall567/json-kotlin-schema">json-kotlin-schema</a> is the library currently in use for Compose Desktop
+and Android targets.</p>
+<h1 id="basic-usage"><a href="#basic-usage" id="basic-usage" class="anchor"></a>Basic Usage</h1>
+<p>The simplest usage of this library looks like this:</p>
+<pre><code class="language-kotlin">@Composable
+fun RenderFormPreview(
+    formStore: FormSavedStateAdapter.Store
+) {
+    
+}
+</code></pre>
+<p><code>FormSavedStateAdapter.Store</code> is an interface that must be implemented by you, and is how the Form schema gets
+populated, and where form state is saved and loaded from. All values returned from the Store are instances of
+<code>kotlinx.serialization.json.JsonElement</code>, which is the parsed DOM-like structure of JSON from the Kotlinx Serialization
+library. This means that you're not actually locked into using JSON Strings for the schemas of this library, you're free
+to parse the input in another format and convert that format's in-memory representation to <code>JsonElement</code> if you need. An
+example would be writing your schemas in <code>.yaml</code> files instead of <code>.json</code>.</p>
+<p>Since the library works with the already-parsed JSON models, you also have the flexibility to work entirely with
+in-memory if you want, to avoid the wasted overhead of continually parsing and serializing those elements to Strings.</p>
+<h1 id="form-state"><a href="#form-state" id="form-state" class="anchor"></a>Form State</h1>
+<p>Form data is managed with the MVI pattern with the
+<a href="https://github.com/copper-leaf/ballast">Ballast state management library</a>. The form schemas and the associated data is
+managed centrally in a ViewModel class, and any changes to the state are sent through a <code>StateFlow</code> to be collected by
+the UI and updated. Anytime any field of the form's data changes, the entire form will be updated accordingly, and all
+rules will be re-evaluated.</p>
+<p>The Form ViewModel manages a <code>StateFlow</code> of <code>FormContract.State</code>, which holds onto a lot of useful data which may be
+needed by the form UI renderer, but may be useful for custom UI elements as well. In particular, it keeps a copy of the
+original data separately from the data that's currently in the UI, and has properties available to let you know whether
+the data has been changed, or whether any individual control widget in the UI has been interacted with or its value
+changed.</p>
+<p>The form's initial configuration is provided to the ViewModel with <code>FormSavedStateAdapter.Store</code>, which should be
+created by you, returning JSON Strings of the Schema and UI schema to the ViewModel. It also is the mechanism by which
+you will be notified when the form's data has changed. You can also change when the form state will be sent to the
+Store by configuring the <code>FormSavedStateAdapter</code>'s <code>SaveType</code> when you provide it to the ViewModel. The <code>SaveType</code> can
+be one of the following values:</p>
+<ul>
+<li><code>SaveType.OnValidChange</code>: After any change is made to the form data, if the updated data is valid according to the
+provided JSON Schema, then the form will be saved automatically.</li>
+<li><code>SaveType.OnAnyChange</code>: After any change is made to the form data, then the form will be saved automatically, even if
+it is not valid against the provided JSON Schema</li>
+<li><code>SaveType.OnCommit</code>: The form will never save itself automatically, but will only be saved when the user explicitly
+chooses to save the form with some button in the UI. Kotlin Json Forms has a built-in submit button which can be added
+to the UI Schema definition with an element like this: <code>{ &quot;type&quot;: &quot;Button&quot;, &quot;options&quot;: { &quot;action&quot;: &quot;submit&quot; } }</code>, but
+you are free to build your own custom UI element outside of the form which calls
+<code>vm.trySend(FormContract.Inputs.CommitChanges)</code> to accomplish the same functionality.</li>
+</ul>
+<h1 id="supported-features"><a href="#supported-features" id="supported-features" class="anchor"></a>Supported Features</h1>
+<h2 id="ui-elements"><a href="#ui-elements" id="ui-elements" class="anchor"></a>UI Elements</h2>
+<p>UI Elements are defined in the UI schema, and control how the form is physically laid out and rendered on the page. The
+table below shows the different controls that are currently implemented or will be soon.</p>
+<table>
+<thead>
+<tr><th>UI Element</th><th>Element Type in UI Schema</th><th>Other UI Schema config</th><th>Supported</th></tr>
+</thead>
+<tbody>
+<tr><td>Render child elements in a Compose <code>Column</code></td><td><code>&quot;type&quot;: &quot;VerticalLayout&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Render child elements in a Compose <code>Row</code></td><td><code>&quot;type&quot;: &quot;HorizontalLayout&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Render a Control according to the referenced field type (see next section)</td><td><code>&quot;type&quot;: &quot;Control&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>A simple Label</td><td><code>&quot;type&quot;: &quot;Label&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Group related elements in a card</td><td><code>&quot;type&quot;: &quot;Group&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Set up a tabbed view. Each tab will be shown/hidden according to the Rule of the element itself</td><td><code>&quot;type&quot;: &quot;Categorization&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>One tab as a child of <code>Categorization</code></td><td><code>&quot;type&quot;: &quot;Category&quot;</code></td><td> </td><td>Yes</td></tr>
+<tr><td>A Submit button to commit form changes. Only visible when using <code>SaveType.OnCommit</code></td><td><code>&quot;type&quot;: &quot;Button&quot;</code></td><td><code>&quot;options&quot;: { &quot;action&quot;: &quot;submit&quot; }</code></td><td>Yes</td></tr>
+<tr><td>A checkbox to show/hide debug info</td><td><code>&quot;type&quot;: &quot;Button&quot;</code></td><td><code>&quot;options&quot;: { &quot;action&quot;: &quot;toggleDebug&quot; }</code></td><td>Yes</td></tr>
+</tbody>
+</table>
+<h2 id="controls"><a href="#controls" id="controls" class="anchor"></a>Controls</h2>
+<p>Controls are defined with an element in the UI Schema with <code>&quot;type&quot;: &quot;Control&quot;</code> and a <code>scope</code> property that is a JSON
+Pointer to a field in the form Schema. The field type in the Schema defines the control widget that is rendered, but
+some field types may be rendered differently based on a combination of properties in both the Schema and the UI Schema.</p>
+<p>There are several controls available in the original JavaScript library that are not available in Kotlin Json Forms yet,
+but a goal is to have all controls from that library fully working here soon. The table below shows the different
+controls that are currently implemented or will be soon.</p>
+<table>
+<thead>
+<tr><th>UI Control</th><th>Field Type in Schema</th><th>Other Schema config</th><th>Other UI Schema config</th><th>Supported</th></tr>
+</thead>
+<tbody>
+<tr><td>Normal text field</td><td><code>string</code></td><td> </td><td> </td><td>Yes</td></tr>
+<tr><td>Rich text field editor</td><td><code>string</code></td><td> </td><td><code>&quot;options&quot;: { &quot;richText&quot;: true }</code></td><td>Partial, doesn't actually update data</td></tr>
+<tr><td>Code text field editor</td><td><code>string</code></td><td> </td><td><code>&quot;options&quot;: { &quot;codeEditor&quot;: true, &quot;lang&quot;: &quot;file extension (optional, defaults to generic markup)&quot; }</code></td><td>Yes</td></tr>
+<tr><td>Text field with dropdown menu</td><td><code>string</code></td><td><code>&quot;enum&quot;: [...]</code></td><td> </td><td>Partial, dropdown is clunky</td></tr>
+<tr><td>Text field with Radio Buttons</td><td><code>string</code></td><td><code>&quot;enum&quot;: [...]</code></td><td><code>&quot;options&quot;: { &quot;format&quot;: &quot;radio&quot; }</code></td><td>Yes</td></tr>
+<tr><td>Text field with dropdown menu</td><td><code>string</code></td><td><code>&quot;oneOf&quot;: [{}, {}]</code></td><td> </td><td>Partial, dropdown is clunky</td></tr>
+<tr><td>Text field with Radio Buttons</td><td><code>string</code></td><td><code>&quot;oneOf&quot;: [{}, {}]</code></td><td><code>&quot;options&quot;: { &quot;format&quot;: &quot;radio&quot; }</code></td><td>Yes</td></tr>
+<tr><td>Text field with Date Picker</td><td><code>string</code></td><td><code>&quot;format&quot;: &quot;date&quot;</code></td><td> </td><td>No</td></tr>
+<tr><td>Text field with Time Picker</td><td><code>string</code></td><td><code>&quot;format&quot;: &quot;time&quot;</code></td><td> </td><td>No</td></tr>
+<tr><td>Text field with DateTime Picker</td><td><code>string</code></td><td><code>&quot;format&quot;: &quot;datetime&quot;</code></td><td> </td><td>No</td></tr>
+<tr><td>Text field with up/down buttons</td><td><code>integer</code></td><td> </td><td> </td><td>Yes</td></tr>
+<tr><td>Text field with up/down buttons</td><td><code>number</code></td><td> </td><td> </td><td>Yes</td></tr>
+<tr><td>Checkbox</td><td><code>boolean</code></td><td> </td><td> </td><td>Yes</td></tr>
+<tr><td>Switch</td><td><code>boolean</code></td><td> </td><td><code>&quot;options&quot;: { &quot;toggle&quot;: true }</code></td><td>Yes</td></tr>
+<tr><td>Multi-select Checkboxes</td><td><code>array</code></td><td><code>uniqueItems: true, items: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [] }</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Multi-select Checkboxes</td><td><code>array</code></td><td><code>uniqueItems: true, items: {&quot;oneOf&quot;: [{}, {}] }</code></td><td> </td><td>Yes</td></tr>
+<tr><td>Render all properties of the object as fields</td><td><code>object</code></td><td> </td><td> </td><td>Yes</td></tr>
+<tr><td>Add/remove items from the array (including nested arrays)</td><td><code>array</code></td><td> </td><td> </td><td>Partial, UI is ugly</td></tr>
+</tbody>
+</table>
+<h2 id="validation"><a href="#validation" id="validation" class="anchor"></a>Validation</h2>
+<p>Each control rendered in the UI will check for validation error messages and display them in the UI. JSON Schema
+validation is very complex, and the messaged displayed in the UI come directly from the platform's validation library,
+which may not be the most user-friendly. At this time, it is not a goal to provide more user-friendly or localized
+error messages.</p>
+<h1 id="roadmap"><a href="#roadmap" id="roadmap" class="anchor"></a>Roadmap</h1>
+<p>This is a list of features planned for this library. None of them are guaranteed, all of them are open for contribution.</p>
+<ul>
+<li>Improve rich-text editor
+<ul>
+<li>Contribute improvements to the upstream library for <a href="https://github.com/Wavesonics/richtext-compose-multiplatform">richtext-compose-multiplatform</a></li>
+<li>Improve toolbar and keyboard shortcuts</li>
+<li>Support saving/restoring rich text field state to/from HTML and Markdown</li>
+<li>Allow the user to switch between the rich-text editor, and editing the markup directly</li>
+<li>When editing markup directly, allow user to choose whether to show a rendered preview of the rich text</li>
+</ul>
+</li>
+<li>Add code editor widget
+<ul>
+<li>Potentially based on <a href="https://github.com/Qawaz/compose-code-editor">this library</a>, if it would move its dependencies to MavenCentral</li>
+</ul>
+</li>
+<li>Improve UX of dropdown-based widgets</li>
+<li>Support date/time pickers
+<ul>
+<li>Ideally, these would use the native picker dialogs on Android, and custom-built ones for Desktop</li>
+</ul>
+</li>
+<li>Add UI elements to display refs to properties, or computed expressions
+<ul>
+<li>Use <a href="https://github.com/copper-leaf/trellis">trellis</a> for building the expression DSL here</li>
+</ul>
+</li>
+<li>Improve UX of array widgets
+<ul>
+<li>would be nice to have list, master/detail, and table views for array-of-object controls</li>
+</ul>
+</li>
+<li>Improve error messages
+<ul>
+<li>See if there's a way to map the error messages of the validator libs to common strings (especially ones that could be localized)</li>
+<li>Add a way to provide custom additional error messages (such as coming from an API after submitting the form)</li>
+</ul>
+</li>
+<li>Support <code>readonly</code> flag
+<ul>
+<li>Globally on the entire form (set via FormContract.State)</li>
+<li>On any individual Control</li>
+<li>On a property within the JSON Schema</li>
+</ul>
+</li>
+<li>Support <code>definitions</code> so that object/array controls can use <code>oneOf</code>, <code>anyOf</code>, or <code>allOf</code> with <code>$ref</code> to the definitions</li>
+<li>Automatically move focus between controls with tab on desktop</li>
+</ul>
+
+</div>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+  </div>
+  
+    <div class="column is-one-quarter is-hidden-touch">
+      <div class="sticky-menu" style="position: sticky; top: 30px;">
+  
+  
+    
+<p class="menu-label">In This Page</p>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=  -->
+  <a href="#ui-elements" class="">
+  
+  UI Elements
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=  -->
+  <a href="#controls" class="">
+  
+  Controls
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <!-- menuItem.page=  -->
+  <a href="#validation" class="">
+  
+  Validation
+  </a>
+</li>
+
+</ul>
+  
+
+</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+      
+      </article>
+    
+      <div class="grow"></div>
+      <div class="page-footer">
+      
+        <nav class="pagination is-rounded footer-pagination" role="navigation" aria-label="pagination">
+
+  <a class="pagination-previous" disabled>
+    <span class="inner">
+      <span class="icon"><i class="fas fa-chevron-left"></i></span>
+      Previous
+    </span>
+  </a>
+
+
+
+  <a class="pagination-next" href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog">
+    Changelog
+    <span class="icon"><i class="fas fa-chevron-right"></i></span>
+  </a>
+
+</nav>
+
+<footer class="footer border-top">
+  <div class="content is-small">
+  <p>
+  Site proudly built with <a href="https://orchid.run/">Orchid</a>.<br>
+</p>
+
+  </div>
+</footer>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script defer data-search-pseudo-elements="true" src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/releases/v5.4.0/js/all.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma-accordion.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma-tabs.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/lunr/lunr.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/assets/js/orchidSearch.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/mermaid/8.13.9/mermaid.min.js"></script>
+<script >
+;
+
+document.addEventListener('DOMContentLoaded', function() {
+    mermaid.init({}, "code.language-mermaid");
+});
+</script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

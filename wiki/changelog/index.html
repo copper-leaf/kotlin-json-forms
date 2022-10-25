@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html class="">
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.1"/>
+<link rel="icon" href="https://copper-leaf.github.io/kotlin-json-forms/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Changelog</title>
+
+
+<meta name="description" content="Customizable JSON Schema-based forms for Kotlin and Compose">
+
+
+
+<link rel="prev" href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide">
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/extraCss.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma-tooltip.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/css/bulma-accordion.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/PrismJS/prism-themes/master/themes/prism-duotone-light.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/kotlin-json-forms/assets/css/mermaid_bulma.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.1","baseUrl":"https://copper-leaf.github.io/kotlin-json-forms","environment":"prod","version":"0.7.0"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<div class="columns is-marginless is-desktop">
+
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-mobile is-hidden-touch">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold is-fullheight">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/kotlin-json-forms"><img src="https://copper-leaf.github.io/kotlin-json-forms/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Customizable JSON Schema-based forms for Kotlin and Compose</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms 1700344615 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide" class="">
+  
+  Usage Guide
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog" class="is-active">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-desktop">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold ">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/kotlin-json-forms"><img src="https://copper-leaf.github.io/kotlin-json-forms/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Customizable JSON Schema-based forms for Kotlin and Compose</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms 1700344615 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide 1527317172 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide" class="">
+  
+  Usage Guide
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog 164877646 -->
+  <a href="https://copper-leaf.github.io/kotlin-json-forms/wiki/changelog" class="is-active">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+
+  <div class="column is-two-thirds-desktop is-three-quarters-widescreen is-four-fifths-fullhd is-paddingless column-main-right">
+  
+
+<nav
+  class="navbar is-white border-bottom"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="container">
+    <div class="navbar-brand is-marginless">
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu is-marginless" id="navbarMain">
+      <div class="navbar-start">
+      
+<div class="navbar-item">
+  <form id="search-input" data-orchid-search>
+    <div class="field is-marginless" id="search">
+      <div class="control has-icons-left input-control">
+        <input class="input" type="text" name="query" placeholder="Search Kotlin JSON Forms">
+
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+
+        <div id="search-progress" data-orchid-search-progress style="display: none;">
+          <div class="loader">Loading...</div>
+        </div>
+      </div>
+    </div>
+    <div id="search-results" data-orchid-search-results style="display: none;">
+      <div class="carat"></div>
+      <b>
+        Search Results
+        <i class="fa fa-times" aria-hidden="true" onclick="$('[data-orchid-search-results]').hide()"></i>
+      </b>
+      <ul></ul>
+    </div>
+  </form>
+</div>
+
+      
+
+  
+  
+    
+
+<a class="navbar-item " href="https://github.com/orchidhq/Orchid">
+Orchid
+</a>
+
+
+  
+
+  
+  
+    
+<div class="navbar-item has-dropdown is-hoverable">
+
+
+<a class="navbar-item " href="">
+Copper Leaf
+</a>
+
+
+  <div class="navbar-dropdown">
+  
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/common">
+Common
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/clog">
+Clog
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kudzu">
+Kudzu
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/trellis">
+Trellis
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/thistle">
+Thistle
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/ballast">
+Ballast
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kodiak">
+Kodiak
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/krow">
+Krow
+</a>
+
+
+    
+  </div>
+</div>
+
+  
+
+
+      </div>
+
+      <div class="navbar-end">
+      
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf" title="Copper Leaf Home">
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf/kotlin-json-forms" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://twitter.com/OrchidSSG" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="textured container" style="width: 100%;">
+    
+    
+
+    
+    
+      <article style="position: relative; margin-top: 60px; margin-bottom: 60px;" role="main">
+      
+      
+        <div class="box">
+        
+
+<div class="columns">
+  <div class="column is-three-quarters-desktop">
+  
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="component component-changelog component-order-0">
+                            
+
+
+<section class="accordions" id="changelog">
+
+  <article class="accordion is-active">
+    <div class="accordion-header toggle">
+      <p>0.7.0 - 2022-10-25</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Updates to Kotlin 1.7.20</li>
+<li>Updates to Compose 1.2.0</li>
+<li>Temporarily removes Compose Web and Bulma as targets, because Compose Web does not work with Kotlin 1.7.20</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.6.0 - 2022-08-26</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Significant refactor, removes Ballast as a dependency to use normal Compose state management without enforcing any
+particular pattern</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.5.0 - 2022-08-19</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>New <code>json-forms-compose-core</code> artifact has been added with all the base functionality using only Compose Runtime</li>
+<li>Added <code>json-forms-compose-bulma</code> to display forms in Compose/Web with Bulma styling, based on <code>json-forms-compose-core</code></li>
+<li><code>json-forms-compose</code> has been renamed to <code>json-forms-compose-material</code>, which is also based on <code>json-forms-compose-core</code></li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.4.0 - 2022-07-16</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Use already-parsed JsonElement instead of forcing the library to only work with JSON Strings</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.3.0 - 2022-07-15</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Adds code editor control</li>
+<li>Connects rich text widget to form state</li>
+<li>adds multi-select checkbox controls</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.2.0 - 2022-07-15</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Adds a few more widget types</li>
+<li>Slightly improves UI</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>0.1.0 - 2022-07-05</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Initial Commit</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+
+
+                        </div>
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+  </div>
+  
+    <div class="column is-one-quarter is-hidden-touch">
+      <div class="sticky-menu" style="position: sticky; top: 30px;">
+  
+  
+    
+<p class="menu-label">In This Page</p>
+  
+
+</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+      
+      </article>
+    
+      <div class="grow"></div>
+      <div class="page-footer">
+      
+        <nav class="pagination is-rounded footer-pagination" role="navigation" aria-label="pagination">
+
+  <a class="pagination-previous" href="https://copper-leaf.github.io/kotlin-json-forms/wiki/usage-guide">
+    <span class="icon"><i class="fas fa-chevron-left"></i></span>
+    Usage Guide
+  </a>
+
+
+
+  <a class="pagination-next" disabled>
+    <span class="inner">
+      Next
+      <span class="icon"><i class="fas fa-chevron-right"></i></span>
+    </span>
+  </a>
+
+</nav>
+
+<footer class="footer border-top">
+  <div class="content is-small">
+  <p>
+  Site proudly built with <a href="https://orchid.run/">Orchid</a>.<br>
+</p>
+
+  </div>
+</footer>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script defer data-search-pseudo-elements="true" src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/releases/v5.4.0/js/all.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma-accordion.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/Copper/4fb868d2/assets/js/bulma-tabs.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/lunr/lunr.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/assets/js/orchidSearch.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<script  src="https://copper-leaf.github.io/kotlin-json-forms/ajax/libs/mermaid/8.13.9/mermaid.min.js"></script>
+<script >
+;
+
+document.addEventListener('DOMContentLoaded', function() {
+    mermaid.init({}, "code.language-mermaid");
+});
+</script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

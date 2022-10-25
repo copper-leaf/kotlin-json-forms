@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-assets.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-external.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-changelog.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-forms.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-home.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-pages.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-snippets.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-wiki.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-sitemap.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://copper-leaf.github.io/kotlin-json-forms/sitemap-indices.xml</loc>
+        <lastmod>2022-10-25</lastmod>
+    </sitemap>
+</sitemapindex>
